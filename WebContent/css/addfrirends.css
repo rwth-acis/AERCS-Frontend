@@ -1,0 +1,39 @@
+.add_to_friend_list_widget{padding-top:10px;}
+.add_to_friend_list_widget .add_to_friend_list_widget_basic_mode_switch{padding-top:3px;display:block;font-size:11px;padding-left:0px;padding-bottom:8px;}
+.add_to_friend_list_widget .add_to_friend_list_widget_title{color:#000;font-size:11px;font-weight:normal;padding-bottom:2px;display:none;}
+.add_to_friend_list_widget.add_fl_show_create_list .add_to_friend_list_widget_title{display:block;}
+.add_to_friend_list_widget.add_to_friend_list_widget_is_reqs_no_lists_active .add_to_friend_list_widget_title{display:block;}
+.add_to_friend_list_widget.add_to_friend_list_widget_list_added .add_to_friend_list_widget_title{display:block;}
+.add_to_friend_list_widget.add_to_friend_list_widget_is_reqs_no_lists .add_to_friend_list_widget_title{display:none;}
+.add_to_friend_list_widget .add_to_friend_list_widget_title .add_to_friend_list_widget_optional_text{color:#999;font-size:9px;padding-left:5px;}
+.add_to_friend_list_widget .add_to_friend_list_widget_create_list_link{font-size:11px;padding-bottom:2px;display:none;background:transparent url(img/friend_list_icon.gif) 0px 0px no-repeat;padding-left:20px;padding-top:4px;}
+.add_to_friend_list_widget .add_to_friend_list_widget_create_list_link .add_to_friend_list_widget_whats_this_link{padding-left:5px;display:none;font-size:9px;}
+.add_to_friend_list_widget .add_to_friend_list_widget_create_list_link .add_to_friend_list_widget_whats_this_link a,
+.add_to_friend_list_widget .add_to_friend_list_widget_create_list_link .add_to_friend_list_widget_whats_this_link a:hover{color:#6d84b4;}
+.add_to_friend_list_widget.add_to_friend_list_widget_is_reqs_no_lists .add_to_friend_list_widget_create_list_link{display:block;}
+.add_to_friend_list_widget .add_to_friend_list_widget_basic_mode_switch.basic_mode_switch_disabled{display:none;}
+.add_to_friend_list_widget .add_to_friend_list_widget_lists{padding:0px;margin:0px;padding-top:2px;padding-left:2px;}
+.add_to_friend_list_widget .add_to_friend_list_widget_lists li{padding-bottom:3px;margin:0 0 0 1.5em;color:#3b5998;list-style-type:square;}
+.add_to_friend_list_widget .add_to_friend_list_widget_lists li span.fl_widget_text{color:#000;}
+.add_to_friend_list_widget .add_to_friend_list_widget_lists li a{font-size:9px;}
+.add_to_friend_list_widget .add_to_friend_list_widget_lists.no_lists_added{display:none;}
+.add_to_friend_list_widget .add_to_friend_list_widget_selector{display:block;overflow:hidden;}
+.add_to_friend_list_widget .add_to_friend_list_widget_selector.basic_mode_switch_disabled{display:none;}
+.add_to_friend_list_widget.add_to_friend_list_widget_is_reqs_no_lists .add_to_friend_list_widget_selector{display:none;}
+.add_to_friend_list_widget .add_to_friend_list_widget_selector .add_to_friend_list_widget_select{display:block;}
+.add_to_friend_list_widget .add_to_friend_list_widget_selector .add_to_friend_list_widget_select select{margin-left:0px;width:200px;}
+.add_to_friend_list_widget .add_to_friend_list_widget_selector .add_to_friend_list_widget_create{display:none;overflow:visible;padding-top:2px;}
+.add_to_friend_list_widget .add_to_friend_list_widget_selector .add_to_friend_list_widget_create .add_to_friend_list_widget_new_list_cancel_button{display:none;font-size:9px;}
+.add_to_friend_list_widget.add_to_friend_list_widget_is_reqs_no_lists_active .add_to_friend_list_widget_selector .add_to_friend_list_widget_create .add_to_friend_list_widget_new_list_cancel_button{display:block;}
+.add_to_friend_list_widget .add_to_friend_list_widget_selector .add_to_friend_list_widget_create .inputtext{margin-left:0px;margin-right:2px;}
+.add_to_friend_list_widget .add_to_friend_list_widget_selector .add_to_friend_list_widget_create .add_to_friend_list_widget_mode_switch{padding:2px 0px 0px 2px;font-size:9px;display:block;}
+.add_to_friend_list_widget .add_to_friend_list_widget_selector .add_to_friend_list_widget_create .add_to_friend_list_widget_mode_switch.mode_switch_disabled{display:none;}
+.add_to_friend_list_widget.add_to_friend_list_widget_is_reqs_no_lists .add_to_friend_list_widget_selector .add_to_friend_list_widget_create .inputbutton,
+.add_to_friend_list_widget.add_to_friend_list_widget_is_reqs_no_lists_active .add_to_friend_list_widget_selector .add_to_friend_list_widget_create .inputbutton{display:none;}
+.add_to_friend_list_widget .add_to_friend_list_widget_selector .add_to_friend_list_widget_select{padding-top:2px;float:left;}
+.add_to_friend_list_widget .add_to_friend_list_widget_selector .add_to_friend_list_widget_select_icon{width:19px;height:23px;float:left;padding:2px 1px 0px 0px;margin:0px;}
+.add_to_friend_list_widget .add_to_friend_list_widget_selector .add_to_friend_list_widget_select_icon img{margin:0px;padding:0px;}
+.confirm_boxes .add_to_friend_list_widget .add_to_friend_list_widget_selector .add_to_friend_list_widget_select .add_to_friend_list_widget_optional_text{font-size:11px;padding-left:3px;color:gray;}
+.add_to_friend_list_widget .add_to_friend_list_widget_selector .add_to_friend_list_widget_select .add_to_friend_list_widget_optional_text{font-size:9px;padding-left:3px;color:gray;}
+.add_to_friend_list_widget.add_fl_show_create_list .add_to_friend_list_widget_selector .add_to_friend_list_widget_create{display:block;}
+.add_to_friend_list_widget.add_fl_show_create_list .add_to_friend_list_widget_selector .add_to_friend_list_widget_select{display:none;padding-top:3px;}

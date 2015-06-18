@@ -1,0 +1,55 @@
+/*       Source:  Local Cache                                                                 */
+/*     Location:  rsrc:89207:/html/css/events.css                                             */
+/*      Machine:  10.1.0.37                                                                   */
+/*    Generated:  March 31st 2008 12:30:54 AM PDT                                             */
+
+
+.myevents #content{padding:0px;}
+.myevents .secondary{float:left;padding:20px 0 40px 20px;width:170px;}
+.myevents .primary{padding:20px 0 0 20px;width:390px;float:left;}
+.myevents #content.noevents{padding-top:20px;}
+.myevents #notice{color:#777;font-size:13px;padding:40px 10px 30px;text-align:center;}
+.myevents #startaparty{float:none;padding:0;margin:0;margin-bottom:20px;width:auto;}
+.myevents #startaparty p{margin:1.0em 0;padding:0;}
+.myevents #calendars table{margin-bottom:20px;}
+.myevents #findaparty{float:none;padding:0;width:auto;}
+.myevents .primary #eventlist{background:white;border-bottom:0;padding-bottom:10px;padding-top:5px;text-align:left;}
+.myevents #partylist table{}
+.myevents .summary_bar{padding:14px 10px 0 10px;}
+.myevents .summary_bar strong{color:#3b5998;font-weight:bold;}
+.myevents .summary_bar a{font-weight:normal;}
+.myevents .secondary, .myevents .primary{background:white;}
+.myevents .seemore{border:0;text-transform:lowercase;text-align:left;}
+.myevents .primary .seemore{text-align:right;}
+#eventlist .image{padding:3px 10px 0 0;width:50px;}
+.myevents .infotable{border-collapse:collapse;border-spacing:0;}
+.eventedit #content{padding:0px;padding-top:10px;padding:10px 20px;}
+.eventedit #tabs{margin-left:0;margin-right:0;}
+.eventedit #error{margin-left:10px;margin-right:10px;margin:0;}
+.eventedit .status{margin-left:0;margin-right:0;}
+.eventedit #content h4{}
+.eventedit #content .formtable{margin:0 auto;}
+.eventedit #invitelist h3{margin:5px 0;}
+.eventedit #invitetool{padding:20px 0;padding:0;}
+.eventedit #anyoneelse{margin-bottom:1.0em;}
+.eventedit #other_names{width:175px;}
+.eventedit #others_select{display:none;}
+.eventedit #others{width:250px;}
+.eventedit select#friends{width:250px;}
+.eventedit select#invite_box{width:250px;}
+.eventedit h2{margin:1.0em 0;}
+.eventedit .status h2{margin:0;}
+.eventedit .primary{float:left;width:250px;}
+.eventedit .secondary{float:left;width:250px;}
+.eventedit .tertiary{float:left;padding-top:150px;text-align:center;width:86px;}
+.eventedit .tertiary div{margin:1.0em 10px;}
+.eventedit .tertiary input{margin:5px 0;width:66px;}
+.eventedit #currentpicture{margin:0;padding-right:20px;padding-top:10px;padding:10px 20px 20px 0;}
+.eventedit #nopicture{width:auto;}
+.eventedit #uploadpicture{margin:0;padding-top:10px;}
+#eventtypes{margin:10px 0px;font-size:11px;}
+#eventtypes td{width:90px;padding:2px 0px;}
+#startanevent{float:left;width:200px;padding:10px 20px;text-align:left;}
+#findanevent{float:left;width:360px;padding:10px 0px 10px 20px;text-align:center;font-size:11px;}
+#content .eventdialog{border-top:1px solid #ccc;padding-top:30px;padding-bottom:30px;}
+#content .eventdialog h4{margin:10px;}

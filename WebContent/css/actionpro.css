@@ -1,0 +1,5 @@
+.actionspro{list-style:none;margin:0px;padding:0px;}
+.actionspro li{border-bottom:1px solid #D8DFEA;}
+.actionspro a{background:transparent;display:block;margin:0px;padding:2px 3px;text-decoration:none;}
+.actionspro a:hover{background:#3b5998;color:white;text-decoration:none;}
+.actionspro .inactive{padding:2px 3px;color:gray;}

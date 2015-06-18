@@ -1,0 +1,274 @@
+
+
+.fp.my_friends #content{background:#f7f7f7;}
+.fp.other_friends #content{background:#fff;}
+.fp #content .status{border-left:none;border-top:none;border-right:none;margin:0px;padding:10px 20px;}
+#fpgc{width:100%;}
+#fpgc tr,
+#fpgc td{vertical-align:top;}
+#fpgc td.fmptd{background:#fff;border-right:solid #b0b0b0 1px;}
+#fpgc td.frntd{border-left:solid #e7e7e7 1px;width:155px;}
+.draggable_friend{background-color:#f7f7f7;background-image:url(/images/icons/friend.gif);background-position:3px 3px;background-repeat:no-repeat;border:solid #ccc 1px;color:#444;display:block;font-size:12px;font-weight:bold;filter:alpha(opacity=80);height:18px;opacity:0.80;padding:5px 8px 3px 24px;;position:absolute;z-index:100;}
+.fp #fpsf{float:right;margin:-19px 14px 0px 0px;}
+.fdh h2.friends_page_title{background-image:url(/images/friends_lists_sprite.png);background-position:0px 3px;background-repeat:no-repeat;display:block;padding-left:19px;padding-right:7px;}
+#friends_page_subtitle{background-image:url(/images/filterset_off.gif);background-position:0px 5px;background-repeat:no-repeat;color:#666;float:left;font-weight:bold;font-size:13px;margin:0px;padding:1px 0px 0px 13px;}
+#friends_page_subtitle.no_title{display:none;}
+.fdh h2.friends_page_title.all{background-position:0px -125px;}
+.fdh h2.friends_page_title.list{background-position:0px -5px;}
+#friend_list_name_input{display:none;}
+.fdh .content{padding:16px 12px 12px 16px;}
+.fdh h2{float:left;font-size:14px;padding-left:8px;padding-left:0px;}
+.fdh form{float:right;width:150px;text-align:right;}
+.fdh form .inputsearch{width:130px;}
+.other_friends .media_header{margin-bottom:10px;}
+.frn{margin:0px;padding:1px 0px 0px 0px;margin-top:-25px;}
+.frn_inpad{position:relative;left:-1px;padding-right:5px;}
+.column_null_state{margin-top:0px;}
+.frn h3{color:#444;font-weight:bold;font-size:11px;padding:6px 0px 6px 6px;}
+.frn .sidebar_item_header{background:#e9e9e9;margin:8px 5px 0px;padding:3px 5px 4px 7px;}
+.frn .sidebar_item_header h2{color:#444;float:left;font-size:11px;}
+.frni{background-color:transparent;margin-right:0px;overflow:hidden;width:150px;}
+.frni.active{margin-right:-1px;}
+.frni a{background-color:transparent;background-position:12px 6px;background-repeat:no-repeat;border-top:solid 1px #dedede;border-bottom:solid 1px #f7f7f7;display:block;margin-left:0px;overflow:hidden;padding:4px 4px 4px 30px;white-space:nowrap;}
+.frn_editlist .inputtext{width:95px;}
+.frni a:focus{outline:0px;}
+.frni a:hover,
+.frni a.hover{background-color:#d8dfea;border-bottom:solid 1px #d8dfea;text-decoration:none;}
+.frni .active:hover,
+.frni .active.hover{border-bottom:1px solid #3b5998;}
+.dragging .frni.list a.hover{color:#4a4;}
+.dragging .frni.active a.hover,
+.dragging .frni.all a.hover{color:#a44;}
+.frni .active{background-color:#6d84b4;background-position:12px 6px;border:solid 1px #3b5998;border-right:1px solid #3b5998;color:#fff;border-left:1px solid #6179ad;border-left:1px solid #6179ad;margin-left:0px;}
+.frn .renameList{background-color:#6d84b4;background-position:12px -83px;background-repeat:no-repeat;border:solid 1px #3b5998;border-right:1px solid #3b5998;color:#fff;border-left:1px solid #6179ad;border-left:1px solid #6179ad;margin-left:0px;padding:0px;padding-right:0px;padding-left:10px;background-image:none;overflow:hidden;}
+.frn .renameList .inputtext{width:115px;margin:0px;}
+.frni.list .active{border-right:0px;}
+.frni.prev a{border-top:solid #f7f7f7 1px;}
+.frni.prev a:hover,
+.frni.prev a.hover{border-top:solid #d8dfea 1px;}
+.frni a{background-image:url(/images/friends_lists_sprite.png);}
+.frni.all a{background-position:12px -123px;}
+.frni.all a:hover,
+.frni.all a.hover{background-position:12px -163px;}
+.frni.all .active{background-position:12px -203px;}
+.frni.list a{background-position:12px -3px;}
+.frni.list a:hover,
+.frni.list a.hover{background-position:12px -43px;}
+.frni.list .active{background-position:12px -83px;}
+.frni a.rename_list{display:none;}
+.frni.list a.rename_list{background-image:none;background-color:transparent;float:right;font-size:9px;height:15px;margin:0px;padding:6px 3px 0px 2px;}
+.frni.active a.rename_list{background:#6d84b4;border:solid #3b5998 1px;border-left:none;color:#d8dfea;display:block;}
+.frni.all a.rename_list{display:none;}
+.frni.all .active:hover{background-color:#6d84b4;background-position:12px -203px;}
+.frni.list .active:hover{background-color:#6d84b4;background-position:12px -83px;}
+.frni.active a.rename_list:hover{background:#6d84b4;border:solid #3b5998 1px;border-left:none;}
+.frn .frn_makelist .frn_mlbut{padding:14px 5px 0px 3px;}
+.frn .frn_editlist{background-color:#6d84b4;background-image:url(/images/friends_lists_sprite.png);background-position:11px -80px;background-repeat:no-repeat;border:solid 1px #3b5998;border-right:1px solid #3b5998;border-left:1px solid #6179ad;color:#fff;margin-left:0px;margin-right:5px;padding:4px 3px 4px 30px;}
+.frn .frn_editlist .inputtext{width:95px;}
+.frn #friends_makelist{margin-left:0px;}
+.frn #friends_newlist{left:-1px;position:relative;}
+.frn #friends_newlist,
+.frn #friends_makelist{height:60px;}
+.frn #friends_newlist .fl_step{background-color:transparent;background-image:url(/images/friends_step.png);background-position:top left;background-repeat:no-repeat;margin:7px 8px 8px 5px;padding-top:8px 10px;position:absolute;width:200px;}
+.frn .frn_boot{margin:0px 0px 20px 0px;padding:0px 4px 0px 5px;}
+.frn .frn_boot .frn_boot_icon{background-image:url(/images/friends_lists_sprite.png);background-position:5px -4px;background-repeat:no-repeat;float:left;height:22px;width:25px;}
+.frn .frn_boot .frn_boot_text{display:table;}
+.frn .people_you_may_know,
+.frn .friend_finder,
+.frn .invite_friends{background-repeat:no-repeat;margin:4px 8px 0px 8px;background-position:4px 12px;padding:10px 0px 10px 24px;border-bottom:solid #ccc 1px;}
+.frn .people_you_may_know{background-image:url(/images/icons/friend.gif);}
+.frn .friend_finder{background-image:url(/images/friend_finder.gif);}
+.frn .invite_friends{background-image:url(/images/invite_sm.png);background-position:4px 16px;border-bottom:none;}
+.frn .status_syndicate{margin:8px 0px 0px 12px;}
+.frn .status_syndicate a.sub{background:transparent url(/images/icons/feed.gif) no-repeat scroll 0px 0.3em;display:block;padding:3px 0px 4px 21px;}
+.frn .status_syndicate a.lm{display:block;font-size:9px;padding:0px 0px 0px 21px;}
+.frn .toggletiny{display:block;}
+.tiny .frn .toggletiny,
+.frn .toggletiny2{display:none;}
+.tiny .frn .toggletiny2{display:block;}
+.frn .toggletiny,
+.frn .toggletiny2{background-repeat:no-repeat;border-top:solid #ccc 1px;margin:4px 8px 0px 0px;padding:8px 0px 16px 24px;}
+.frn .toggletiny{background-image:url(/images/movearrow.gif);background-position:5px 8px;}
+.frn .toggletiny2{background-image:url(/images/friends_lists_sprite.png);background-position:5px -120px;}
+.ftabs{border-bottom:1px solid #e8e8e8;border-bottom:1px solid #ccc;padding:0px 10px 0px 8px;}
+.ftabs #ftabs a{background:#f0f0f0;border-top:1px solid #ccc;border-right:solid #ccc 1px;border-left:solid #e5e5e5 1px;display:block;float:left;color:#666;margin-top:1px;padding:4px 8px;position:relative;}
+.ftabs #ftabs a:hover{background:#fff;color:#444;text-decoration:none;}
+.ftabs #ftabs a:focus{outline:0px;}
+.ftabs #ftabs a.active{background:#fff;border-bottom:none;border-bottom:solid #fff 1px;margin-left:-1px;border-left:1px solid #ccc;color:#333;margin-top:0px;margin-bottom:-1px;padding-top:5px;padding-bottom:4px;}
+.ftabs #ftabs a.active:hover{background:#fff;}
+.ftabs #ftabs a.last{border-right:solid #ccc 1px;}
+.ftabs #ftabs a.first{margin-left:0px;border-left:1px solid #ccc;}
+.ftabs .advanced{display:block;float:right;margin:5px 5px 0px 0px;}
+.fmp{background:#ffffff;padding-top:10px;}
+.fmp_null_state{border-top:1px solid #ccc;}
+.fmp .drag_tip{background-color:#f9fff9;border-bottom:solid #ccc 1px;color:#121;display:none;padding:8px 10px;}
+.fmp .drag_tip b{color:#343;}
+.tiny .fmp .drag_tip{display:block;}
+.fmp #friends_target{}
+.fmp #friends_target .ferror{background:#ffebe8;border:1px solid #dd3c10;margin:10px;padding:10px;}
+.ftabs img#friends_loading{display:none;float:right;margin:7px 16px 0px 0px;}
+.fmp .fadvfilt{background:#e7e7e7;background:#fff;clear:both;padding:0px 12px;padding-bottom:8px;}
+.fmp .fadvfilt #friends_nk{margin-right:4px;}
+.fmp .fadvfilt b{color:#555;padding-right:5px;}
+.fmp .fsummary{background:#fff;}
+.fmp .fsummary .name{height:20px;padding:4px 0px 0px 12px;}
+.fmp .fsummary .name h2{padding-top:4px;}
+.fmp .fsummary input{color:#444;display:none;font-size:12px;font-weight:bold;width:200px;}
+.fmp .fsummary h2.editable .click_to_edit{color:#777;color:#3b5998;font-size:9px;font-weight:normal;margin-left:4px;}
+.fmp .fsummary .bar{border-color:#ddd;padding:0px 12px;}
+.fmp .flistedit{background:#f7f7f7;border-bottom:solid #ddd 1px;padding:4px 12px;}
+.fmp .flistedit b{color:#555;}
+#fpgc .fmp .flistedit tr,
+#fpgc .fmp .flistedit td{vertical-align:middle;}
+#fpgc .fmp .flistedit td{padding-right:6px;}
+.fmp .flistedit input{width:220px;}
+.fmp .fl_step{background-image:url(/images/friends_step_fff.png);background-position:top left;background-repeat:no-repeat;margin:16px 16px 8px 90px;padding-top:10px;}
+.fmp #friends_multiselect{border-bottom:solid #ddd 1px;}
+.fmp #friends_multiselect,
+.fmp #fb_multi_friend_selector_wrapper{background:#f7f7f7;}
+.fmp #fb_multi_friend_selector_wrapper{margin:0px;padding:9px 12px 12px;}
+.fmp #fb_multi_friend_selector{margin:2px 0px;padding:0px;}
+.fmp #fb_multi_friend_selector.num_cols_3{width:488px;}
+.fmp #fb_multi_friend_selector h2{color:#555;font-size:11px;font-weight:bold;padding:8px 0px 6px;}
+.fmp #fb_multi_friend_selector_wrapper #friends{background:#fff;}
+.fmp #fb_multi_friend_selector #finder input{width:200px;}
+.fmp .fmp_delete{background:#f7f7f7;border-top:solid 1px #e7e7e7;clear:both;padding:8px 12px;}
+.fmp .fmp_delete_few_friends{margin-top:100px;}
+.fmp .footer_bar{background:#fff;border-top:none;padding:0px 10px 4px;}
+.fmp .footer_bar .fquail{color:#fff;cursor:default;float:left;font-size:6px;padding-top:7px;}
+.frn_mlbut a:hover{color:#fff;text-decoration:underline;}
+.make_new_list_button_table{cursor:pointer;margin:0px;padding:0px;border:0px;color:#fff;}
+.make_new_list_button_table:hover{text-decoration:underline;color:#fff;}
+.make_new_list_button_table .button_main{background:#6d84b4;text-align:left;border:1px solid #3b5998;border-left:0px;padding:0px;color:#fff;}
+.make_new_list_button_table .button_main .button_text{margin:0px;padding:4px 10px 5px 6px;border-top:1px solid #bfc9dc;}
+.make_new_list_button_table .button_main .button_text:hover{text-decoration:underline;}
+.make_new_list_button_table .button_left{background-image:url(/images/icons/friend_list_plus.png);background-position:2px 7px;background-repeat:no-repeat;background-color:#fff;border:1px solid #b7b7b7;border-right:0px;width:26px;}
+.ffriends{background:#fff;}
+.ffriend{background:transparent;border-bottom:solid 1px #ddd;line-height:14px;padding:8px 10px 8px 12px;}
+.ffriends .grid{display:block;float:left;padding:3px 0px 0px 4px;}
+.ffriend .fpic{display:block;float:left;overflow:hidden;margin:0px 9px 0px 0px;min-height:50px;padding:0px;}
+.ffriend.click{background:#fbfdff;}
+.ffriend.click .fpic .sq,
+.ffriend .fpic .sm{display:none;}
+.ffriend.click .fpic .sm{display:block;}
+.ffriend .factions{float:right;}
+.ffriend .factions a{display:block;float:left;height:14px;margin-left:1px;margin-top:1px;padding:0px;width:13px;}
+.ffriend .factions .fadd{float:left;margin:0px 4px 0px 0px;text-align:right;}
+.ffriend .factions .fadd a{display:block;margin:0px;padding:0px;width:85px;}
+.ffriend .factions a:hover{text-decoration:none;}
+.ffriend .factions .fadd a:hover{text-decoration:underline;}
+.ffriend .factions a.remove{background-color:transparent;background-image:url(/images/x_to_hide.gif);}
+.ffriend .factions a.remove:hover{background-color:transparent;background-image:url(/images/x_to_hide_hover.gif);}
+.ffriend .factions a.toggle{background-color:transparent;background-image:url(/images/bar_minimize.gif);background-position:0px 14px;}
+.ffriend .factions a.toggle:hover{background-color:transparent;background-image:url(/images/bar_minimize_hover.gif);background-position:0px 14px;}
+.ffriend.click .factions a.toggle{background-color:transparent;background-image:url(/images/bar_minimize.gif);background-position:0px 0px;}
+.ffriend.click .factions a.toggle:hover{background-color:transparent;background-image:url(/images/bar_minimize_hover.gif);background-position:0px 0px;}
+.ffriend .fcontent{float:left;width:375px;}
+.ffriend.click .fcontent{float:left;}
+.my_friends .ffriend .fcontent{width:325px;}
+.my_friends .ffriend.click .fcontent{width:225px;}
+.other_friends .ffriend .fcontent{width:375px;}
+.other_friends .ffriend.click .fcontent{width:375px;}
+.ffriend .fcontent .fname{font-size:12px;font-weight:bold;}
+.ffriend .fcontent span.fname{color:#444;}
+.my_friends .ffriend.click .fcontent .fstatus{display:block;padding:1px 0px 0px 1px;}
+.ffriend .fcontent .frecent,
+.ffriend .fcontent .fadded,
+.ffriend .fcontent .fupdt{color:#777;padding-top:2px;}
+.ffriend .fcontent .frecent span{background:#fff8cc;border-bottom:solid 1px #ffe222;color:#222;}
+.ffriend .fcontent .fupdt{height:14px;}
+.ffriend .fcontent .flinks{display:none;padding:4px 0px 0px;position:relative;}
+.ffriend.click .fcontent .flinks{display:block;}
+.ffriend .fcontent .flinks .pipe{color:gray;}
+.ffriend .fcontent .flinks .flink_listadd{display:none;}
+.manylists .ffriend .fcontent .flinks .flink_listadd{display:inline;}
+.ffriend .fcontent .flinks .flink_addtolist{background-image:url(/images/status_on.gif);background-repeat:no-repeat;background-position:1px 6px;padding:0px 4px;}
+.ffriend .fcontent .flinks a.flink_addtolist:hover{text-decoration:none;}
+.ffriend .fcontent .flinks .flink_dropdown{background:#fff;border:solid #999 1px;position:absolute;width:140px;right:34px;top:20px;z-index:100;}
+.ffriend .fcontent .flinks .flink_dropdown p{color:#333;margin:0px;padding:8px;text-align:center;}
+.ffriend .fcontent .flinks .flink_dropdown span{background-color:#f7f7f7;background-image:url(/images/friends_lists_sprite.png);background-repeat:no-repeat;background-position:122px -4px;border-bottom:solid #e9e9e9 1px;color:#666;display:block;font-size:9px;padding:3px 4px 0px 4px;}
+.ffriend .fcontent .flinks .flink_dropdown a{color:#333;display:block;padding:3px 4px;}
+.ffriend .fcontent .flinks .flink_dropdown a:hover{background:#666;color:#fff;cursor:pointer;text-decoration:none;}
+.ffriend .fcontent .flinks .flink_inner{overflow-y:auto;overflow-x:none;max-height:300px;}
+.ffriend .fcontent .fext_short{display:block;padding-top:2px;}
+.ffriend .fcontent .fext_short a{color:#556;}
+.ffriend.click .fcontent .fext_short{display:none;}
+.ffriend .fcontent .fext{border-top:solid #e7e7e7 1px;display:none;margin-top:6px;padding-top:4px;}
+.ffriend .fcontent .fext .nonetworks{color:#999;}
+.ffriend.click .fcontent .fext{display:block;}
+.ffriend .fcontent .fext .fexth{color:#777;padding-bottom:2px;padding-right:12px;}
+.ffriend .fcontent .fextsm{padding-bottom:1px;}
+.ffriend .fcontent .fextsme{padding-bottom:2px;}
+.ffriend .fcontent .fext_short a.fextsm_edit{display:none;}
+.ffriend .fcontent .fextsm ul,
+.ffriend .fcontent .fextsm li{color:#444;list-style:none;margin:0px;padding:0px 0px 1px;}
+.ffriend .fcontent .fext .fextdetails{padding-top:4px;}
+.ffriend .fcontent .fext .fextlistsrow.nolists{display:none;}
+.ffriend .fcontent .fext .fextlists{padding-top:4px;}
+.ffriend .fcontent .fext a.flistrm{background-image:url(/images/x_to_hide.gif);background-position:center center;font-size:9px;margin-left:4px;padding:1px 4px 0px;}
+.ffriend .fcontent .fext a.flistrm:hover{text-decoration:none;background-image:url(/images/x_to_hide_hover.gif);}
+.ffriend .dragme{cursor:move;display:none;}
+.ffriend .draggable{display:none;}
+.tiny .ffriend:hover .draggable,
+.tiny .ffriend.hover .draggable{display:block;float:right;margin:1px 0px 0px;padding:0px;}
+.my_friends .tiny .ffriend{cursor:move;}
+.my_friends .tiny .ffriend:hover,
+.my_friends .tiny .ffriend.hover{background:#fafcff;}
+.tiny #friends_target{max-height:500px;overflow:auto;}
+.tiny .ffriend .fpic,
+.tiny .ffriend .frecent,
+.tiny .ffriend .fadded,
+.tiny .ffriend .fupdt,
+.tiny .ffriend .flinks{display:none;}
+.tiny .ffriend.click .fpic,
+.tiny .ffriend.click .frecent,
+.tiny .ffriend.click .fadded,
+.tiny .ffriend.click .fupdt,
+.tiny .ffriend.click .flinks{display:block;}
+.tiny .ffriend .fcontent{width:358px;}
+.tiny .ffriend.click .fcontent{width:308px;}
+.tiny .ffriend .factions{display:none;}
+.fl_step .title{background:#6D84B4;border-left:solid #3b5998 1px;border-right:solid #3b5998 1px;color:#fff;font-weight:bold;padding:4px;}
+.fl_step .text{background:#fff;border:solid #999 1px;border-top:none;color:#555;padding:4px 8px;}
+.contextual_dialog .generic_dialog_popup{width:390px;}
+.fmp #friends_target .no_friends_null_state{background:#fff;}
+.fmp #friends_target .friends_init_state{background:#fff;margin:10px;}
+.fmp #friends_target .friends_init_state .fsuggestions{border:1px solid #ccc;}
+.fmp #friends_target .null_image{border:0px;margin:0px;padding:0px;}
+.fmp #friends_target .friend_finder_null_state{background:#fff;border:0px;margin:0px;padding:0px;}
+.fmp #friends_target .friend_finder_init_state{background:#f7f7f7;border:1px solid #ccc;margin:0px 0px 10px;padding:15px 15px 15px 5px;}
+.fmp #friends_target .friend_finder_init_state h3{color:#000;font-size:13px;font-weight:normal;margin:0px;padding:0px 0px 15px 20px;text-align:left;}
+.fmp #friends_target .friend_finder_null_state h3{color:#000;font-size:13px;font-weight:normal;margin:0px;padding:0px 0px 15px 40px;text-align:left;}
+.fmp #friends_target.contact_importer_widget{margin:0px;padding:0px 0px 20px;}
+.fmp #friends_target .contact_importer_widget .editor{padding:0px;margin-left:40px;}
+.fmp #friends_target .contact_importer_widget .editor .buttons{padding:0px;width:auto;}
+.fmp #friends_target #address_book_login_widget{border:0px;margin:0px;padding:0px;}
+.fmp #friends_target .disclaimer{font-size:9px;margin:0px;padding-left:40px;padding-top:15px;text-align:left;}
+.fmp #friends_target .find_friends_extra_links{border-top:1px solid #e5e5e5;margin:0px 50px 0px 40px;padding:15px 0px 20px;}
+.fmp #friends_target .find_friends_extra_links ul{font-size:13px;list-style:none;margin:0px;padding:0px;}
+.fmp #friends_target .find_friends_extra_links ul li{list-style:none;margin:0px;padding:0px;}
+.fmp #friends_target .user_status{background:#f2f4f7 url(/images/icons/friend_guy.gif) 10px 8px no-repeat;margin-left:7px;margin-bottom:8px;margin-top:-2px;margin-right:7px;border:1px solid #d8dfea;padding:0px;}
+.fmp #friends_target .user_status .user_status_min_container{height:33px;float:left;margin:0px;padding:0px;overflow:visible;}
+.fmp #friends_target .user_status:hover{cursor:pointer;}
+.fmp #friends_target .user_status_editing:hover{cursor:default;}
+.fmp #friends_target .user_status:hover a{text-decoration:underline;}
+.fmp #friends_target .user_status_editing:hover a{text-decoration:none;}
+.fmp #friends_target .user_status_editing a:hover{text-decoration:underline;cursor:pointer;}
+.fmp #friends_target .mobile_status{background-image:url(/images/icons/friend_mob.gif);}
+.fmp #friends_target .user_status .status_text_container{padding-top:10px;padding-left:33px;padding-bottom:7px;padding-right:10px;margin:0px;}
+.fmp #friends_target .user_status .status_text_container #status_time{color:#666;font-size:9px;padding-left:5px;}
+.fmp #friends_target .user_status_editing .status_editor_container{padding-top:5px;padding-left:32px;padding-bottom:4px;margin:0px;}
+.fmp #friends_target .user_status .profile_empty_status{float:left;padding-top:5px;padding-left:0px;margin:0px;}
+.fmp #friends_target .user_status .my_status{padding:0px;margin:0px;float:left;padding-right:3px;}
+.fmp #friends_target .user_status_editing .my_status{display:none;}
+.fmp #friends_target .user_status_editing .status_text_container{display:none;}
+.fmp #friends_target .user_status_editing #status_editor table .fields{vertical-align:middle;color:#666;padding-right:5px;}
+.fmp #friends_target .user_status_editing #status_editor table .clear_link{vertical-align:middle;text-align:right;padding-left:5px;}
+.fmp #friends_target .user_status_editing #status_editor table #edit_status_text{width:200px;}
+.fmp #friends_target .user_status_editing #status_editor table #edit_status_select{width:218px;}
+.fmp #friends_target .user_status_editing #status_editor table #edit_status_select a{width:212px;}
+.rooster_info{border-bottom:solid 1px #D8DFEA;background:#F2F4F7;margin:0px;padding:15px 20px 10px 20px;}
+.rooster_info h4.privacy_friendlist{font-size:14px;float:left;border-bottom:none;padding:0px 10px 2px 0px;margin:0px 0px 0px 0px;}
+.rooster_info .announcement_title{text-align:right;border-bottom:1px solid #D8DFEA;padding-top:0px;}
+.rooster_info p{margin:10px 0px 10px 0px;}
+.friendspro_rooster_container{padding:10px 10px 10px 10px;border-bottom:1px solid #ddd;background:white;}

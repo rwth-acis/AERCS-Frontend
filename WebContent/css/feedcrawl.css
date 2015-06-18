@@ -1,0 +1,49 @@
+/*       Source:  Local Cache                                                                 */
+/*     Location:  rsrc:95759:/html/css/feedcrawl.css                                          */
+/*      Machine:  10.1.0.57                                                                   */
+/*    Generated:  May 2nd 2008 3:00:34 AM PDT                                                 */
+
+
+#fc_setup_top{}
+#fc_setup_bottom,
+#fc_source_config{border-top:1px solid #ddd;padding-top:5px;margin-top:5px;}
+#fc_source_config{display:none;}
+#feedcrawl_config h3{font-size:11px;padding-bottom:4px;}
+#fc_source_config h3{color:#444;font-weight:normal;margin-left:5px;padding:5px 0 6px 20px;background-position:left 3px;background-repeat:no-repeat;}
+#fc_source_config h3 strong{color:#222;}
+#fc_source_config h3 a.fc_view_all_configured{font-weight:bold;float:right;}
+#feedcrawl_config .source_list{padding:5px 0;margin:0;}
+#feedcrawl_config .source_list li{display:block;float:left;border:1px solid #fff;padding:2px 2px;margin-right:4px;list-style-type:none;cursor:pointer;}
+#feedcrawl_config .source_list li img{float:left;padding:0 2px;}
+#feedcrawl_config .source_list li .source_name{float:left;padding:2px;color:#3b5998;}
+#feedcrawl_config .source_list li:hover .source_name{text-decoration:underline;}
+#fc_setup_bottom .source_list li.available{display:none;}
+#fc_setup_top .source_list li.added{display:none;}
+#feedcrawl_config.configuring #fc_setup_bottom{display:none;}
+#feedcrawl_config.configuring #fc_source_config{display:block;}
+#feedcrawl_config.fc_no_sites_left #fc_setup_top,
+#feedcrawl_config.fc_no_sites_added #fc_setup_bottom{display:none;}
+#feedcrawl_config.fc_no_sites_left #fc_setup_bottom,
+#feedcrawl_config.fc_no_sites_left #fc_source_config{border:none;margin-top:0;padding-top:0;}
+#feedcrawl_config.configuring #fc_setup_top .source_list li.configuring{border-color:#ccc;background:#eee;color:#333;}
+#fc_source_config .minifeed{float:left;padding:0;width:350px;}
+#fc_source_config .minifeed h2{background:none;border:none;}
+#fc_source_config .minifeed .body,
+#fc_source_config .minifeed .headline .title,
+#fc_source_config .minifeed .headline h2,
+#fc_source_config .minifeed .extra_media{border:none;width:330px;}
+#fc_source_config .fc_loading{background:url(/images/upload_progress.gif) no-repeat center center;padding:10px;}
+#fc_source_config .fc_expanded_info{display:block;}
+#fc_source_config .fc_info .fc_row{margin:4px 0 4px 6px;padding:0;}
+#fc_source_config .fc_expanded_info .fc_row{margin-top:0;}
+#fc_source_config .fc_info .fc_update_feed{font-size:9px;}
+#fc_source_config .fc_info .fc_row label{color:#555;float:left;font-weight:normal;width:90px;}
+#fc_source_config .fc_info .fc_row em{color:#666;font-style:normal;}
+#fc_source_config .fc_info .fc_edit_options{color:#555;font-size:9px;margin-left:5px;}
+#fc_source_config .fc_info .fc_row .fc_update_story{font-size:9px;}
+#fc_source_config .fc_info .fc_edit_options .fc_edit_source{font-size:11px;}
+#fc_source_config .fc_editor{float:left;padding:6px 15px;}
+#fc_source_config .fc_editor .fc_form_label{padding:3px 5px;}
+#fc_source_config .fc_editor .inputtext{margin-right:5px;padding-bottom:4px;}
+#fc_source_config .fc_editor .inputsubmit{margin-right:3px;}
+#fc_source_config .fc_editor .fc_form_instructions{color:#555;font-size:9px;margin:0 0 0 47px;padding:5px 3px 3px;width:190px;}

@@ -1,0 +1,151 @@
+/*       Source:  Local Cache                                                                 */
+/*     Location:  rsrc:86911:/html/css/welcome.css                                            */
+/*      Machine:  10.1.0.61                                                                   */
+/*    Generated:  April 7th 2008 5:23:01 PM PDT                                               */
+
+
+.welcome #content,
+.sitetour #content{padding:0px;}
+#content_frame{padding:10px;}
+#content_stage{}
+#buttons{text-align:center;padding-right:20px;}
+#buttons input{width:80px;}
+.welcome .status{padding:20px;margin:20px;}
+.main_column{width:auto;}
+.main_column h2.main_header{color:#3b5998;font-size:13px;margin:0px;padding:0px 0px 2px 0px;}
+.main_column .main_summary{color:#111;font-size:11px;font-size:13px;padding-bottom:1.0em;}
+.main_column h3{color:#333;font-size:13px;font-weight:bold;margin:0px;}
+.main_column p{margin:0px 0px 1.0em 0px;}
+.main_column .section{padding:0px 0px 15px 0px;}
+.main_column .section .thumb{border:1px solid #ccc;display:block;float:left;margin-right:10px;padding:2px;}
+.main_column .section .thumb img{display:block;}
+.main_column .section p{}
+.main_column .next_page{border-top:1px solid #d8dfea;padding:10px 0px 0px 0px;}
+.main_column .next_page a{font-weight:normal;}
+.side_column{float:right;width:160px;}
+.side_column .side_module{padding:0px 0px 10px 0px;}
+.side_column .side_module h2{background:#d8dfea;border-top:1px solid #3b5998;color:#3b5998;background:#eee;border-top:1px solid #ccc;color:#333;font-size:11px;font-weight:bold;margin:0px;padding:3px 5px 4px 5px;}
+.side_column .side_module p{margin:0px;padding:7px 5px;}
+.side_column #sitetour_nav{}
+.side_column #sitetour_nav ol{list-style:none;margin:0px;padding:5px 0px;}
+.side_column #sitetour_nav li{display:block;padding:2px 5px;}
+.side_column #sitetour_nav li.current a{color:#333;color:#111;font-weight:bold;}
+.side_column #sitetour_nav li.current a:hover{text-decoration:none;}
+.side_column #sitetour_register{}
+.side_column #register_button{padding:0px 4px;}
+.side_column #register_button .inputtext{margin:0px;}
+.welcome h2#statement{color:#3b5998;color:#111;font-size:11px;padding:2px 10px 10px 0px;margin:0px;}
+.welcome #content_frame{padding:0px;}
+.welcome #buttons{text-align:center;padding:0px;}
+#welcome .top_content{}
+#welcome{padding:60px;}
+#welcome .about{font-size:14px;line-height:24px;color:#333}
+#welcome #welcome_image{border:1px solid #ccc;background:#ffffff;float:left;line-height:0px;padding:3px;margin-top:12px;}
+#welcome .right_column{float:left;margin-left:20px;overflow:hidden;width:auto;}
+#welcome .language{float:right;}
+#welcome .language p{color:#777;margin:0;list-style:none;text-align:right;}
+#welcome .top_links{width:360px;}
+#welcome .top_links p{color:#777;margin:0;list-style:none;text-align:right;}
+#welcome .top_links a{font-weight:bold;}
+#welcome .messaging{margin-top:12px;border-bottom:1px solid #ccc;border-top:1px solid #ccc;padding:22px 0;width:368px;font-size:16px;line-height:26px;color:#333;}
+#welcome #register{color:#777;line-height:16px;padding:10px 0;width:360px;}
+#welcome #register #register_content{float:right;}
+#welcome .tagline{font-size:13px;line-height:13px;padding:0px 2px 4px 0px;margin:0px;}
+#welcome #register a{}
+#welcome #button{}
+#welcome .features{color:#555;margin:30px 0;}
+#welcome .features p{color:#777;font-size:13px;line-height:24px;text-align:center;padding:0 25px 0 0;}
+#welcome .features a{font-weight:bold;}
+#welcome .bottom_link{border-top:1px solid #ccc;text-align:right;font-size:12px;padding:20px 10px 0 0;margin:20px 0 0 0;overflow:hidden;height:38px;}
+#welcome .bottom_link #more_options{margin-top:2px;float:right;}
+#welcome .bottom_link .site_tour{color:#777;float:left;}
+#welcome .bottom_link a.find_friends_icon{background:url('/images/friend_finder.gif') no-repeat 0px 0px;padding:3px 0px 0px 25px;}
+#welcome .bottom_link .find_friends_left{float:left;padding:2px 4px 0px 4px;}
+#welcome .bullet_point{color:#dadada;}
+#welcome .bottom_link .right_arrow{background:url('/images/sitetour/tour_arrow_micro.gif') no-repeat 100% 50%;padding:0px 10px 2px 0px;}
+.search_loggedout{float:right;text-align:right;padding:0 0 0 0;margin:0px;color:#555;font-size:12px;width:380px;}
+.search_form_wrapper #search_loggedout_nm{width:140px;}
+.search_loggedout .box{width:120px;margin:0px 0px 0px 0px;}
+.search_loggedout .inputbutton{margin:0 0 0 4px;padding:2px 10px 3px 10px;}
+.search_loggedout a{font-weight:normal;font-size:10px;padding:0px 55px 0px 0px;}
+#find_friends_left{padding:18px 0 0 0;margin:18px 0 0 0;border-top:1px solid #ddd;overflow:hidden;}
+#find_friends_left h3{margin:0 0 10px 0;}
+#find_friends_left .inputtext#search_loggedout_nm{border:1px solid #94a4c6;border-right:0px;display:block;margin:0px;padding:3px;width:178px;overflow:hidden;}
+#use_friend_finder{color:#777;clear:both;font-size:12px;margin:8px 0 0 0;padding:0 0 0 4px;height:1%;}
+#use_friend_finder a{font-weight:bold;padding-right:10px;background:transparent url(/images/icons/see_more.gif) center right no-repeat;}
+.search_form_wrapper .td_input{padding:2px 5px 0 0;font-size:12px;}
+.search_form_wrapper td{text-align:right;}
+.search_form_wrapper .more_link{padding:2px 0;text-align:right;}
+#reg_center_content{margin:30px 0 0 0;}
+#reg_box_parent{margin:0;float:right;width:320px;display:block;}
+#reg_features{color:#555;padding:10px 0 10px 4px;width:225px;}
+#reg_features h2{padding:1px 0 10px 0;}
+#reg_features ul{margin:5px 0 0 0;padding:0;font-size:12px;color:#000;overflow:hidden;}
+#reg_features ul li{list-style-type:none;list-style-position:outside;padding:7px 0 7px 25px;background-position:center left;background-repeat:no-repeat;}
+.icongarden #photos{background:url(/images/icons/photo.gif) no-repeat 0px 7px;}
+.icongarden #classmates{background:url(/images/icons/friend_guy.gif) no-repeat 0px 7px;}
+.icongarden #friends{background:url(/images/icons/friend.gif) no-repeat 0px 7px;}
+.icongarden #events{background:url(/images/icons/event.gif) no-repeat 0px 7px;}
+.icongarden #groups{background:url(/images/icons/group.gif) no-repeat 0px 7px;}
+.icongarden #privacy{background:url(/images/icons/privacy.gif) no-repeat 0px 7px;}
+.editor td.label, .captcha_input label{font-weight:normal ;}
+.captcha_input label{width:90px;margin:0 0 0 1px;}
+#reg_form_box .editor{margin:0 0 10px 0;}
+body{background-color:#fff;padding:0px;}
+#reg_subhead{margin:0 0 10px 0;}
+#reg_box{border:1px solid #c6cfe1;padding:10px;margin:0;background-color:#dfe4ee;}
+#reg_box h2{font-size:13px;font-weight:bold;padding:0 0 5px 0;}
+#reg_box .label{color:#555;text-align:right;font-weight:bold;width:90px;}
+#reg_box .inputtext, #reg_box .inputpassword{width:180px;}
+#reg_progress{font-size:13px;text-align:center;margin:0;font-weight:bold;padding:0;}
+#reg_progress img{margin-right:15px;}
+#reg_progress #progress_wrap{padding:80px 0 0 0;margin:0;text-align:center;}
+#terms{margin:0 5px 0 102px;}
+p.legal_tos{font-size:9px;line-height:12px;margin:10px 5px 0pt 102px;}
+.option_field{margin-bottom:10px;}
+.option_field label{font-weight:normal ;}
+#recaptchadiv{min-height:97px;}
+div#recaptcha_area{width:250px ;}
+#captcha_whatsthis{display:none;}
+#captcha_response{margin-left:10px;border:1px solid #bdc7d8;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;padding:3px;}
+#reg_success{margin:0;padding:0;text-align:left;}
+#reg_success p{text-align:left;}
+#reg_success .inputsubmit{background-color:#3B5998;border-color:#D9DFEA;border-style:solid;border-width:1px;color:#FFF;font-size:11px;}
+#reg_success h3{padding-top:80px;}
+#reg_form_box #reg_btn_link{margin:0 0 0 103px;}
+#reg_form_box #cancel_button{float:left;}
+#reg_error,
+#captcha_error{background:#ffebe8;border:1px solid #DD3c10;line-height:15px;padding:7px 0;margin:10px 0 0 0;text-align:center;height:0px;overflow:hidden;}
+#reg_captcha{margin:0;padding:0;line-height:16px;}
+#reg_captcha #captcha div.captcha_input{margin:5px 0 7px 0;overflow:hidden;}
+#reg_captcha #captcha div.captcha_input input{width:150px;}
+#reg_captcha #captcha_buttons{padding:0;border-top:1px solid #ccc;margin:5px 0 0 0;padding:10px 0 0 0;text-align:left;display:block;overflow:hidden;}
+#captcha_buttons .gridCol{float:left;display:block;overflow:hidden;margin:0;}
+#captcha_buttons #back_button{width:100px;}
+* html table.editor select{margin-left:1px;}
+#reg_captcha #cancel_button{float:left;background-image:url(/images/filter_show.gif);background-position:middle left;background-repeat:no-repeat;font-size:12px;line-height:14px;font-weight:bold;border:0px solid transparent;color:#3b5998;margin:6px 0 0 0;padding-left:12px;}
+.status{margin:20px 10px 5px 10px;}
+.register_link_button{border-style:solid;border-top-width:1px;border-left-width:1px;border-bottom-width:1px;border-right-width:1px;border-top-color:#D9DFEA;border-left-color:#D9DFEA;border-bottom-color:#0e1f5b;border-right-color:#0e1f5b;background-color:#3b5998;color:#FFFFFF;font-size:13px;padding:2px 15px;text-align:center;}
+#welcome_image{background:#FFFFFF none repeat scroll 0%;border:1px solid #CCCCCC;float:left;line-height:0px;margin-top:22px;padding:3px;}
+#welcome_messaging{border-bottom:1px solid #CCCCCC;border-top:1px solid #CCCCCC;color:#333333;font-size:16px;line-height:26px;margin-top:10px;padding:22px 0pt;width:385px;}
+.login .right_column{margin:12px 0 0 20px;float:left;}
+.AB_simple_reg_header{border:none;padding:20 0 0 0;}
+#AB_loginform{float:left;}
+#reg_box_login_holder{margin:20px 0;float:right;}
+#AB_login_holder{float:left;}
+#reg_box_login_holder h2{border:none;}
+#reg_box_login_holder h2{font-size:14px;padding:0 0 5px 0;}
+.top_content{margin-bottom:10px;}
+#birthday_warning{font-size:9px;margin:-3px 0 2px 2px;}
+#birthday_dialog_desc{padding:10px;margin:0;}
+#birthday_dialog_button{padding:0 10px 10px 10px;text-align:right;overflow:hidden;}
+#birthday_dialog_button input{float:right;}
+table.editor select{margin-right:2px;}
+table.editor select{margin-right:5px;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0){#captcha_buttons #back_button{margin-right:2px;}
+table.editor select{margin-right:2px;}
+table.editor td{padding:3px 0 0 0;}
+#birthday_warning{font-size:9px;margin:0 0 2px 2px;}
+.search_loggedout{margin-top:1px;}
+}

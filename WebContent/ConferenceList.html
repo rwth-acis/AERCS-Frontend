@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
+        <link rel="stylesheet" type="text/css" href="AERCS.css"/>
+        <link rel="stylesheet" type="text/css" href="css/InterfacePro.css"/>
+        <link rel="stylesheet" type="text/css" href="css/common.css"/>
+        <link rel="stylesheet" type="text/css" href="css/search.css"/>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="javascript/MenuBar.js"></script>
+        <script type="text/javascript" src="javascript/functions.js"></script>
+        <script src="javascript/contentHandler.js"></script>
+        <script src="javascript/ServiceAPI/b64.js"></script>
+        <script src="javascript/ServiceAPI/moduleHelper.js"></script>
+        <script src="javascript/ServiceAPI/serviceAPI.js"></script>
+        <script src="javascript/requestHandler.js"></script>
+        <script type="text/javascript">
+            
+            $(document).ready(function() {
+                appendMenu(book);
+                // Obtains url variables.
+                var startChar = getUrlVar("start");
+                if(typeof startChar === 'undefined') {
+                    startChar = "A";
+                }
+                // Retrieves conferences.
+                selectConferences(addConferences, function(errorData){alert("error");}, startChar);
+            });
+            
+            // Adds retrieved conferences to the table.
+            function addConferences(data) {
+                var conferences = JSON.parse(data);
+                var index;
+                for(index=0; index < conferences.length; index++){
+                    var conference = conferences[index];
+                    alert(conference.id);
+                    var conferenceStr = '\
+                        <tr align="left">\
+                            <td>\
+                                <div class="datawrap">&nbsp;&nbsp;\
+                                    <a href="EventList.html?series=' + conference.series_key +
+                                    '&id=' + conference.id + '&item=1">'
+                                    + conference.name + "(" +conference.abbreviation +")" + '</a>\
+                                </div>\
+                            </td>\
+                        </tr>';
+                    $("#conferences").append(conferenceStr);
+                }
+                $("#conferences").append(conferenceStr);
+            }
+            
+        </script>
+        <title>AERCS - Conferences</title>
+    </head>
+    <body class="profile">
+        
+        <div id="book">
+            <!-- Menu bar!-->
+            <div id="content_shadow">
+                <div id="content" class="clearfix">
+
+                    <div class="dashboard_header">
+                        <div class="dh_titlebar clearfix">
+                            <h2>Computer Science Conferences and Workshops series browsing</h2>
+                        </div>
+                    </div>
+    
+                    <table id="conferences" width="100%">
+                        <tr align="left" >
+                            <td> 
+                                <a href="ConferenceList.html?start=A">A</a> -
+                                <a href="ConferenceList.html?start=B">B</a> -
+                                <a href="ConferenceList.html?start=C">C</a> -                                
+                                <a href="ConferenceList.html?start=D">D</a> -
+                                <a href="ConferenceList.html?start=E">E</a> -
+                                <a href="ConferenceList.html?start=F">F</a> -
+                                <a href="ConferenceList.html?start=G">G</a> -
+                                <a href="ConferenceList.html?start=H">H</a> -
+                                <a href="ConferenceList.html?start=I">I</a> -                                
+                                <a href="ConferenceList.html?start=J">J</a> -
+                                <a href="ConferenceList.html?start=K">K</a> -
+                                <a href="ConferenceList.html?start=L">L</a> -
+                                <a href="ConferenceList.html?start=M">M</a> -
+                                <a href="ConferenceList.html?start=N">N</a> -
+                                <a href="ConferenceList.html?start=O">O</a> -                                
+                                <a href="ConferenceList.html?start=P">P</a> -
+                                <a href="ConferenceList.html?start=Q">Q</a> -
+                                <a href="ConferenceList.html?start=R">R</a> -
+                                <a href="ConferenceList.html?start=S">S</a> -
+                                <a href="ConferenceList.html?start=T">T</a> -
+                                <a href="ConferenceList.html?start=U">U</a> -                                
+                                <a href="ConferenceList.html?start=V">V</a> -
+                                <a href="ConferenceList.html?start=W">W</a> -
+                                <a href="ConferenceList.html?start=X">X</a> -
+                                <a href="ConferenceList.html?start=Y">Y</a> -
+                                <a href="ConferenceList.html?start=Z">Z</a>
+                                <hr/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

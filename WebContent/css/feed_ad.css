@@ -1,0 +1,29 @@
+/*       Source:  Local Cache                                                                 */
+/*     Location:  rsrc:72217:/html/css/feed_ad.css                                            */
+/*      Machine:  10.1.0.63                                                                   */
+/*    Generated:  May 2nd 2008 3:00:29 AM PDT                                                 */
+
+.ad_media{}
+.ad_capsule .photo_widget{padding-bottom:2px;margin:0px;padding:0px;}
+.ad_capsule .photo_widget.three,
+.ad_capsule .photo_widget.four{clear:both;}
+.ad_capsule .photo_widget a{margin:0px 5px 0px 0px;padding-bottom:2px;}
+.ad_capsule .photo_widget a img{vertical-align:middle;background:#fff;padding:3px;border:1px solid #ccc;margin-bottom:1px;}
+.ad_capsule .photo_widget a:hover img{border:1px solid #3b5998;}
+.ad_capsule .photo_widget a:hover img{border:1px solid #3b5998;}
+.ad_capsule .photo_widget_wrapper .body{clear:both;}
+.ad_capsule h2{margin-bottom:2px;}
+.ad_capsule .external_link{border-bottom:1px dotted #3b5998;}
+#book .ad_capsule a .external_image{border:1px dotted #ccc;}
+#book .ad_capsule a:hover .external_image{border:1px dotted #3b5998;}
+.ad_capsule .external_link:hover{border-bottom:none;}
+.ad_capsule p.one, .ad_capsule p.two{float:right;}
+.ad_capsule p.one{width:276px;}
+.ad_capsule h3{color:#333;font-weight:bold;font-size:11px;margin-bottom:5px;margin:0px;}
+.ad_capsule p.two{width:186px;}
+.ad_capsule .photo_widget.one, .ad_capsule .photo_widget.two{float:left;}
+.ad_capsule .photo_widget.three, .ad_capsule .photo_widget.four{padding:8px 0 0 0;}
+.minifeed .ad_capsule p.one{margin-top:5px;width:256px;}
+.minifeed .ad_capsule .photo_widget{margin-top:5px;}
+.share_media .ad_capsule p.one{margin-top:5px;width:70%;float:right;}
+.share_media .ad_capsule .photo_widget{margin-top:5px;}

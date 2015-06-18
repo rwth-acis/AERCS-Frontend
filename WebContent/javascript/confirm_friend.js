@@ -1,0 +1,3 @@
+function confirm_friend_show_dialog(other_id,confirm_onclick){var dialog=new pop_dialog();var post_vars={'other_id':other_id};var confirm_dialog_handler=function(asyncResponse){var payload=asyncResponse.getPayload();var pl_confirm_onclick=payload['confirm_onclick'];if(confirm_onclick){pl_confirm_onclick+=confirm_onclick;}
+dialog.show_choice(payload['title'],payload['html'],tx('sh:confirm-button'),pl_confirm_onclick,tx('cf:ignore-button'),payload['reject_onclick'],'',tx('sh:cancel-button'),function(){dialog.fade_out(100);});};dialog.show_dialog('<div class="dialog_loading">'+tx('sh:loading')+'</div>');new AsyncRequest().setURI('/ajax/confirm_friend.php').setData(post_vars).setHandler(bind(this,confirm_dialog_handler)).send();}
+if(window.Bootloader){Bootloader.done(1);}

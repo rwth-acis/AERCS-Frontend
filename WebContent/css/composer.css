@@ -1,0 +1,54 @@
+/*       Source:  Local Cache                                                                 */
+/*     Location:  rsrc:84323:/html/inbox/css/composer.css                                     */
+/*      Machine:  10.1.0.37                                                                   */
+/*    Generated:  April 13th 2008 8:47:21 PM PDT                                              */
+
+
+.composer{padding-top:30px;padding-left:80px;padding:30px 0 10px 90px;background:#f7f7f7;}
+.composer_fields{margin:0;width:458px;}
+.composer_fields dt{float:left;width:65px;margin:0;padding:0 10px 0 0;text-align:right;}
+.composer_fields label{display:block;padding-top:6px;}
+.composer_fields .field label{padding-bottom:5px;}
+.composer_fields dd{float:left;width:382px;margin:0 0 10px 0;}
+.share_link #share_link,
+.composer_fields .field input.inputtext,
+.composer_fields .field textarea,
+#compose_message div.tokenizer{border:1px solid #8496ba;}
+#compose_message div.tokenizer{width:355px;}
+.fbpage_updates .composer{border-top:1px solid #898989;}
+.fbpage_updates .fbpage_return_link{float:right;}
+.fbpage_updates #compose_message div.tokenizer{border:none;background:transparent;padding-top:3px;}
+.fbpage_updates #compose_message div.tokenizer .token{background:transparent;padding:0px;}
+.fbpage_updates #compose_message div.tokenizer .token span{background:transparent;padding:0px;}
+.fbpage_updates #compose_message div.tokenizer .token span span{background:transparent;padding:0px;}
+.fbpage_updates #compose_message div.tokenizer .token span span span{background:transparent;padding:0px;}
+.fbpage_updates #compose_message div.tokenizer .token span span span span{background:transparent;padding:0px;}
+.share_link #share_link,
+.composer_fields .field #subject_field,
+.composer_fields textarea{width:355px;margin:0;padding:5px 0 5px 3px;font-size:11px;overflow:hidden;}
+.composer_fields textarea{height:100px;}
+.composer_fields span.readonly{padding-top:6px;display:block;}
+.submits input.inputsubmit{padding-top:2px;padding-bottom:3px;margin-right:5px;}
+.sharer input.inputsubmit{padding-top:2px;padding-bottom:3px;margin-right:5px;}
+input.action{padding-left:25px;padding-right:25px;}
+input.aux{padding-left:15px;padding-right:15px;background:#f0f0f0;color:#000;border-top-color:#e7e7e7;border-right-color:#666;border-bottom-color:#666;border-left-color:#e7e7e7;}
+.thread input#exit_button{width:auto;}
+.share_link h4{padding:4px 0 3px;}
+.share_link #share_link{float:left;width:150px;}
+.share_link .inputsubmit{float:left;margin:5px 0 0;}
+.share_link .explain{float:left;width:90px;padding:5px 7px;font-size:9px;color:#666;}
+.submits .submits_wrap{float:left;}
+.submits .sub_controls{float:right;padding:6px 0 0 0;font-size:9px;}
+.composer_fields dd.share_stage{width:355px;}
+.attachment_stage{border-top:1px solid #ccc;border-bottom:1px solid #ccc;background-color:#f0f0f0;}
+.inbox .visibility_warning{padding-bottom:5px;font-size:9px;color:#666666;}
+#page_body.inbox #error{margin-right:80px;}
+#page_body.inbox #compose_message .share_stage #error{margin:0px;}
+#page_body.inbox #compose_message #error{margin:0 100px 10px 75px;}
+#book #inline_composer #error{margin:0px 40px 10px 75px;}
+#book #inline_composer .status{margin-left:75px;}
+#inline_composer{margin-top:10px;margin-bottom:15px;border:0;margin-left:140px;background:#fff;}
+#inline_composer .attach_dropdown{margin:2px 0 0 0;float:right;}
+.message_dialog table.pop_dialog_table{width:500px;}
+.message_dialog table.pop_dialog_table td.pop_content h2.dialog_loading{background-position:430px 10px;}
+.message_dialog .composer{padding:20px 0px 10px;}

@@ -1,0 +1,213 @@
+<div class="graphEditorRoot">
+<!--                                                                     -->
+<!--  This file is part of yFiles AJAX.                                  -->
+<!--                                                                     -->
+<!--  yWorks proprietary/confidential. Use is subject to license terms.  -->
+<!--                                                                     -->
+<!--  Unauthorized redistribution of this file is strictly forbidden.    -->
+<!--                                                                     -->
+<!--  Copyright (c) 2006-2010 by yWorks GmbH, Vor dem Kreuzberg 28,      -->
+<!--  72070 Tuebingen, Germany. All rights reserved.                     -->
+<!--                                                                     -->
+
+<!-- ------------------ 1. Static Content ------------------- -->
+<div dojoType="dijit.layout.BorderContainer" gutters="false"
+  liveSplitters="false" style="width: 100%; height: 100%;" dojoAttachPoint="_layoutContainer" class="graphEditorLayout">
+
+  <div dojoType="dijit.layout.ContentPane" region="top">
+  <!-- ---------------------- Menu Bar ---------------------- -->
+  <div dojoType="dijit.MenuBar" class="menuBar">
+		<div dojoType="dijit.PopupMenuBarItem">
+			<span>File</span>
+			<div dojoType="dijit.Menu">
+				<div dojoType="dijit.MenuItem" dojoAttachPoint="_newMenu"
+             iconClass="yFilesEditorIcon yFilesEditorIconNew">New</div>
+				<div dojoType="dijit.MenuItem" dojoAttachPoint="_downloadMenu"
+             iconClass="yFilesEditorIcon yFilesEditorIconDownload">Download</div>
+			</div>
+		</div>
+    <div dojoType="dijit.PopupMenuBarItem">
+			<span>View</span>
+			<div dojoType="dijit.Menu">
+				<div dojoType="dijit.MenuItem" dojoAttachPoint="_zoomInMenu"
+             iconClass="yFilesEditorIcon yFilesEditorIconZoomIn">Zoom In</div>
+				<div dojoType="dijit.MenuItem" dojoAttachPoint="_zoomOutMenu"
+             iconClass="yFilesEditorIcon yFilesEditorIconZoomOut">Zoom Out</div>
+        <div dojoType="dijit.MenuItem" dojoAttachPoint="_fitContentMenu"
+             iconClass="yFilesEditorIcon yFilesEditorIconFitContent">Fit Content</div>
+      </div>
+		</div>
+    <div dojoType="dijit.PopupMenuBarItem">
+			<span>Grouping</span>
+			<div dojoType="dijit.Menu">
+				<div dojoType="dijit.MenuItem" dojoAttachPoint="_viewParentMenu">View Parent</div>
+				<div dojoType="dijit.MenuItem" dojoAttachPoint="_viewGroupMenu">View Group Content</div>
+        <div dojoType="dijit.MenuSeparator"></div>        
+        <div dojoType="dijit.MenuItem" dojoAttachPoint="_groupMenu">Group</div>
+				<div dojoType="dijit.MenuItem" dojoAttachPoint="_ungroupMenu">Ungroup</div>
+        <div dojoType="dijit.MenuSeparator"></div> 
+        <div dojoType="dijit.MenuItem" dojoAttachPoint="_openGroupMenu">Open Group</div>
+				<div dojoType="dijit.MenuItem" dojoAttachPoint="_closeGroupMenu">Close Group</div>
+      </div>
+		</div>
+    <div dojoType="dijit.PopupMenuBarItem" dojoAttachPoint="_layoutMenu">
+			<span>Layout</span>
+			<div dojoType="dijit.Menu">
+				<div dojoType="dijit.MenuItem" dojoAttachPoint="_hierarchicalMenu">Hierarchical</div>
+				<div dojoType="dijit.MenuItem" dojoAttachPoint="_organicMenu">Organic</div>
+				<div dojoType="dijit.MenuItem" dojoAttachPoint="_orthogonalMenu">Orthogonal</div>
+			</div>
+		</div>
+    <div dojoType="dijit.PopupMenuBarItem">
+			<span>Windows</span>
+      <!--<div dojoType="dijit.Menu">-->
+				<!--<div dojoType="dijit.CheckedMenuItem" dojoAttachPoint="_overviewMenu">Overview</div>-->
+				<!--<div dojoType="dijit.CheckedMenuItem" dojoAttachPoint="_paletteMenu">Palette</div>-->
+				<!--<div dojoType="dijit.CheckedMenuItem" dojoAttachPoint="_optionsMenu">Options</div>-->
+			<!--</div>-->
+
+      <div dojoType="dijit.Menu">
+				<div dojoType="dijit.MenuItem" dojoAttachPoint="_overviewMenu">Overview</div>
+				<div dojoType="dijit.MenuItem" dojoAttachPoint="_paletteMenu">Palette</div>
+				<div dojoType="dijit.MenuItem" dojoAttachPoint="_optionsMenu">Options</div>
+			</div>
+    </div>
+    <div dojoType="dijit.PopupMenuBarItem">
+			<span>Help</span>
+			<div dojoType="dijit.Menu">
+				<div dojoType="dijit.MenuItem" dojoAttachPoint="_helpMenu"
+             iconClass="yFilesEditorIcon yFilesEditorIconHelp">Help</div>
+			</div>
+		</div>
+	</div>
+
+  <!-- ---------------------- Toolbar ---------------------- -->
+  <div dojoType="dijit.Toolbar" dojoAttachPoint="toolbar" layoutAlign="top">
+
+  <button name="new" dojoAttachPoint="_newButton" dojoType="dijit.form.Button" title="New"
+          iconClass="yFilesEditorIcon yFilesEditorIconNew" showLabel="false">New
+  </button>
+  <button name="download" dojoAttachPoint="_downloadButton" dojoType="dijit.form.Button" title="Download"
+          iconClass="yFilesEditorIcon yFilesEditorIconDownload" showLabel="false">Download
+  </button>
+
+  <div dojoType="dijit.ToolbarSeparator">&nbsp;</div>
+
+  <button name="edit" dojoAttachPoint="_editButton" dojoType="dijit.form.ToggleButton" title="Toggle Pan/Edit Mode"
+          iconClass="yFilesEditorIcon yFilesEditorIconEdit" checked="checked" showLabel="false">Toggle Pan/Edit Mode
+  </button>
+  <button name="delete" dojoAttachPoint="_deleteButton" dojoType="dijit.form.Button" title="Delete Selection"
+          iconClass="yFilesEditorIcon yFilesEditorIconDelete" showLabel="false">Delete Selection
+  </button>
+
+  <div dojoType="dijit.ToolbarSeparator">&nbsp;</div>
+
+  <button name="zoomIn" dojoAttachPoint="_zoomInButton" dojoType="dijit.form.Button" title="Zoom In"
+          iconClass="yFilesEditorIcon yFilesEditorIconZoomIn" showLabel="false">Zoom In
+  </button>
+  <button name="zoomOut" dojoAttachPoint="_zoomOutButton" dojoType="dijit.form.Button" title="Zoom Out"
+          iconClass="yFilesEditorIcon yFilesEditorIconZoomOut" showLabel="false">Zoom Out
+  </button>
+  <button name="zoomArea" dojoAttachPoint="_zoomAreaButton" dojoType="dijit.form.ToggleButton" title="Zoom Area"
+          iconClass="yFilesEditorIcon yFilesEditorIconZoomArea" showLabel="false">Zoom Area
+  </button>
+  <button name="fitContent" dojoAttachPoint="_fitContentButton" dojoType="dijit.form.Button" title="Fit Content"
+          iconClass="yFilesEditorIcon yFilesEditorIconFitContent" showLabel="false">Fit Content
+  </button>
+</div>
+</div>
+
+<div dojoType="dijit.layout.ContentPane" region="center">  
+    <!-- ---------------------- Graph Canvas ---------------------- -->
+  <div dojoType="yfiles.client.tiles.widget.GraphCanvas" dojoAttachPoint="canvas" layoutAlign="client"
+       nodeEvents="true" edgeEvents="true" nodeLabelEvents="true" paperEvents="true" maxZoomForFitContent="1.0">
+  </div>
+</div>
+</div>  
+
+<!-- ----------------- 2. Dynamic Content ----------------- -->
+<!-- ---------------------- Overview ---------------------- -->
+<div dojoAttachPoint="_overviewPane" dojoType="dojox.layout.FloatingPane" closable="true" resizable="true"
+     dockable="false" title="Overview" contentClass="graphEditorOverview"
+     style="top: 80px; left: 40px; width: 200px; height: 150px; position: absolute;z-index:101">
+    <div dojoType="yfiles.client.tiles.widget.GraphCanvas" dojoAttachPoint="overview"
+         tileSize="350" layoutAlign="client"></div>
+</div>
+
+<!-- ----------------------- Options ---------------------- -->
+<div dojoAttachPoint="_optionsPane" dojoType="dojox.layout.FloatingPane" title="Options" class="graphEditorOptions"
+         closable="true" resizable="false" dockable="false"
+         style="width: 500px; height: 280px; left: 60px; top: 60px; position: absolute;">
+      <div dojoAttachPoint="_optionsContents" style="padding: 10px;">
+        <div dojoType="dijit.layout.TabContainer" style="height: 200px;">
+          <div dojoType="dijit.layout.ContentPane" title="Zoom" style="overflow: hidden; padding:5px; height: 200px">
+            <p><b>Zoom Factor</b> <input dojoType="dijit.form.NumberSpinner" value="2.0"
+                                         smallDelta="0.1" constraints="{min:1.1,max:10.0,places:1,round:true}"
+                                         maxlength="7" dojoAttachPoint="_zoomFactorSpinner"></p>
+
+            <p>
+              The Zoom Factor determines by how much the zoom value is changed, if you zoom in or zoom out
+              using the toolbar buttons.
+            </p>
+          </div>
+          <div dojoType="dijit.layout.ContentPane" title="Hit Test" style="overflow: hidden; padding:5px;  height: 200px">
+            <p><b>Edge Test Sensitivity:</b> <span dojoAttachPoint="_sensitivityValue">5</span></p>
+
+            <div style="padding-left: 5px; padding-right: 5px;"
+                 dojoAttachPoint="_sensitivitySlider" dojoType="dijit.form.HorizontalSlider" value="5"
+                 minimum="1" maximum="15" discreteValues="15" intermediateChanges="true">
+              <div dojoType="dijit.form.HorizontalRule" container="bottomDecoration" count="8"
+                   style="height:5px;"></div>
+              <ol dojoType="dijit.form.HorizontalRuleLabels" container="bottomDecoration"
+                  style="height:1.2em;font-size:75%;color:gray;"
+                  count="8" minimum="1" maximum="15" constraints="{pattern:'#'}"></ol>
+            </div>
+
+            <p>
+              The mouse is considered to be over an edge, if its distance in pixels to the centerline of the edge
+              is at most the Edge Test Sensitivity.
+            </p>
+          </div>
+          <div dojoType="dijit.layout.ContentPane" title="Download" style="overflow: hidden; padding:5px;  height: 200px">
+            <p><b>Download Format</b></p>
+            <select title="Choose a Download Format" dojoAttachPoint="_formatSelect">
+              <!-- filled dynamically -->
+            </select>
+
+            <p>
+              Downloaded graphs will be served using the specified format.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+<!-- ---------------------- Palette ---------------------- -->
+<div title="Node Types" dojoAttachPoint="_nodeChoice" dojoType="dojox.layout.FloatingPane"
+     contentClass="graphEditorNodeTypes" dockable="false" closable="true" resizable="true"
+     style="width: 200px; height: 160px; left: 40px; top: 250px; position: absolute;z-index:100">
+</div>
+
+<!-- -------------------- context menu -------------------- -->
+<div dojoAttachPoint="_contextMenu" dojoType="dijit.Menu" contextMenuForWindow="true">
+  <div dojoType="dijit.MenuItem" iconClass="yFilesEditorIcon yFilesEditorIconZoomIn" label="Zoom In"
+       dojoAttachPoint="_zoomInContextMenu"></div>
+  <div dojoType="dijit.MenuItem" iconClass="yFilesEditorIcon yFilesEditorIconZoomOut" label="Zoom Out"
+       dojoAttachPoint="_zoomOutContextMenu"></div>
+  <div dojoType="dijit.MenuItem" iconClass="yFilesEditorIcon yFilesEditorIconFitContent" label="Fit Content"
+       dojoAttachPoint="_fitContentContextMenu"></div>
+  <div dojoType="dijit.MenuSeparator"></div>
+  <div dojoType="dijit.MenuItem" iconClass="yFilesEditorIcon yFilesEditorIconDelete" label="Delete" disabled="true"
+       dojoAttachPoint="_deleteContextMenu"></div>
+  <div dojoType="dijit.MenuItem" iconClass="yFilesEditorIcon yFilesEditorIconEditLabel" label="Edit Label"
+       disabled="true" dojoAttachPoint="_editLabelContextMenu"></div>
+  <div dojoType="dijit.MenuSeparator"></div>
+  <div dojoType="dijit.MenuItem" iconClass="yFilesEditorIcon yFilesEditorIconOpenUrl" label="Open URL" disabled="true"
+       dojoAttachPoint="_openURLContextMenu"></div>
+</div>
+
+<!-- -------------------- Special Info -------------------- -->
+<div dojoType="dojox.widget.Toaster" positionDirection="tr-down" messageTopic="yGraphEditorTopic"></div>
+
+</div>
