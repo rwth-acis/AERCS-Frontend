@@ -54,3 +54,9 @@ function selectJournals(callback, errorCallback, startChar){
     var content = "";
     sendRequest("GET", url, content, callback, errorCallback);
 }
+
+function selectEvents(callback, errorCallback, series, id, item){
+	var url = "events?series=" + series + "&id=" + id + "&item=" + item;
+	var content = "";
+	sendRequest("GET", url, content, callback, errorCallback);
+}

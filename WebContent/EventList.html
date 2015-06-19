@@ -7,55 +7,67 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
-        <link rel="stylesheet" type="text/css" href="AERCS.css"/>
         <link rel="stylesheet" type="text/css" href="css/InterfacePro.css"/>
         <link rel="stylesheet" type="text/css" href="css/common.css"/>
         <link rel="stylesheet" type="text/css" href="css/search.css"/>
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script type="text/javascript" src="javascript/MenuBar.js"></script>
         <script type="text/javascript" src="javascript/functions.js"></script>
-        <script src="javascript/contentHandler.js"></script>
         <script src="javascript/ServiceAPI/b64.js"></script>
         <script src="javascript/ServiceAPI/moduleHelper.js"></script>
         <script src="javascript/ServiceAPI/serviceAPI.js"></script>
         <script src="javascript/requestHandler.js"></script>
         <script type="text/javascript">
             
-            $(document).ready(function() {
-                appendMenu(book);
-                // Obtains url variables
-                var item = getUrlVar("item");
-                if(typeof item === 'undefined') {
-                    item = "1";
-                }
-                var series = getUrlVar("series");
-                var id = getUrlVar("id");
-                // Sets title.
-                $('dh_titlebar').("h2").append("abcdefg");
-                
-                // Retrieves events.
-                //selectJournals(addJournals, function(errorData){alert("error");}, startChar);
-            });
+        $(document).ready(function() {
+            appendMenu(book);
+            // Obtains url variables
+            var item = getUrlVar("item");
+            if(typeof item === 'undefined') {
+                item = "1";
+            }
+            var series = getUrlVar("series");
+            var id = getUrlVar("id");
             
-            // Adds retrieved journals to the table.
-            function addJournals(data) {
-                var journals = JSON.parse(data);
-                var index;
-                for(index=0; index < journals.length; index++){
-                    var journal = journals[index];
-                    var journalStr = '\
-                        <tr align="left">\
-                            <td>\
-                                <div class="datawrap">&nbsp;&nbsp;\
-                                    <a href="EventList.html?series=' + journal.key + '&item=1">'
-                                    + journal.name + "(" +journal.abbreviation +")" + '</a>\
-                                </div>\
-                            </td>\
-                        </tr>';
-                    $("#conferences").append(journalStr);
-                }
-                $("#conferences").append(journalStr);
-            }  
+            // Sets title.
+            //selectTitle(addTitle, function(errorData){alert("error");}, id);
+            
+            // Retrieves events.
+            selectEvents(addEvents, function(errorData){alert("error");}, series, id, item);
+        });
+        
+        function addTitle(data) {
+            var eventseries = JSON.parse(data);
+            $("#series_name").append(eventseries[0].name);
+        }
+        
+        // Adds retrieved journals to the table.
+        function addEvents(data) {
+            var events = JSON.parse(data);
+            var index;
+            for(index=0; index < events.length; index++){
+                var event = events[index];
+                
+                var eventStr = '\
+                	<tr align="left">\
+                		<td>\
+                			<div class="datawrap">&nbsp;&nbsp;\
+                				<a href="Event.html?id=' + event.id + '">' + event.name + '</a>\
+                			</div>\
+                		</td>\
+                	<td>\
+                		<div class="datawrap">&nbsp;&nbsp;\
+                			' + '(' + event.country + ', ' + event.year + ')' + '\
+                		</div>\
+                	</td>\
+                </tr>';
+
+                $("#series_name").append(eventStr);
+            }
+        }  
+        
+        
+        
             
         </script>
         <title>AERCS - Conferences</title>
@@ -69,7 +81,7 @@ and open the template in the editor.
 
                     <div class="dashboard_header">
                         <div class="dh_titlebar clearfix">
-                            <h2></h2>
+                            <h2 id="series_name"></h2>
                         </div>
                     </div>
     
