@@ -7,6 +7,7 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
+        <link rel="stylesheet" type="text/css" href="css/AERCS.css"/>
         <link rel="stylesheet" type="text/css" href="css/InterfacePro.css"/>
         <link rel="stylesheet" type="text/css" href="css/common.css"/>
         <link rel="stylesheet" type="text/css" href="css/search.css"/>
@@ -29,45 +30,116 @@ and open the template in the editor.
             var series = getUrlVar("series");
             var id = getUrlVar("id");
             
-            // Sets title.
-            //selectTitle(addTitle, function(errorData){alert("error");}, id);
-            
             // Retrieves events.
             selectEvents(addEvents, function(errorData){alert("error");}, series, id, item);
+        
+        	addTabs(series, item, id);
         });
         
-        function addTitle(data) {
-            var eventseries = JSON.parse(data);
-            $("#series_name").append(eventseries[0].name);
+        function addTabs(series, item, id) {
+        	var tabStr = '\
+        		<ul class="toggle_tabs clearfix" id="toggle_tabs_unused">\
+	                <li class="first">\
+	                    <a href="EventList.html?series='+series+'&id='+id+'&item=1" ' +(item==1?'class="selected"':'')+ '>Events List</a>\
+	                </li>\
+	                <li>\
+	                    <a href="EventList.html?series='+series+'&id='+id+'&item=2" ' +(item==2?'class="selected"':'')+ '>Series Analysis</a>\
+	                </li>\
+	                <li>\
+		                <a href="EventList.html?series='+series+'&id='+id+'&item=3" ' +(item==3?'class="selected"':'')+ '>Key Member of Community</a>\
+		            </li>\
+		            <li ' +(series.lastIndexOf("db/conf")!=0?'class="last"':'')+ '>\
+			            <a href="EventList.html?series='+series+'&id='+id+'&item=4" ' +(item==4?'class="selected"':'')+ '>Community Visualization</a>\
+			        </li>';
+	            
+	        if(series.lastIndexOf("db/conf")==0){
+	        	tabStr+='<li class="last">\
+				         	<a href="EventList.html?series='+series+'&id='+id+'&item=5" ' +(item==5?'class="selected"':'')+ '>Location</a>\
+				         </li>';
+	        }
+	        tabStr+='</ul>';
+        	$("#tabs").append(tabStr);
         }
         
         // Adds retrieved journals to the table.
         function addEvents(data) {
-            var events = JSON.parse(data);
-            var index;
-            for(index=0; index < events.length; index++){
-                var event = events[index];
-                
-                var eventStr = '\
-                	<tr align="left">\
-                		<td>\
-                			<div class="datawrap">&nbsp;&nbsp;\
-                				<a href="Event.html?id=' + event.id + '">' + event.name + '</a>\
-                			</div>\
-                		</td>\
-                	<td>\
-                		<div class="datawrap">&nbsp;&nbsp;\
-                			' + '(' + event.country + ', ' + event.year + ')' + '\
-                		</div>\
-                	</td>\
-                </tr>';
+        	var item = getUrlVar("item");
+            var id = getUrlVar("id");
 
-                $("#series_name").append(eventStr);
+            var events = JSON.parse(data);
+            console.log("name: " + events[0].series_name)
+            $("#series_name").append(events[0].series_name);
+            var index;
+            
+           	if(item == 1){
+              	for(index=1; index < events.length; index++){
+	               	var event = events[index];
+	                var eventStr = '\
+	                	<tr align="left">\
+	                		<td>\
+	                			<div class="datawrap">&nbsp;&nbsp;\
+	                				<a href="Event.html?id=' + event.id + '">' + event.name + '</a>\
+	                			</div>\
+	                		</td>\
+	                	<td>\
+	                		<div class="datawrap">&nbsp;&nbsp;\
+	                			' + '(' + event.country + ', ' + event.year + ')' + '\
+	                		</div>\
+	                	</td>\
+	                </tr>';
+	                
+	                $("#info_table").append(eventStr);
+              	}
             }
+            if(item == 2){
+            	var eventStr = '\
+                    <div class="header">\
+                    	<h2 id=""> Community Analysis </h2>\
+                	</div>\
+                	<iframe src="SeriesChartViewer.html?id=' +id+ '" width="99%" height="962" marginwidth="0"> </iframe>';
+                $("#info_table").append(eventStr);
+
+            }
+            if(item == 3){
+            	var eventStr = '\
+            	<caption>Key members of the community</caption>\
+           		<tr bgcolor="#e6f7ff" width="100%">\
+                   	<td width="10%" align="left" bgcolor="#3A6EA5" >\
+                       	<font color="#FFFFFF"> <b> No. of Conf.</b> </font>\
+                       </td>\
+                       <td width="50%" align="left" bgcolor="#3A6EA5" >\
+                       	<font color="#FFFFFF"> <b> Authors</b> </font>\
+                       </td>\
+                       <td width="40%" align="left" bgcolor="#3A6EA5" >\
+                       	<font color="#FFFFFF"> <b>PC members</b> </font>\
+                       </td>\
+               	</tr>';
+                $("#info_table").append(eventStr);
+
+                eventStr = ''; 
+            	for(index=1; index < events.length; index++){
+		            var event = events[index];
+		            var count = event.count;
+		            eventStr += '\
+	               		<tr bgcolor="#e6f7ff" width="100%">\
+                       		<td width="10%" align="center">' + event.count + '\
+                   			</td>\
+                   			<td width="50%">';
+	                 
+	            	for(var i=0; i<event.authorKeys.length; i++){
+	            		eventStr += '\
+	            			<a href="Person.html?key=' +event.authorKeys[i]+ '">' +event.authorNames[i]+ ', </a>';
+	            	}
+	            	eventStr += '\
+	            		</td>\
+                       		<td width="40%">\
+                       		</td>\
+                   		</tr>';
+            	}
+               	$("#info_table").append(eventStr);
+            }
+
         }  
-        
-        
-        
             
         </script>
         <title>AERCS - Conferences</title>
@@ -84,7 +156,15 @@ and open the template in the editor.
                             <h2 id="series_name"></h2>
                         </div>
                     </div>
-    
+                
+					<div class="tabs clearfix">
+                        <div id="tabs" class="left_tabs">
+                            
+                        </div>
+	                </div>
+	                
+	                <table id="info_table" class="info_table" border="0" width="100%">
+	                </table>
 
                 </div>
             </div>
