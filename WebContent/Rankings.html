@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
+        <link rel="stylesheet" type="text/css" href="css/AERCS.css"/>
+        <link rel="stylesheet" type="text/css" href="css/InterfacePro.css"/>
+        <link rel="stylesheet" type="text/css" href="css/common.css"/>
+        <link rel="stylesheet" type="text/css" href="css/search.css"/>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="javascript/MenuBar.js"></script>
+        <script type="text/javascript" src="javascript/functions.js"></script>
+        <script src="javascript/ServiceAPI/b64.js"></script>
+        <script src="javascript/ServiceAPI/moduleHelper.js"></script>
+        <script src="javascript/ServiceAPI/serviceAPI.js"></script>
+        <script src="javascript/requestHandler.js"></script>
+        <script type="text/javascript">
+            
+        $(document).ready(function() {
+            appendMenu(book);
+            // Obtains url variables
+            var conf = getUrlVar("conf");
+            if(typeof conf === 'undefined') {
+            	conf = "0";
+            }
+            var journal = getUrlVar("journal");
+            if(typeof journal === 'undefined') {
+            	journal = "0";
+            }
+            var domain = getUrlVar("domain");
+            if(typeof domain === 'undefined') {
+            	domain = "0";
+            }
+            var currentPage = getUrlVar("page");
+            if(typeof currentPage === 'undefined') {
+            	currentPage = "1";
+            }
+            var col = getUrlVar("col");
+            if(typeof col === 'undefined') {
+            	col = "5";
+            }
+            var order = getUrlVar("order");
+            if(typeof order === 'undefined') {
+            	order = "0";
+            }
+            
+            if(getUrlVars().length == 1){
+            	conf = 1;
+                journal = 1;
+                domain = 0;
+            }
+            
+            // Retrieves events.
+            getRanking(addRanking, function(errorData){alert("error");}, conf, journal, domain, currentPage, col, order);
+        
+        });
+        
+        function addRanking(data){
+            var ranking = JSON.parse(data);
+            var domainRs = ranking[1];
+            var rs = ranking[2];
+
+        	var formStr = '\
+	        	<form method="get" action="" name="rankingsform" id="rankingsform">\
+		            <input type="hidden" name="page" value="1">\
+		            <table>\
+		                <tr align="left" >\
+		                    <td>\
+		                        &nbsp;\
+		                    </td>\
+		                    <td>\
+		                        Conferences<input type="checkbox" name="conf" value="1" ' +((ranking[0].conf == 1)?"checked":"")+ ' onclick="submit()"/>\
+		                    </td>\
+		                    <td>\
+		                        Journals<input type="checkbox" name="journal" value="1" ' +((ranking[0].journal == 1)?"checked":"")+ ' onclick="submit()"/>\
+		                    </td>\
+		                    <td>\
+		                        Domain:\
+		                        <select name="domain" onchange="submit()">\
+		                          <option value="0">All</option>';
+		      
+			for(var i=0; i<domainRs.length; i++){
+				var curDomainRs = domainRs[i];
+				formStr += '\
+                    <option value="' +curDomainRs.id+ '"' +((ranking[0].domain == curDomainRs.id)?"selected":"")+ '>' +curDomainRs.name+ '</option>';
+			}
+		                        
+			formStr += '\
+		                        </select>\
+		                    </td>\
+		                </tr>\
+		            </table>\
+		            <input type="hidden" name="col" value="' +ranking[0].col+ '">\
+		            <input type="hidden" name="order" value="' +ranking[0].order+ '">\
+		        </form>';
+		        
+			$("#rankForm").append(formStr);
+			
+			////////////////////////////////
+			var tableStr = '\
+				<table width = "100%">\
+	            <tr>\
+	                <td style="width:4px">\
+	                    &nbsp;\
+	                </td>\
+	                <td style="width:60%;padding: 0 2px 4px 0">\
+	                    <div class="header">\
+	                        <h2 id="title_app_2341989679">Venue</h2>\
+	                        <a href="?' +ranking[0].pagedQueryString+ '&col=5&order=0">\
+	                            <img src="img/up_arrow.png" />\
+	                        </a>\
+	                        <a href="?' +ranking[0].pagedQueryString+ '&col=5&order=1">\
+	                            <img src="img/down_arrow.png" />\
+	                        </a>\
+	                   </div>\
+	                </td>\
+	                <td style="padding: 0 2px 4px 0">\
+	                    <div class="header">\
+	                        <h2 id="title_app_2341989679">Betweenness</h2>\
+	                        <a href="?' +ranking[0].pagedQueryString+ '&col=1&order=0">\
+	                            <img src="img/up_arrow.png" />\
+	                        </a>\
+	                        <a href="?' +ranking[0].pagedQueryString+ '&col=1&order=1">\
+	                            <img src="img/down_arrow.png" />\
+	                        </a>\
+	                    </div>\
+	                </td>\
+	                <td style="padding: 0 2px 4px 0">\
+	                    <div class="header">\
+	                        <h2 id="title_app_2341989679">PageRank</h2>\
+	                        <a href="?' +ranking[0].pagedQueryString+ '&col=2&order=0">\
+	                            <img src="img/up_arrow.png" />\
+	                        </a>\
+	                        <a href="?' +ranking[0].pagedQueryString+ '&col=2&order=1">\
+	                            <img src="img/down_arrow.png" />\
+	                        </a>\
+	                    </div>\
+	                </td>\
+	                <td style="padding: 0 2px 4px 0">\
+	                    <div class="header">\
+	                        <h2 id="title_app_2341989679">Authority</h2>\
+	                        <a href="?' +ranking[0].pagedQueryString+ '&col=3&order=0">\
+	                            <img src="img/up_arrow.png" />\
+	                        </a>\
+	                        <a href="?' +ranking[0].pagedQueryString+ '&col=3&order=1">\
+	                            <img src="img/down_arrow.png" />\
+	                        </a>\
+	                    </div>\
+	                </td>\
+	                <td style="padding: 0 2px 4px 0">\
+	                    <div class="header">\
+	                        <h2 id="title_app_2341989679">Hub</h2>\
+	                        <a href="?' +ranking[0].pagedQueryString+ '&col=4&order=0">\
+	                            <img src="img/up_arrow.png" />\
+	                        </a>\
+	                        <a href="?' +ranking[0].pagedQueryString+ '&col=4&order=1">\
+	                            <img src="img/down_arrow.png" />\
+	                        </a>\
+	                    </div>\
+	                </td>\
+	            </tr>';
+			
+			for(i=0; i<rs.length; i++)
+		    {
+				var curRs = rs[i];
+				tableStr += '\
+	                <tr align="left" >\
+	                    <td>\
+	                        &nbsp;\
+	                    </td>\
+	                    <td >\
+	                        <a href="EventList.html?series=' +curRs.series_key+ '&item=1">' +curRs.name+ '</a><br>\
+	                    </td>\
+	                    <td style="text-align:center">\
+	                        ' +curRs.bn+ '\
+	                    </td>\
+	                    <td style="text-align:center">\
+	                    	' +curRs.pr+ '\
+	                    </td>\
+	                    <td style="text-align:center">\
+	                    	' +curRs.au+ '\
+	                    </td>\
+	                    <td style="text-align:center">\
+	                    	' +curRs.hu+ '\
+	                    </td>\
+	                </tr>';
+		    }
+			tableStr += '</table>';
+			$("#rankTable").append(tableStr);
+			
+			/////////////////////////////////////////
+			
+			var pageNum = Math.floor(ranking[0].resultNum / ranking[0].resultPerPage);
+		    if (ranking[0].resultNum % ranking[0].resultPerPage > 0)
+		    {
+		        pageNum++;
+		    }
+		    
+		    var firstPage = 1;
+		    var lastPage = pageNum;
+		
+		    var prevPage = ranking[0].page - 1;
+		    if (prevPage < firstPage)
+		    {
+		        prevPage = firstPage;
+		    }
+		    
+		    var nextPage =  ranking[0].page + 1;
+		    if (nextPage > lastPage)
+		    {
+		        nextPage = lastPage;
+		    }
+		    
+		    var fromPage =  ranking[0].page - 2;
+		    if (fromPage < firstPage)
+		    {
+		        fromPage = firstPage;
+		    }
+		    
+		    var toPage =  ranking[0].page + 2;
+		    if (toPage > lastPage)
+		    {
+		        toPage = lastPage;
+		    }
+		    
+		    var navStr = '';
+		    if (pageNum > 1)
+		    {
+		    	navStr += '\
+	                <table width = "100%">\
+                    <tr>\
+                        <td style="width:4px">\
+                            &nbsp;\
+                        </td>\
+                        <td>\
+                            <a href="?page=' +firstPage+ '&' +ranking[0].sortedQueryString+ '">First</a>&nbsp;\
+                            <a href="?page=' +prevPage+ '&' +ranking[0].sortedQueryString+ '">Previous</a>&nbsp;';
+	            
+                for (i=fromPage; i<=toPage; i++)
+	            {
+	                if (i != ranking[0].page){
+						navStr += '\
+							<a href="?page=' +i+ '&' +ranking[0].sortedQueryString+ '">' +i+ '</a>&nbsp;';
+	                }
+	                else{
+	                	navStr += i+'&nbsp';
+	                }
+	            }
+	        	navStr += '\
+		                    <a href="?page=' +nextPage+ '&' +ranking[0].sortedQueryString+ '">Next</a>&nbsp;\
+		                    <a href="?page=' +lastPage+ '&' +ranking[0].sortedQueryString+ '">Last</a>\
+		                </td>\
+		            </tr>\
+		        </table>';
+		    }
+			$("#navTable").append(navStr);
+
+        }
+           
+        </script>
+        <title>AERCS - Rankings</title>
+    </head>
+    <body class="profile">
+        
+        <div id="book">
+            <!-- Menu bar!-->
+            <div id="content_shadow">
+                <div id="content" class="clearfix">
+
+                    <div class="dashboard_header">
+                        <div class="dh_titlebar clearfix">
+                            <h2>Venue rankings</h2>
+                        </div>
+                    </div>
+                
+					 <div id="rankForm">
+					 </div>
+					 
+					 <div id="rankTable">
+					 </div>
+					 
+					 <div id="navTable">
+					 </div>
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

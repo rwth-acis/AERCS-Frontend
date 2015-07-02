@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
+        <link rel="stylesheet" type="text/css" href="css/AERCS.css"/>
+        <link rel="stylesheet" type="text/css" href="css/InterfacePro.css"/>
+        <link rel="stylesheet" type="text/css" href="css/common.css"/>
+        <link rel="stylesheet" type="text/css" href="css/search.css"/>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="javascript/MenuBar.js"></script>
+        <script type="text/javascript" src="javascript/functions.js"></script>
+        <script src="javascript/ServiceAPI/b64.js"></script>
+        <script src="javascript/ServiceAPI/moduleHelper.js"></script>
+        <script src="javascript/ServiceAPI/serviceAPI.js"></script>
+        <script src="javascript/requestHandler.js"></script>
+        <script type="text/javascript">
+            
+        $(document).ready(function() {
+            appendMenu(book);
+            // Obtains url variables
+            var id = getUrlVar("id");
+            
+            // Retrieves events.
+            selectEvent(addEvent, function(errorData){alert("error");}, id);
+        });
+        
+        
+        function addEvent(data) {
+            var event = JSON.parse(data);
+            $("#event_name").append(event[0].name);
+
+        	var infoStr = '\
+        		<tr>\
+		            <td class="label">Year:   </td>\
+			        <td><div class="datawrap">' +event[0].year+ '</div></td>\
+			    </tr>\
+			    <tr>\
+			    	<td class="label">Location:   </td>\
+			    	<td><div class="datawrap">' +(event[0].country==null?"N/A":event[0].country)+ '</div></td>\
+		        </tr>';
+        	$("#info_table").append(infoStr);
+        	
+        	var relatedSeries = event[1];
+        	var urls = event[2];
+        	
+        	if(relatedSeries != null && relatedSeries.length != 0){
+            	var seriesStr = '\
+	        		<div class="header">\
+		                <h2>Related series</h2>\
+		            </div>\
+		            <div class="subheader clearfix">\
+		                <h3>\
+		                    <div style="float: left;">Displaying ' +relatedSeries.length+ ' link(s).</div>\
+		               </h3>\
+		            </div>\
+		            <div class="post_items clearfix">';
+		            
+	        	for(var i=0; i < relatedSeries.length; i++){
+	        		var relatedSerie = relatedSeries[i];
+	        		seriesStr += '\
+                        <div class="share_item_wide">\
+                            <div class="share_media profilebox_wide clearfix">\
+                                <img src="img/link.gif" alt=""  class="media_icon" />\
+                                <div class="external share_ext_misc">\
+                                    <div class="share_media clearfix external share_ext_misc">\
+                                        <div class="ext_media clearfix no_extra">\
+                                            <div class="textual">\
+                                                <div class="metadata">\
+                                                    <div class="title">\
+                                                        <a href=' +relatedSerie.url+ ' title=' +relatedSerie.url+' target="_blank">' +(relatedSerie.title==null?relatedSerie.url:relatedSerie.title)+ '</a>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                        </div>\
+                                    </div>\
+                                </div>\
+                            </div>\
+                        </div>';
+	            }
+	        	seriesStr += '</div>'
+		       
+            	$("#relatedSeries").append(seriesStr);
+        	}
+        	
+        	var urlStr='';
+        	if(urls == null && urls.length == 0){
+        		urlStr = '\
+        			<div class="box clearfix ">\
+	                    <div class="datawrap">There is no link for this event.</div>\
+	                </div>';
+        	}
+        	else{
+        		urlStr = '\
+        			<div class="subheader clearfix">\
+	                   <h3>\
+	                       <div style="float: left;">Displaying ' +urls.length+ ' link(s).</div>\
+	                  </h3>\
+	               </div>\
+	               <div class="post_items clearfix">';
+	               
+	            for (var i=0; i < urls.length; i++){
+	           		var relatedUrl = urls[i];
+	           		urlStr += '\
+	                	<div class="share_item_wide">\
+	                    	<div class="share_media profilebox_wide clearfix">\
+	                        	<img src="img/link.gif" alt=""  class="media_icon" />\
+	                        	<div class="external share_ext_misc">\
+	                            	<div class="share_media clearfix external share_ext_misc">\
+	                                	<div class="ext_media clearfix no_extra">\
+	                                    	<div class="textual">\
+	                                        	<div class="metadata">\
+	                                            	<div class="title">\
+                                                   		<a href=' +relatedUrl.url+ ' title=' +relatedUrl.url+' target="_blank">' +((relatedUrl.title)?relatedUrl.title:relatedSerie.url)+ '</a>\
+	                                            	</div>\
+	                                            	<div class="url">\
+                                                   		<a href=' +relatedUrl.url+ ' title=' +relatedUrl.url+' target="_blank">' +relatedUrl.url+ '</a>\
+	                                            	</div>';
+	                                            	
+	               	if (relatedUrl.summary != null){
+	               		urlStr += '\
+		                    <div class="summary">' +relatedUrl.summary+ '</div>';
+               		}
+	               	if (relatedUrl.commend != null){
+	               		urlStr += '\
+	               			<div class="owner_comment">\
+	                            <span class="q">' +relatedUrl.commend+ '</span>\
+	                        </div>';
+               		}
+	           		urlStr+= '\
+	           								</div>\
+			            				</div>\
+				                    </div>\
+				                </div>\
+				            </div>\
+				        </div>';
+      			}
+        		urlStr += '</div>';
+        	}
+        	$("#urls").append(urlStr);
+        	
+        	
+        	var commStr = '\
+	            <div class="header">\
+		            <h2>Community visualization</h2>\
+		        </div>\
+		        <iframe src="NetworkVisualization_lite.html?id=' +event[0].id+ '" width="99%" height="600"> </iframe>';
+        	$("#community").append(commStr);
+        }  
+            
+        </script>
+        <title>AERCS - Conferences</title>
+    </head>
+    <body class="profile">
+        
+        <div id="book">
+            <!-- Menu bar!-->
+            <div id="content_shadow">
+                <div id="content" class="clearfix">
+
+                    <div class="dashboard_header">
+                        <div class="dh_titlebar clearfix">
+                            <h2 id="event_name"></h2>
+                        </div>
+                    </div>
+                    
+                    <div class="header">
+                    	<h2>Information</h2>
+                	</div>
+                    
+	                
+	                <table id="info_table" class="info_table" border="0" width="100%">
+	                </table>
+	                
+	                <div id="relatedSeries">
+	                </div>
+
+	                <div class="header">
+	                    <h2>Related websites</h2>
+	                </div> 
+
+					<div id="urls">
+	                </div>
+	                
+	                <div id="community">
+	                </div>      
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

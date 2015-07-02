@@ -1,0 +1,27 @@
+/* GraphCanvas */
+.yfiles .yFilesGraphCanvas {
+  cursor: default;
+}
+
+.yfiles .yFilesGraphCanvasOverlay {
+  background-color: gray;
+  border-style: none;
+}
+
+.yfiles .yFilesGraphCanvas .loading {
+  background-image: url(loading.gif);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Rubberband */
+.yfiles .yFilesRubberbandArea {
+  border: 1px solid black;
+  background: #99CCFF;
+}
+
+/* ViewPortMarker */
+.yfiles .yFilesViewPortMarker {
+  background-color: #99CCFF;
+  border: solid black 1px;
+}

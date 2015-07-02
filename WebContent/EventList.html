@@ -67,12 +67,11 @@ and open the template in the editor.
             var id = getUrlVar("id");
 
             var events = JSON.parse(data);
-            console.log("name: " + events[0].series_name)
             $("#series_name").append(events[0].series_name);
             var index;
             
            	if(item == 1){
-              	for(index=1; index < events.length; index++){
+              	for(index=2; index < events.length; index++){
 	               	var event = events[index];
 	                var eventStr = '\
 	                	<tr align="left">\
@@ -94,7 +93,7 @@ and open the template in the editor.
             if(item == 2){
             	var eventStr = '\
                     <div class="header">\
-                    	<h2 id=""> Community Analysis </h2>\
+                    	<h2> Community Analysis </h2>\
                 	</div>\
                 	<iframe src="SeriesChartViewer.html?id=' +id+ '" width="99%" height="962" marginwidth="0"> </iframe>';
                 $("#info_table").append(eventStr);
@@ -117,7 +116,7 @@ and open the template in the editor.
                 $("#info_table").append(eventStr);
 
                 eventStr = ''; 
-            	for(index=1; index < events.length; index++){
+            	for(index=2; index < events.length; index++){
 		            var event = events[index];
 		            var count = event.count;
 		            eventStr += '\
@@ -138,7 +137,17 @@ and open the template in the editor.
             	}
                	$("#info_table").append(eventStr);
             }
-
+			if(item == 4){
+				var newID = events[1].newest_year;
+            
+	            var eventStr = '\
+	            	<div class="header">\
+						<h2><a href="NetworkVisualization.html?id=' +newID+ '">Full Screen</a></h2>\
+					</div>\
+					<iframe src="NetworkVisualization_lite.html?id=' +newID+ '" width="99%" height="800"></iframe>';
+	            
+				$("#info_table").append(eventStr);	
+			}
         }  
             
         </script>

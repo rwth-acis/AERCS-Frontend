@@ -60,3 +60,21 @@ function selectEvents(callback, errorCallback, series, id, item){
 	var content = "";
 	sendRequest("GET", url, content, callback, errorCallback);
 }
+
+function getChartUrls(callback, errorCallback, id){
+	var url = "seriesCharts?id=" + id;
+	var content = "";
+	sendRequest("GET", url, content, callback, errorCallback);
+}
+
+function selectEvent(callback, errorCallback, id){
+	var url = "event?id=" + id;
+	var content = "";
+	sendRequest("GET", url, content, callback, errorCallback);
+}
+
+function getRanking(callback, errorCallback, conf, journal, domain, currentPage, col, order){
+	var url = "ranking?conf=" + conf + "&journal=" + journal + "&domain=" + domain + "&page=" + currentPage + "&col=" + col + "&order=" + order;
+	var content = "";
+	sendRequest("GET", url, content, callback, errorCallback);
+}

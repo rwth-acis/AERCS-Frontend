@@ -1,0 +1,24 @@
+html, body, #main {
+  width: 100%; /* make the body expand to fill the visible window */
+  height: 100%;
+  overflow: hidden; /* erase window level scrollbars */
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+  font-family: Myriad, Tahoma, Verdana, sans-serif;
+}
+
+.dojoTabPane {
+  padding : 10px 10px 10px 10px;
+}
+
+.tooltip {
+  font-size: 10pt;
+  background-color: #ebf5ff;
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
+  padding: 2px;
+  position: absolute;
+  overflow: hidden;
+  display: none;
+}

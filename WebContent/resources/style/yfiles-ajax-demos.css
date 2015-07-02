@@ -1,0 +1,135 @@
+/* GraphEditor */
+.yfiles .graphEditorOptions .dojoTabPane {
+  padding: 10px 10px 10px 10px;
+  overflow: auto;
+}
+
+.yfiles .graphEditorNodeType {
+  padding: 15px 5px;
+  background-color: white;
+}
+
+.yfiles .graphEditorNodeType.selected {
+  background-color: #EEEEEE;
+}
+
+.yfiles .graphEditorWindowMenu {
+  font-weight: normal;
+}
+
+.yfiles .graphEditorWindowMenu.selected {
+  font-weight: bold;
+}
+
+/* toolbar icons for the GraphEditor */
+.yfiles .yFilesEditorIcon {
+  background-image: none;
+	background-repeat: no-repeat;
+  border: none;
+  width: 22px;
+	height: 22px;
+	text-align: center;
+}
+.yfiles .yFilesEditorIconNew { background-image: url( '../images/document_plain_new.png' ); }
+.yfiles .yFilesEditorIconLoad { background-image: url( '../images/folder_out.png' ); }
+.yfiles .yFilesEditorIconDownload { background-image: url( '../images/server_to_client.png' ); }
+.yfiles .yFilesEditorIconEdit { background-image: url( '../images/edit.png' ); }
+.yfiles .yFilesEditorIconDelete { background-image: url( '../images/delete2.png' ); }
+.yfiles .yFilesEditorIconZoomIn { background-image: url( '../images/zoom_in.png' ); }
+.yfiles .yFilesEditorIconZoomOut { background-image: url( '../images/zoom_out.png' ); }
+.yfiles .yFilesEditorIconZoomArea { background-image: url( '../images/selection_view.png' ); }
+.yfiles .yFilesEditorIconFitContent { background-image: url( '../images/fit_to_size.png' ); }
+.yfiles .yFilesEditorIconLayout { background-image: url( '../images/branch.png' ); }
+.yfiles .yFilesEditorIconHelp { background-image: url( '../images/help.png' ); }
+.yfiles .yFilesEditorIconEditLabel { background-image: url( '../images/element_into_input.png' ); }
+.yfiles .yFilesEditorIconOpenUrl { background-image: url( '../images/earth.png' ); }
+.yfiles .yFilesEditorIconOverview { background-image: url( '../images/earth.png' ); }
+.yfiles .yFilesEditorIconOptions { background-image: url( '../images/preferences.png' ); }
+.yfiles .yFilesEditorIconNodeTypes { background-image: url( '../images/palette.png' ); }
+
+.yfiles .yFilesEditorIconSmall {
+  background-image: none;
+	background-repeat: no-repeat;
+  border: 1px solid #b1badf;
+  background-color:#f3f6ff;
+  /* #e1ebfb; */
+  width: 30px;
+	height: 22px;
+	text-align: center;
+  background-position:center;
+}
+
+.yfiles .yFilesEditorIconZoomOriginalSmall { background-image: url( '../images/zoomOriginal_small.png' ); }
+.yfiles .yFilesEditorIconZoomInSmall { background-image: url( '../images/zoomIn_small.png' ); }
+.yfiles .yFilesEditorIconZoomOutSmall { background-image: url( '../images/zoomOut_small.png' ); }
+.yfiles .yFilesEditorIconZoomFitSmall { background-image: url( '../images/zoomFit_small.png' ); }
+.yfiles .yFilesEditorIconStartSmall { background-image: url( '../images/start_small.png' ); }
+.yfiles .yFilesEditorIconStopSmall { background-image: url( '../images/stop_small.png' ); }
+
+
+/* GraphInfo */
+.yfiles .graphInfo {
+  width: 100%;
+  padding : 10px 10px 10px 10px;
+  overflow: auto;
+}
+
+.yfiles .graphInfo a {
+  color: #AA5522;
+  font-weight: bold;
+}
+
+.yfiles .graphInfo a:link,
+  a:visited {
+  text-decoration: none;
+}
+
+.yfiles .graphInfo a:active,
+.yfiles .graphInfo a:focus,
+.yfiles .graphInfo a:hover {
+  text-decoration: underline;
+}
+
+.yfiles .graphInfo .customHeading {
+  font-size: 12pt;
+  font-weight: bold;
+  color: #4079EA;
+}
+
+.yfiles .graphInfo .infoHeading {
+  font-size: 12pt;
+  width: 100%;
+}
+
+.yfiles .graphInfo .infoTable {
+  width: 100%;
+}
+
+.yfiles .graphInfo .infoBody {
+  font-size: 10pt;
+  width: 100%;
+}
+
+.yfiles .infoBody .infoBodyRow.even {
+  background-color: #FAFAFA; 
+}
+
+.yfiles .infoBody .infoBodyRow.odd {
+  background-color: #E1EBFB;
+}
+
+.yfiles .infoBody .infoBodyRow td {
+  padding: 2px;
+}
+
+.yfiles .infoBodyRow .infoKey {
+  font-weight: bold;
+}
+
+.yfiles .tooltip {
+  width: 260px;
+}
+
+.yfiles .tooltip .infoTable {
+  width: 100%;
+}
