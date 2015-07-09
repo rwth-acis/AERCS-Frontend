@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
+        <link rel="stylesheet" type="text/css" href="css/AERCS.css"/>
+        <link rel="stylesheet" type="text/css" href="css/InterfacePro.css"/>
+        <link rel="stylesheet" type="text/css" href="css/common.css"/>
+        <link rel="stylesheet" type="text/css" href="css/search.css"/>
+        <link rel="stylesheet" TYPE="text/css" href="css/menutabs/menutabs.css">
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="javascript/MenuBar.js"></script>
+        <script type="text/javascript" src="javascript/functions.js"></script>
+        <script src="javascript/ServiceAPI/b64.js"></script>
+        <script src="javascript/ServiceAPI/moduleHelper.js"></script>
+        <script src="javascript/ServiceAPI/serviceAPI.js"></script>
+        <script src="javascript/requestHandler.js"></script>
+        <script type="text/javascript" src="javascript/menutabs/tabber.js"></script>
+        <script type="text/javascript" src="javascript/filterlist/filterlist.js"></script>
+        <script type="text/javascript">
+            
+        $(document).ready(function() {
+            appendMenu(book);
+
+            var seriesType = getUrlVar("seriesType");
+            var selectedSeries = getUrlVar("selectedSeries");
+            var searchKeyword = getUrlVar("searchKeyword");
+            var typeOfSeriesSearchIn = getUrlVar("typeOfSeriesSearchIn");
+            var startChar = getUrlVar("startChar");
+
+//             if(typeof seriesType === 'undefined') seriesType = "";
+//             if(typeof selectedSeriesHistory === 'undefined') selectedSeriesHistory = "";
+//             if(typeof searchKeyword === 'undefined') searchKeyword = "";
+//             if(typeof typeOfSeriesSearchIn === 'undefined') typeOfSeriesSearchIn = "";
+            if(typeof startChar === 'undefined') startChar = "A";
+            
+            var conferenceTab="";
+            var journalTab="";
+            var searchAllTab="";
+            if(typeof seriesType === 'undefined')
+            {
+            	seriesType = "SA";
+            }
+            if(seriesType == "C")
+            {
+                conferenceTab = "tabbertab tabbertabdefault";
+                journalTab = "tabbertab";
+                searchAllTab = "tabbertab";
+            }
+            if(seriesType == "J")
+            {
+                conferenceTab = "tabbertab";
+                journalTab = "tabbertab tabbertabdefault";
+                searchAllTab = "tabbertab";
+            }
+            if(seriesType == "SA")
+            {
+                conferenceTab = "tabbertab";
+                journalTab = "tabbertab";
+                searchAllTab = "tabbertab tabbertabdefault";
+            }
+
+	        $("#tabSearch").addClass(searchAllTab);
+	        $("#tabConference").addClass(conferenceTab);
+	        $("#tabJournal").addClass(journalTab);
+
+            selectSeriesComparison(compareSeries, function(errorData){alert("error");}, seriesType, selectedSeries, searchKeyword, typeOfSeriesSearchIn, startChar);
+        });
+        
+        function compareSeries(data){
+            var events = JSON.parse(data);
+
+            var rsLeft = events[0];
+            var rsRight = events[1];
+            var rsConferenceLeft = events[2];
+            var rsJournalLeft = events[3];
+            
+//             $("#tabSearch").addClass(events[0].searchAllTab);
+//             $("#tabConference").addClass(events[0].conferenceTab);
+//             $("#tabJournal").addClass(events[0].journalTab);
+
+            
+            var SeriesLeftDivStr ='\
+            	<select name="searchAllSeriesLeftList" id="searchAllSeriesLeftList" multiple="multiple" onDBLClick="add1(this);">';
+               
+			var counter=0;
+            for(var i=0; i<rsLeft.length; i++){
+               	var curRs = rsLeft[i];
+				counter++;
+                   if(curRs.series_key.lastIndexOf("db/conf") == 0){
+                   	SeriesLeftDivStr += '\
+                   		<option class="darkblue" value="' +curRs.id+ ' ++|++ ' +curRs.name+ ' (' +curRs.abbreviation.toUpperCase()+ ') ++|++ darkblue">\
+                           	' +curRs.name+ '(' +curRs.abbreviation.toUpperCase()+')\
+                       	</option>';
+        	        }
+                   if(curRs.series_key.lastIndexOf("db/journal") == 0)
+                   {
+                   	SeriesLeftDivStr += '\
+                   		<option class="darkred" value="' +curRs.id+ ' ++|++ ' +curRs.name+ ' (' +curRs.abbreviation.toUpperCase()+ ') ++|++ darkred">\
+                           	' +curRs.name+ '(' +curRs.abbreviation.toUpperCase()+')\
+                       	</option>';
+				}
+			}
+           	SeriesLeftDivStr += '</select>';
+            $("#SeriesLeftDiv").append(SeriesLeftDivStr);
+            
+	        var s = document.createElement("script");
+	        s.text = "var filterOnSearchAllSeries = new filterlist(document.getElementById('searchAllSeriesLeftList'), 'darkgreen');";
+	        $("#SeriesLeftDiv").append(s);
+            
+            ////////////////////////////////////////
+            
+            var seriesStr = '';
+			var SeriesRightDivStr = '\
+	            <form id="searchAllForm" name="searchAllSeriesRightListForm" action="" method="POST" style="display:inline;">\
+            		<select name="searchAllSeriesRightList" id="searchAllSeriesRightList" multiple="multiple">';
+            
+            for(i=0; i<rsRight.length; i++){
+            	curRs = rsRight[i];
+				var textColor="";
+                            
+                if(curRs.seriesKey.lastIndexOf("db/conf") == 0)
+                {
+                    textColor = "darkblue";
+                }
+                if(curRs.seriesKey.lastIndexOf("db/journal") == 0)
+                {
+                    textColor = "darkred";
+                }
+                
+                seriesStr += '\
+                	<option class="' +textColor+ '" value="' +curRs.seriesID+ '">\
+	                    ' +curRs.seriesName+ '\
+	                </option>';
+            }
+            
+            SeriesRightDivStr += seriesStr;
+            SeriesRightDivStr += '</select>';
+            $("#SeriesRightDiv").append(SeriesRightDivStr);
+            
+            ///////////////////////////////////////
+            
+            var conferenceTableStr = '';
+            for(i=65; i<=90; i++)
+            {
+            	conferenceTableStr += '\
+            		<form name="conferenceForm' +String.fromCharCode(i)+ '" method="GET" action="SeriesComparison.html">\
+	                    <input type="hidden" name="startChar" value="' +String.fromCharCode(i)+ '">\
+	                    <input type="hidden" name="seriesType" value="C">\
+	                    <input type="hidden" name="selectedSeries"/>\
+	                    <a href="javascript:carrySeriesSelection(&apos;conferenceForm' +String.fromCharCode(i)+ '&apos;, &apos;seriesSelection&apos;);">' +String.fromCharCode(i)+ '</a>\
+                	</form>';
+               	if(i!=90){
+               		conferenceTableStr += '-';                           
+                }
+            }
+	        $("#conferenceTable").append(conferenceTableStr);
+            
+	        //////////////////////////////////////////
+	        
+	        var conferenceLeftStr = '\
+                <select name="conferenceLeftList" id="conferenceLeftList" multiple="multiple" onDBLclick="add1(this)">';
+                
+	        for(i=0; i<rsConferenceLeft.length; i++){
+	        	curRs = rsConferenceLeft[i];
+	        	conferenceLeftStr += '\
+               		<option class="darkblue" value="' +curRs.id+ ' ++|++ ' +curRs.name+ ' (' +curRs.abbreviation.toUpperCase()+ ') ++|++ darkblue">\
+						' +curRs.name+ '(' +curRs.abbreviation.toUpperCase()+')\
+					</option>';
+	        }
+
+	        conferenceLeftStr += '</select>';
+	        $("#conferenceLeftDiv").append(conferenceLeftStr);
+	        
+	        var s = document.createElement("script");
+	        s.text = "var filterOnConferences = new filterlist(document.getElementById('conferenceLeftList'), 'darkblue');";
+	        $("#conferenceLeftDiv").append(s);
+	        
+	        //////////////////////////////////////////////
+	        
+	        var conferenceRightStr = '\
+                <form name="conferenceRightListForm" action="" method="POST" >\
+                	<select name="conferenceRightList" id="conferenceRightList" multiple="multiple">';
+
+            conferenceRightStr += seriesStr;
+            conferenceRightStr += '\
+            		</select>\
+                </form>';
+
+	        $("#conferenceRightDiv").append(conferenceRightStr);
+	        
+	        ////////////////////////////////////////////////
+	        
+            var journalTableStr = '';
+            for(i=65; i<=90; i++)
+            {
+            	journalTableStr += '\
+            		<form name="journalForm' +String.fromCharCode(i)+ '" method="GET" action="SeriesComparison.html">\
+	                    <input type="hidden" name="startChar" value="' +String.fromCharCode(i)+ '">\
+	                    <input type="hidden" name="seriesType" value="J">\
+	                    <input type="hidden" name="selectedSeries"/>\
+	                    <a href="javascript:carrySeriesSelection(&apos;journalForm' +String.fromCharCode(i)+ '&apos;, &apos;seriesSelection&apos;);">' +String.fromCharCode(i)+ '</a>\
+                	</form>';
+               	if(i!=90){
+               		journalTableStr += '-';                           
+                }
+            }
+	        $("#journalTable").append(journalTableStr);
+
+			//////////////////////////////////////////////////
+			
+	        var journalLeftStr = '\
+                <select name="journalLeftList" id="journalLeftList" multiple="multiple" onDBLclick="add1(this)">';
+                
+	        for(i=0; i<rsJournalLeft.length; i++){
+	        	curRs = rsJournalLeft[i];
+	        	journalLeftStr += '\
+               		<option class="darkred" value="' +curRs.id+ ' ++|++ ' +curRs.name+ ' (' +curRs.abbreviation.toUpperCase()+ ') ++|++ darkred">\
+						' +curRs.name+ '(' +curRs.abbreviation.toUpperCase()+')\
+					</option>';	
+	        }
+	        journalLeftStr += '</select>';
+	        $("#journalLeftDiv").append(journalLeftStr);
+	        
+	        var s = document.createElement("script");
+	        s.text = "var filterOnJournals = new filterlist(document.getElementById('journalLeftList'), 'darkred');";
+	        $("#journalLeftDiv").append(s);
+
+	        
+	        /////////////////////////////////////////////////////
+	        
+	        var journalRightStr = '\
+                <form name="journalRightListForm" action="" method="POST" >\
+                	<select name="journalRightList" id="journalRightList" multiple="multiple">';
+
+                journalRightStr += seriesStr;
+                journalRightStr += '\
+            		</select>\
+                </form>';
+
+	        $("#journalRightDiv").append(journalRightStr);
+
+        }
+        
+        
+        /* Optional: Temporarily hide the "tabber" class so it does not "flash"
+        on the page as plain HTML. After tabber runs, the class is changed
+        to "tabberlive" and it will appear. */
+
+		document.write('<style type="text/css">.tabber{display:none;}<\/style>');
+
+		function add1(leftList)
+		{
+		    var rightList1 = document.getElementById('conferenceRightList');
+		    var rightList2 = document.getElementById('journalRightList');
+		    var rightList3 = document.getElementById('searchAllSeriesRightList');
+		    var i;
+		    for (i=0; i<leftList.options.length; i++) 
+		    {
+		        if (leftList.options[i].selected) 
+		        {
+		             var array = leftList.options[i].value.split("++|++");
+		             var count = 0;
+		             var j=0;
+		             for (j=0; j<rightList1.options.length; j++) 
+		             {
+		                if(array[0]==rightList1.options[j].value)
+		                    count++;
+		             }
+		             if(count==0)
+		             {
+		                rightList1.options[rightList1.options.length] = new Option(array[1], array[0]);
+		                rightList1.options[rightList1.options.length-1].style.color = array[2];
+		                rightList2.options[rightList2.options.length] = new Option(array[1], array[0]);
+		                rightList2.options[rightList2.options.length-1].style.color = array[2];
+		                
+		                rightList3.options[rightList3.options.length] = new Option(array[1], array[0]);
+		                rightList3.options[rightList3.options.length-1].style.color = array[2];
+		             }
+		        }
+		    }
+		}
+		
+		function remove1(cList)
+		{
+		    var currentList = document.getElementById(cList);
+		    var rightList1 = document.getElementById('conferenceRightList');
+		    var rightList2 = document.getElementById('journalRightList');
+		    var rightList3 = document.getElementById('searchAllSeriesRightList');
+		    
+		    var i=0;
+		    while (i<currentList.options.length){
+		        i++
+		        if (currentList.options[i-1].selected){
+		            rightList1.remove(i-1);
+		            rightList2.remove(i-1);
+		            rightList3.remove(i-1);
+		            i=0;
+		        }
+		    }
+		}
+		function removeAll()
+		{
+	        var rightList1 = document.getElementById('conferenceRightList');
+	        var rightList2 = document.getElementById('journalRightList');
+	        var rightList3 = document.getElementById('searchAllSeriesRightList');
+	        rightList1.options.length = 0;
+	        rightList2.options.length = 0;
+	        rightList3.options.length = 0;
+		}
+		function carrySeriesSelection(currentFormName, nextPage)
+		{
+		    var rightList = document.getElementById('conferenceRightList');
+		    var currentForm = document.getElementsByName(currentFormName);
+    
+		    var i;
+		    for (i=0; i<rightList.options.length; i++) 
+		    {
+		        currentForm[0].selectedSeries.value = currentForm[0].selectedSeries.value + ',' + rightList.options[i].value;
+		    }
+    
+		    if(rightList.options.length==0 && nextPage=='drawSeriesAnalysis') 
+		    {
+		        alert('Please select atleast one series before proceed'); 
+		    }
+		    else
+		        currentForm[0].submit();
+		}
+
+		function submitOnEnter(currentForm, e) 
+		{
+		
+		    if (e.keyCode == 13) 
+		    {
+		        carrySeriesSelection(currentForm, 'selfCall');
+		    }
+		    else
+		        return true;
+		}
+            
+        </script>
+        <title>Select Series to Compare</title>
+    </head>
+    <body class="profile">
+        
+        <div id="book">
+            <!-- Menu bar!-->
+            <div id="content_shadow">
+                <div id="content" class="clearfix">
+
+                    <div class="dashboard_header">
+                        <div class="dh_titlebar clearfix">
+                            <h2>AERCS Series Comparison</h2>
+                        </div>
+                    </div>
+                
+					<div class="headingtext">This application allows you to visually compare selected conferences and journals indexed in DBLP by key social network parameters of their co-authorship networks, citation networks, and by the rate of recurring authors and papers. Select any number of conferences or journals either by keyword search ("Search") and/or by browsing ("Browse Conferences", "Browse Journals"). After you are finished with your selection, select the type of comparison in the dropdown box and click the Draw button.</div>
+
+					<div class="tabber">
+						<div id="tabSearch">
+                            <h2>Search</h2>
+					
+							<table width="100%" >       
+								<form name="searchAllSeriesLeftListForm" method="GET" action="SeriesComparison.html" style='display:inline;'>
+								    <tr align="left" >
+								        <td>
+								            <input name=searchKeyword onkeypress="return submitOnEnter('searchAllSeriesLeftListForm', event)">
+								            <select name="typeOfSeriesSearchIn" title="typeOfSeriesSearch">
+								                <option value="both">Both (Conferences/Journals)</option>
+								                <option value="conferences">Conferences</option> 
+								                <option value="journals">Journals</option> 
+								            </select>
+								            <input type="hidden" name="seriesType" value="SA">
+								            <input type="hidden" name="selectedSeries"/>
+								            <input type=button value="Search" style="width: 90px" onclick="javascript:carrySeriesSelection('searchAllSeriesLeftListForm', 'seriesSelection');">
+								        </td>
+								        <td>
+								        </td>
+								        <td>
+								        </td>
+								    </tr>
+                                    <tr align="left">
+                                        <td>
+                                            <div id="SeriesLeftDiv" class="container">
+                                            </div>
+                                            </form>
+										</td>
+										<td>
+	                                        <div class="low container">
+	                                            <input name="searchAllSeriesAdd" value="Add" type="button" onClick="add1(document.getElementById('searchAllSeriesLeftList'));">
+	                                            <input name="searchAllSeriesRemove" value="Remove" type="button" onClick="remove1('searchAllSeriesRightList');">
+	                                        </div>
+                                    	</td>
+                                    	<td>
+                                        	<div id="SeriesRightDiv" class="container">
+                                    		</div>
+                                    	</td>
+									</tr>
+									
+									<tr>
+	                                    <td>    
+	                                    </td>
+	                                    <td>
+	                                    </td>
+	                                    <td>
+	                                        <div align="right">
+	                                            <form name="searchAllSeriesDrawChartsForm" method="GET" action="drawSeriesComparison.jsp">
+	                                                <input name="clear" value="Clear All" type="button" onClick="javascript:removeAll('searchAllSeriesRightList');">
+	                                                <select name="chartType" title="Chart">
+	                                                    <option value="a">Co-Authorship</option> 
+	                                                    <option value="c">Citation</option>
+	                                                    <option value="r">Recurring Authors/Papers</option>
+	                                                </select>
+	                                                <input name="draw" value="Draw" type="button" onClick="javascript:carrySeriesSelection('searchAllSeriesDrawChartsForm', 'drawSeriesAnalysis');">
+	                                                <input type="hidden" name="selectedSeries"/>
+	                                               
+	                                            </form> 
+	                                        </div>
+	                                    </td>
+	                                </tr>
+							</table>
+						</div>
+						
+						<div id="tabConference">
+                            <h2>Browse Conferences</h2>
+                            
+                            <table width="100%" >
+                                <tr align="left" >
+                                    <td>
+                                    	<div id="conferenceTable">
+                                    	</div>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                
+                                <form name="conferenceLeftListForm" action="">
+                                    <tr align="left" >
+                                        <td> 
+                                            <INPUT NAME=regexp onKeyUp="filterOnConferences.set(this.value)">
+                                            <INPUT TYPE=button onClick="filterOnConferences.reset();this.form.regexp.value=''" value="Clear">
+                                            <INPUT TYPE=checkbox NAME="toLowerCase" onClick="filterOnConferences.set_ignore_case(!this.checked)">Case-sensitive
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr align="left">
+                                        <td>
+                                            <div id="conferenceLeftDiv" class="container">
+                                            </div>                   
+                                        </form>   
+                                    </td>
+                                    <td>
+                                        <div class="low container">
+                                            <input name="conferenceAdd" value="Add" type="button" onClick="add1(document.getElementById('conferenceLeftList'));">
+                                            <input name="conferenceRemove" value="Remove" type="button" onClick="remove1('conferenceRightList');">        
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="conferenceRightDiv" class="container">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <div align="right">
+                                            <form name="conferenceDrawChartsForm" method="GET" action="drawSeriesComparison.jsp">
+                                                <input name="clear" value="Clear All" type="button" onClick="javascript:removeAll('conferenceRightList');">
+                                                <select name="chartType" title="Chart">
+                                                    <option value="a">Co-Authorship</option> 
+                                                    <option value="c">Citation</option> 
+                                                    <option value="r">Recurring Authors/Papers</option>
+                                                </select>
+                                                <input name="draw" value="Draw" type="button" onClick="javascript:carrySeriesSelection('conferenceDrawChartsForm', 'drawSeriesAnalysis');">
+                                                <input type="hidden" name="selectedSeries"/>    
+                                            </form>   
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <div id="tabJournal">
+                            <h3>Browse Journals</h3>
+                            
+                            <table width="100%" >
+                                <tr align="left" >
+                                    <td>
+                                    	<div id="journalTable">
+                                    	</div>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                
+                                <form name="journalLeftListForm" action="">
+                                    <tr align="left" >
+                                        <td> 
+                                            <INPUT NAME=regexp onKeyUp="filterOnJournals.set(this.value)">
+                                            <INPUT TYPE=button onClick="filterOnJournals.reset();this.form.regexp.value=''" value="Clear">
+                                            <INPUT TYPE=checkbox NAME="toLowerCase" onClick="filterOnJournals.set_ignore_case(!this.checked)">Case-sensitive
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr align="left">
+                                        <td>
+                                            <div id="journalLeftDiv" class="container">
+                                            </div>                   
+                                        </form>
+                                    </td>
+                                    
+                                    <td>
+                                        <div class="low container">
+                                            <input name="journalAdd" value="Add" type="button" onClick="add1(document.getElementById('journalLeftList'));">
+                                            <input name="journalRemove" value="Remove" type="button" onClick="remove1('journalRightList');">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="journalRightDiv" class="container">
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>    
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <div align="right">
+                                            <form name="journalDrawChartsForm" method="GET" action="drawSeriesComparison.jsp">
+                                                <input name="clear" value="Clear All" type="button" onClick="javascript:removeAll('journalRightList');">
+                                                <select name="chartType" title="Chart">
+                                                  <option value="a">Co-Authorship</option> 
+                                                  <option value="c">Citation</option>  
+                                                  <option value="r">Recurring Authors/Papers</option>
+                                                </select>
+                                                <input name="draw" value="Draw" type="button" onClick="javascript:carrySeriesSelection('journalDrawChartsForm', 'drawSeriesAnalysis');">
+                                                <input type="hidden" name="selectedSeries"/>    
+                                            </form> 
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

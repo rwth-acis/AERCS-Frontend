@@ -78,3 +78,9 @@ function getRanking(callback, errorCallback, conf, journal, domain, currentPage,
 	var content = "";
 	sendRequest("GET", url, content, callback, errorCallback);
 }
+
+function selectSeriesComparison(callback, errorCallback, seriesType, selectedSeries, searchKeyword, typeOfSeriesSearchIn, startChar){
+	var url = "seriesComparison?seriesType=" + seriesType + "&selectedSeries=" + selectedSeries + "&searchKeyword=" + searchKeyword + "&typeOfSeriesSearchIn=" + typeOfSeriesSearchIn + "&startChar=" + startChar;
+	var content = "";
+	sendRequest("GET", url, content, callback, errorCallback);
+}

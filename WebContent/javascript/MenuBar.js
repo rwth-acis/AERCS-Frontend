@@ -13,7 +13,7 @@ var menuString =
                                 <a href="Networks.html" id="global_friends_link">Networks</a>\
                                 <a href="Rankings.html" id="global_friends_link">Rankings</a>\
                                  <!--a href="test-SeriesSelection1.jsp" id="global_friends_link">1</a-->\
-                                 <a href="selectSeriesComparison.jsp" id="global_friends_link">Compare Series</a>\
+                                 <a href="SeriesComparison.html" id="global_friends_link">Compare Series</a>\
                             </div>\
                         </li>\
                     </ul>\

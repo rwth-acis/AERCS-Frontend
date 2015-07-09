@@ -179,7 +179,7 @@ H3
   
 #content {
 	float: right;
-	margin-right: -190px;  /*** Same length as .outer border-left but with negative value ***/
+	/*margin-right: -190px;*/  /*** Same length as .outer border-left but with negative value ***/
 	/*margin-right: -170px;*/  /*** Same length as .outer border-left but with negative value ***/
 	margin-bottom: 0px;
 	width: 100%;
