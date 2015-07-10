@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
+        <link rel="stylesheet" type="text/css" href="css/AERCS.css"/>
+        <link rel="stylesheet" type="text/css" href="css/InterfacePro.css"/>
+        <link rel="stylesheet" type="text/css" href="css/common.css"/>
+        <link rel="stylesheet" type="text/css" href="css/search.css"/>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="javascript/MenuBar.js"></script>
+        <script type="text/javascript" src="javascript/functions.js"></script>
+        <script src="javascript/ServiceAPI/b64.js"></script>
+        <script src="javascript/ServiceAPI/moduleHelper.js"></script>
+        <script src="javascript/ServiceAPI/serviceAPI.js"></script>
+        <script src="javascript/requestHandler.js"></script>
+        <script type="text/javascript" src="javascript/dojo/dojo.js" djConfig="parseOnLoad: true"></script>
+        <script type="text/javascript">
+        
+        dojo.require("dojo.parser");
+        dojo.require("dijit.layout.ContentPane");
+        dojo.registerModulePath("dojoc","../dojoc");
+        dojo.require("dojoc.layout.FreelyMovingStackContainer");
+            
+        $(document).ready(function() {
+            appendMenu(book);
+            // Obtains url variables
+            var id = getUrlVar("id");
+            var key = getUrlVar("key");
+            if(typeof id === 'undefined')	id = "";
+            if(typeof key === 'undefined')	key = "";
+
+            // Retrieves persons.
+            selectPerson(addPerson, function(errorData){alert("error");}, id, key);
+        });
+        
+        
+        function addPerson(data) {
+            var person = JSON.parse(data);
+
+        	$("#person_title").append(person[0].name);
+        	$("#person_related").append(person[0].name+"'s Related Websites");
+
+        	var rs1 = person[1];
+        	var relatedWebsitesStr = '';
+        	for(var i=0; i<rs1.length; i++){
+        		var curRs = rs1[i];
+        		relatedWebsitesStr += '\
+                    <div class="datawrap">' +(curRs.description==null?"Link":curRs.description)+ ': <a href="' +curRs.url+ '">' +curRs.url+ '</a></div>';
+        	}
+        	$("#relatedWebsites").append(relatedWebsitesStr);
+
+        	
+        	var eventsStr = '';
+        	var events = person[2];
+        	if(events.length > 0){
+        		eventsStr += '\
+            		<div class="subheader clearfix">\
+                    <h3>\
+                        <div style="float: left;">\
+                            Displaying ' +events.length+ ' series.';
+				var pageNum = Math.floor((events.length - 1) / 10) + 1;
+				if (pageNum > 1){
+					eventsStr += '\
+                        Go to:&nbsp;\
+                        <a href="#" id="first" onClick="dijit.byId(&apos;mainTabContainer&apos;).first()">&lt;&lt;</a>\
+                        <a href="#" id="prev" onClick="dijit.byId(&apos;mainTabContainer&apos;).back()">&lt;</a>';
+                        
+                    for (var i=1; i<=pageNum; i++){
+                    	eventsStr += '\
+    						<a href="#" id="goto' +i+ '" onClick="dijit.byId(&apos;mainTabContainer&apos;).goto(' +i+ ')">' +i+ '</a>';
+                    }
+                    
+                    eventsStr += '\
+                        <a href="#" id="next" onClick="dijit.byId(&apos;mainTabContainer&apos;).forward()">&gt;</a>\
+                        <a href="#" id="last" onClick="dijit.byId(&apos;mainTabContainer&apos;).last()">&gt;&gt;</a>';
+				}
+				
+				eventsStr += '\
+                    </div>\
+	                    </h3>\
+	                </div>\
+	                <div id="mainTabContainer" dojoType="dojoc.layout.FreelyMovingStackContainer" style="height: 20em;">\
+	                    <div id="Page1" dojoType="dijit.layout.ContentPane" label="Intro">\
+	                            <div>Page: 1/' +pageNum+ '</div>';
+	                            
+				for (var i = 0; i < events.length; i ++){
+				    if (i % 10 == 0 && i > 0){
+				    	eventsStr += '\
+		                    </div>\
+		                    <div id="Page' +(Math.floor(i/10)+1)+ '" dojoType="dijit.layout.ContentPane">\
+		                        <div>Page: ' +(Math.floor(i/10)+1)+ '/' +pageNum+ '</div>';
+				    }
+				    
+				    eventsStr += '\
+                        <div>\
+	                        <div style="clear:both; float:left; width:70%" class="ffriends clearfix" id="ffriends">\
+	                            <div class="datawrap"><a href="EventList.html?series=' +events[i].key+ '&item=1">' +events[i].abbr+ ' (' +events[i].name+ ')</a></div>\
+	                        </div>\
+	                        <div style="float:right; width:30%" class="datawrap">' +events[i].event_no+ ' event(s)</div>\
+	                    </div>';
+				}
+            } // if(events.length > 0)
+        	else{
+        		eventsStr += '\
+        			<div class="box clearfix ">\
+                    <div class="datawrap">No events ! </div>\
+                </div>';
+        	}
+        	$("#events").append(eventsStr);
+
+
+//         	var commStr = '\
+// 	            <div class="header">\
+// 		            <h2>Community visualization</h2>\
+// 		        </div>\
+// 		        <iframe src="NetworkVisualization_lite.html?id=' +event[0].id+ '" width="99%" height="600"> </iframe>';
+//         	$("#community").append(commStr);
+        }  
+            
+        </script>
+        <title>AERCS - Conferences</title>
+    </head>
+    <body class="profile">
+        
+        <div id="book">
+            <!-- Menu bar!-->
+            <div id="content_shadow">
+                <div id="content" class="clearfix">
+
+                    <div class="dashboard_header">
+                        <div class="dh_titlebar clearfix">
+                            <h2 id="person_title"></h2>
+                        </div>
+                    </div>
+                    
+                    <div class="header">
+                    	<h2 id="person_related"></h2>
+                	</div>
+                   
+	                <div id="relatedWebsites" class="box clearfix">
+	                </div>
+	                
+	                <div class="header">
+	                    <h2>Conferences</h2>
+	                </div>
+	                
+	                <div id="events">
+	                </div>
+	                
+	                
+<!-- 	                <div id="community"> -->
+<!-- 	                </div>       -->
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

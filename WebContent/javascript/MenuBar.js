@@ -17,7 +17,7 @@ var menuString =
                             </div>\
                         </li>\
                     </ul>\
-                    <form method="post" action="searchservlet" name="qsearch" id="qsearchform" >\
+                    <form method="get" action="SearchResult.html" name="qsearch" id="qsearchform" >\
                     <ul class="secondary_set" id="nav_unused_2">\
                         <li><b><font color="lightblue">Search</font></b></li>\
                         <li>\

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
+        <link rel="stylesheet" type="text/css" href="css/AERCS.css"/>
+        <link rel="stylesheet" type="text/css" href="css/InterfacePro.css"/>
+        <link rel="stylesheet" type="text/css" href="css/common.css"/>
+        <link rel="stylesheet" type="text/css" href="css/search.css"/>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="javascript/MenuBar.js"></script>
+        <script type="text/javascript" src="javascript/functions.js"></script>
+        <script src="javascript/ServiceAPI/b64.js"></script>
+        <script src="javascript/ServiceAPI/moduleHelper.js"></script>
+        <script src="javascript/ServiceAPI/serviceAPI.js"></script>
+        <script src="javascript/requestHandler.js"></script>
+        <script type="text/javascript">
+            
+        $(document).ready(function() {
+            appendMenu(book);
+            // Obtains url variables
+            var searchdata = getUrlVar("searchdata");
+            var searchfield = getUrlVar("searchfield");
+            var page = getUrlVar("page");
+
+            if(typeof searchdata === 'undefined')	searchdata = "";
+            if(typeof searchfield === 'undefined')	searchfield = "1";
+            if(typeof page === 'undefined')			page = "1";
+
+            // Retrieves events.
+            searchResults(addSearchResults, function(errorData){alert("error");}, searchdata, searchfield, page);
+        });
+                
+        // Adds retrieved journals to the table.
+        function addSearchResults(data) {
+        	var results = JSON.parse(data);
+        	var resultNum = results[0].resultNum;
+            var searchdata = getUrlVar("searchdata");
+            var searchfield = getUrlVar("searchfield");
+            var page = getUrlVar("page");
+            if(typeof searchdata === 'undefined')	searchdata = "";
+            if(typeof searchfield === 'undefined')	searchfield = "1";
+            if(typeof page === 'undefined')	page = "1";
+			var currentPage = parseInt(page);
+
+            if(searchdata == ""){
+            	$("#searchTitle").append("Please enter some keywords");
+            }
+            else if(searchfield == "1"){
+	            var searchTitleStr = '\
+	            	Search person for "' +searchdata+ '": ' +resultNum+(resultNum>1?" Results":" Result")+ '</h2>\
+	            ';
+				$("#searchTitle").append(searchTitleStr);
+
+				var personSearchStr = '\
+					<tr>\
+	                    <td width="60%">\
+			                <div class="header">\
+			                    <h2>Person name</h2>\
+			                </div>\
+			            </td>\
+			            <td width="40%">\
+			                <div class="header">\
+			                    <h2>Event No.</h2>\
+			                </div>\
+			            </td>\
+			        </tr>';
+				for(var i=1; i<results.length; i++){
+					var person = results[i];
+					personSearchStr += '\
+						<tr>\
+				            <td><a href="Person.html?key=' +person.key+ '">' +person.name+ '</a> </td>\
+				            <td> '+person.p_num+ '</td>\
+			        	</tr>';
+				}
+				$("#resultsTable").append(personSearchStr);
+			}
+			else if(searchfield == "2"){
+				var searchTitleStr = '\
+	            	Search events for "' +searchdata+ '": ' +resultNum+(resultNum>1?" Results":" Result")+ '</h2>\
+	            ';
+				$("#searchTitle").append(searchTitleStr);
+
+				var eventSearchStr = '\
+					<tr>\
+	                    <td width="70%">\
+			                <div class="header">\
+			                    <h2>Event name</h2>\
+			                </div>\
+			            </td>\
+			            <td width="15%">\
+			                <div class="header">\
+			                    <h2>Participants No.</h2>\
+			                </div>\
+			            </td>\
+                        <td width="15%">\
+	                        <div class="header">\
+	                            <h2>Series analysis </h2>\
+	                        </div>\
+	                    </td>\
+			        </tr>';
+				for(var i=1; i<results.length; i++){
+					var event = results[i];
+					eventSearchStr += '\
+						<tr>\
+				            <td><a href="Event.html?id=' +event.id+ '">' +event.name+ '</a> </td>\
+				            <td> '+event.author_num+ '</td>';
+				            
+				    if(event.series_key != null && event.series_key.length > 0){
+						eventSearchStr += '\
+	                        <td>\
+	                            <a href="EventList.html?series=' +event.series_key+ '&item=1">Series analysis</a>\
+	                        </td>';
+				    }
+				    else{
+						eventSearchStr += '<td> </td>';
+				    }
+					eventSearchStr += '</tr>';
+				}
+				$("#resultsTable").append(eventSearchStr);
+
+			}
+			else if (searchfield == "3"){
+				var searchTitleStr = '\
+	            	Search series for "' +searchdata+ '": ' +resultNum+(resultNum>1?" Results":" Result")+ '</h2>\
+	            ';
+				$("#searchTitle").append(searchTitleStr);
+
+				var seriesSearchStr = '\
+					<tr>\
+	                    <td width="70%">\
+			                <div class="header">\
+			                    <h2>Series name</h2>\
+			                </div>\
+			            </td>\
+			            <td width="10%">\
+			                <div class="header">\
+			                    <h2>Events No.</h2>\
+			                </div>\
+			            </td>\
+			        </tr>';
+				for(var i=1; i<results.length; i++){
+					var series = results[i];
+					seriesSearchStr += '\
+						<tr>\
+				            <td><a href="EventList.html?series=' +series.series_key+ '&item=1">' +series.name+ '</a> </td>\
+				            <td> </td>\
+			        	</tr>';
+				}
+				$("#resultsTable").append(seriesSearchStr);
+			}
+            
+            var resultPerPage = 25;
+            var pageNum = Math.floor(resultNum / resultPerPage);
+            if (resultNum % resultPerPage > 0)
+            {
+                pageNum++;
+            }
+            
+            var firstPage = 1;
+            var lastPage = pageNum;
+
+            var prevPage = currentPage - 1;
+            if (prevPage < firstPage)
+            {
+                prevPage = firstPage;
+            }
+            
+            var nextPage = currentPage + 1;
+            if (nextPage > lastPage)
+            {
+                nextPage = lastPage;
+            }
+            
+            var fromPage = currentPage - 2;
+            if (fromPage < firstPage)
+            {
+                fromPage = firstPage;
+            }
+            
+            var toPage = currentPage + 2;
+            if (toPage > lastPage)
+            {
+                toPage = lastPage;
+            }
+
+		    var navStr = '';
+            if (pageNum > 1){
+            	navStr += '\
+                    <a href="?page=' +firstPage+ '&searchdata=' +searchdata+ '&searchfield=' +searchfield+ '">First</a>&nbsp;\
+                    <a href="?page=' +prevPage+ '&searchdata=' +searchdata+ '&searchfield=' +searchfield+ '">Previous</a>&nbsp;\
+				';
+                    
+                for (var i=fromPage; i<=toPage; i++){
+                    if (i!=currentPage){
+                    	navStr += '\
+                            <a href="?page=' +i+ '&searchdata=' +searchdata+ '&searchfield=' +searchfield+ '">' +i+ '</a>&nbsp;';
+                    }
+                    else{
+                    	navStr += i+'&nbsp';
+                    }
+                }
+                
+            	navStr += '\
+                    <a href="?page=' +nextPage+ '&searchdata=' +searchdata+ '&searchfield=' +searchfield+ '">Next</a>&nbsp;\
+                    <a href="?page=' +lastPage+ '&searchdata=' +searchdata+ '&searchfield=' +searchfield+ '">Last</a>\
+				';
+
+    			$("#navTable").append(navStr);
+
+            }
+
+		    
+        }  
+            
+        </script>
+        <title>AERCS - Search result</title>
+    </head>
+    <body class="profile">
+        
+        <div id="book">
+            <!-- Menu bar!-->
+            <div id="content_shadow">
+                <div id="content" class="clearfix">
+
+                    <div class="dashboard_header">
+                        <div class="dh_titlebar clearfix">
+                            <h2 id="searchTitle"></h2>
+                        </div>
+                    </div>
+                
+					<table id="resultsTable" width="100%">
+					</table>
+					
+					<div id="navTable">
+					 </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

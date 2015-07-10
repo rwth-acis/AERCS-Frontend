@@ -90,7 +90,7 @@ and open the template in the editor.
 	                $("#info_table").append(eventStr);
               	}
             }
-            if(item == 2){
+           	else if(item == 2){
             	var eventStr = '\
                     <div class="header">\
                     	<h2> Community Analysis </h2>\
@@ -99,7 +99,7 @@ and open the template in the editor.
                 $("#info_table").append(eventStr);
 
             }
-            if(item == 3){
+           	else if(item == 3){
             	var eventStr = '\
             	<caption>Key members of the community</caption>\
            		<tr bgcolor="#e6f7ff" width="100%">\
@@ -137,7 +137,7 @@ and open the template in the editor.
             	}
                	$("#info_table").append(eventStr);
             }
-			if(item == 4){
+           	else if(item == 4){
 				var newID = events[1].newest_year;
             
 	            var eventStr = '\
@@ -148,6 +148,15 @@ and open the template in the editor.
 	            
 				$("#info_table").append(eventStr);	
 			}
+           	else if(item == 5){
+	            var eventStr = '\
+	            	<div class="header">\
+						<h2> Location Distribution </h2>\
+					</div>\
+					<iframe src="GoogleMapViewer.html?id=' +id+ '" width="99%" height="820" marginwidth="0"></iframe>';
+	            
+				$("#info_table").append(eventStr);	
+           	}
         }  
             
         </script>

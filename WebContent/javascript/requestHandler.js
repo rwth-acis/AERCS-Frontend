@@ -73,6 +73,12 @@ function selectEvent(callback, errorCallback, id){
 	sendRequest("GET", url, content, callback, errorCallback);
 }
 
+function selectPerson(callback, errorCallback, id, key){
+	var url = "person?id=" + id + "&key=" + key;
+	var content = "";
+	sendRequest("GET", url, content, callback, errorCallback);
+}
+
 function getRanking(callback, errorCallback, conf, journal, domain, currentPage, col, order){
 	var url = "ranking?conf=" + conf + "&journal=" + journal + "&domain=" + domain + "&page=" + currentPage + "&col=" + col + "&order=" + order;
 	var content = "";
@@ -81,6 +87,12 @@ function getRanking(callback, errorCallback, conf, journal, domain, currentPage,
 
 function selectSeriesComparison(callback, errorCallback, seriesType, selectedSeries, searchKeyword, typeOfSeriesSearchIn, startChar){
 	var url = "seriesComparison?seriesType=" + seriesType + "&selectedSeries=" + selectedSeries + "&searchKeyword=" + searchKeyword + "&typeOfSeriesSearchIn=" + typeOfSeriesSearchIn + "&startChar=" + startChar;
+	var content = "";
+	sendRequest("GET", url, content, callback, errorCallback);
+}
+
+function searchResults(callback, errorCallback, searchdata, searchfield, page){
+	var url = "search?searchdata=" + searchdata + "&searchfield=" + searchfield + "&page=" + page;
 	var content = "";
 	sendRequest("GET", url, content, callback, errorCallback);
 }
