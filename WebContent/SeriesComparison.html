@@ -93,14 +93,14 @@ and open the template in the editor.
 				counter++;
                    if(curRs.series_key.lastIndexOf("db/conf") == 0){
                    	SeriesLeftDivStr += '\
-                   		<option class="darkblue" value="' +curRs.id+ ' ++|++ ' +curRs.name+ ' (' +curRs.abbreviation.toUpperCase()+ ') ++|++ darkblue">\
+                   		<option class="darkblue" value="' +curRs.id+ '++|++' +curRs.name+ ' (' +curRs.abbreviation.toUpperCase()+ ')++|++darkblue">\
                            	' +curRs.name+ '(' +curRs.abbreviation.toUpperCase()+')\
                        	</option>';
         	        }
                    if(curRs.series_key.lastIndexOf("db/journal") == 0)
                    {
                    	SeriesLeftDivStr += '\
-                   		<option class="darkred" value="' +curRs.id+ ' ++|++ ' +curRs.name+ ' (' +curRs.abbreviation.toUpperCase()+ ') ++|++ darkred">\
+                   		<option class="darkred" value="' +curRs.id+ '++|++' +curRs.name+ ' (' +curRs.abbreviation.toUpperCase()+ ')++|++darkred">\
                            	' +curRs.name+ '(' +curRs.abbreviation.toUpperCase()+')\
                        	</option>';
 				}
@@ -168,7 +168,7 @@ and open the template in the editor.
 	        for(i=0; i<rsConferenceLeft.length; i++){
 	        	curRs = rsConferenceLeft[i];
 	        	conferenceLeftStr += '\
-               		<option class="darkblue" value="' +curRs.id+ ' ++|++ ' +curRs.name+ ' (' +curRs.abbreviation.toUpperCase()+ ') ++|++ darkblue">\
+               		<option class="darkblue" value="' +curRs.id+ '++|++' +curRs.name+ ' (' +curRs.abbreviation.toUpperCase()+ ')++|++darkblue">\
 						' +curRs.name+ '(' +curRs.abbreviation.toUpperCase()+')\
 					</option>';
 	        }
@@ -219,7 +219,7 @@ and open the template in the editor.
 	        for(i=0; i<rsJournalLeft.length; i++){
 	        	curRs = rsJournalLeft[i];
 	        	journalLeftStr += '\
-               		<option class="darkred" value="' +curRs.id+ ' ++|++ ' +curRs.name+ ' (' +curRs.abbreviation.toUpperCase()+ ') ++|++ darkred">\
+               		<option class="darkred" value="' +curRs.id+ '++|++' +curRs.name+ ' (' +curRs.abbreviation.toUpperCase()+ ')++|++darkred">\
 						' +curRs.name+ '(' +curRs.abbreviation.toUpperCase()+')\
 					</option>';	
 	        }
@@ -408,7 +408,7 @@ and open the template in the editor.
 	                                    </td>
 	                                    <td>
 	                                        <div align="right">
-	                                            <form name="searchAllSeriesDrawChartsForm" method="GET" action="drawSeriesComparison.jsp">
+	                                            <form name="searchAllSeriesDrawChartsForm" autocomplete="off" method="GET" action="DrawSeriesComparison.html">
 	                                                <input name="clear" value="Clear All" type="button" onClick="javascript:removeAll('searchAllSeriesRightList');">
 	                                                <select name="chartType" title="Chart">
 	                                                    <option value="a">Co-Authorship</option> 
@@ -477,7 +477,7 @@ and open the template in the editor.
                                     </td>
                                     <td>
                                         <div align="right">
-                                            <form name="conferenceDrawChartsForm" method="GET" action="drawSeriesComparison.jsp">
+                                            <form name="conferenceDrawChartsForm" method="GET" action="DrawSeriesComparison.html">
                                                 <input name="clear" value="Clear All" type="button" onClick="javascript:removeAll('conferenceRightList');">
                                                 <select name="chartType" title="Chart">
                                                     <option value="a">Co-Authorship</option> 
@@ -546,7 +546,7 @@ and open the template in the editor.
                                     </td>
                                     <td>
                                         <div align="right">
-                                            <form name="journalDrawChartsForm" method="GET" action="drawSeriesComparison.jsp">
+                                            <form name="journalDrawChartsForm" method="GET" action="DrawSeriesComparison.html">
                                                 <input name="clear" value="Clear All" type="button" onClick="javascript:removeAll('journalRightList');">
                                                 <select name="chartType" title="Chart">
                                                   <option value="a">Co-Authorship</option> 

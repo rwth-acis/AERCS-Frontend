@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
+        <link rel="stylesheet" type="text/css" href="css/AERCS.css"/>
+        <link rel="stylesheet" type="text/css" href="css/InterfacePro.css"/>
+        <link rel="stylesheet" type="text/css" href="css/common.css"/>
+        <link rel="stylesheet" type="text/css" href="css/search.css"/>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="javascript/MenuBar.js"></script>
+        <script type="text/javascript" src="javascript/functions.js"></script>
+        <script src="javascript/ServiceAPI/b64.js"></script>
+        <script src="javascript/ServiceAPI/moduleHelper.js"></script>
+        <script src="javascript/ServiceAPI/serviceAPI.js"></script>
+        <script src="javascript/requestHandler.js"></script>
+        <script type="text/javascript">
+            
+        $(document).ready(function() {
+            appendMenu(book);
+
+            var chartType = getUrlVar("chartType");
+            var selectedSeriesData = getUrlVar("selectedSeries");
+            
+            getSeriesComparison(drawSeriesComparison, function(errorData){alert("error");}, selectedSeriesData, chartType);
+        });
+        
+        
+        function drawSeriesComparison(data) {
+            var chartType = getUrlVar("chartType");
+            var selectedSeriesData = decodeURIComponent( getUrlVar("selectedSeries") );
+
+            var citation="";
+            var authorship="";
+            var recurring="";
+            
+            var pageHeading="", pageText="";
+            
+            if(chartType == "a")
+            {
+                authorship = "selected";
+                pageHeading = "Series Co-Authorship Network Comparison";
+                pageText = "<p>This set of plots shows a comparison of key social network parameters of the co-authorship networks of the selected conferences/journals in their history. In a co-authorship network, each node represents an author, and each edge represents one or more co-authored papers by the two connected nodes. The co-authorship network therefore represents the author community of a conference series or journal.</p><p>Each data point in a series plot represents one \"event\". For conferences, each data point represents a specific conference event (e.g. VLDB 2009 in the VLDB conference series), while for journals each data point refers to a particular volume (e.g. Volume 2 of IEEE Software). The horizontal axis represents an ordered history of events from oldest (left) to newest (right).</p>";
+            }
+            if(chartType == "c")
+            {
+                citation = "selected";
+                pageHeading = "Series Co-Authorship Citation Network Comparison";
+                pageText = "<p>This set of plots shows a comparison of key social network parameters of the citation networks of the selected conferences/journals in their history. In the citation network, a node represents a paper, and an edge represents a citation between the citing and the cited paper. The citation network therefore represents the body of literature cited by papers of a conference series or journal. The citation network is based on the combined DBLP and CiteSeerX data sets.</p><p>Each data point in a series plot represents one \"event\". For conferences, each data point represents a specific conference event (e.g. VLDB 2009 in the VLDB conference series), while for journals each data point refers to a particular volume (e.g. Volume 2 of IEEE Software). The horizontal axis represents an ordered history of events from oldest (left) to newest (right).</p>";
+            }
+            if(chartType == "r")
+            {
+                recurring = "selected";
+                pageHeading = "Series Recurring Authors & Papers Comparison";
+                pageText = "These plots visualize the development of the proportion of recurring authors, who repeatedly publish in a conference series or journal, and the fraction of papers that has been contributed by recurring authors. A healthy proportion of recurring authors and papers indicates a tight author community that still allows new authors to join.";
+            }
+            $("#page_heading").append(pageHeading);
+            $("#heading_text").append(pageText);
+
+
+            var drawComp = JSON.parse(data);
+            var selectedSeries = drawComp[0].selectedSeries;
+			var colors = drawComp[1].colors;
+            var urls = drawComp[2].urls;
+			
+            var compStr = '\
+            	<tr align="left" >\
+                <td>\
+                    <form name="journalDrawChartsForm" method="GET" action="DrawSeriesComparison.html" style="display:inline;">\
+                        <select name="chartType" title="Chart">\
+                            <option value="c" ' +citation+ '>Citation</option>\
+                            <option value="a" ' +authorship+ '>Co-Authorship</option>\
+                            <option value="r" ' +recurring+ '>Recurring Authors/Papers</option>\
+                        </select>\
+                        <input name="draw" value="Draw" type="submit" >\
+                        <input type="hidden" name="selectedSeries" value="' +selectedSeriesData+ '">\
+                    </form>\
+                    <form name="selectSeriesForm" method="GET" action="SeriesComparison.html" style="display:inline;">\
+                        <a href="#" onclick="document.selectSeriesForm.submit()">Edit Selection</a>\
+                        <input type="hidden" name="selectedSeries" value="' +selectedSeriesData+ '">\
+                    </form>\
+                </td>\
+                <td>\
+                </td>\
+            </tr>';
+            
+            if(chartType == "a" || chartType == "c" ){
+				compStr += '\
+					<tr align="left" >\
+                    <td>\
+                        <hr><img src="' +urls[0]+ '" width="450" height="450" />\
+                    </td>\
+                    <td>';
+                   
+                for(var j=0; j< colors.length ; j++){
+                	compStr += '\
+                        <hr><b><a href="#" style="color: #' +colors[j]+ '" title="' +selectedSeries[j][1]+ '" onclick="ShowSubmenu(); return false;"> ' +(selectedSeries[j][1].substring(selectedSeries[j][1].indexOf("(")+1, selectedSeries[j][1].indexOf(")"))).toUpperCase()+ ' </a></b>\
+    				';
+                }
+                    
+                compStr += '\
+	                	</td>\
+	                    <td>\
+	                        <hr><img src="' +urls[3]+ '" width="450" height="450" />\
+	                    </td>\
+	                </tr>\
+	                <tr align="left" >\
+	                    <td>\
+	                        <hr><img src="' +urls[4]+ '>" width="450" height="450" />\
+	                    </td>\
+	                    <td>';
+	                    
+                for(var j=0; j< colors.length ; j++){
+                	compStr += '\
+                        <hr><b><a href="#" style="color: #' +colors[j]+ '" title="' +selectedSeries[j][1]+ '" onclick="ShowSubmenu(); return false;"> ' +(selectedSeries[j][1].substring(selectedSeries[j][1].indexOf("(")+1, selectedSeries[j][1].indexOf(")"))).toUpperCase()+ ' </a></b>\
+    				';
+                }
+                
+                compStr += '\
+                	</td>\
+                    <td>\
+                        <hr><img src="' +urls[5]+ '" width="450" height="450" />\
+                    </td>\
+                </tr>\
+                <tr align="left" >\
+                    <td>\
+                        <hr><img src="' +urls[6]+ '>" width="450" height="450" />\
+                    </td>\
+                    <td>';
+                    
+                for(var j=0; j< colors.length ; j++){
+               		compStr += '\
+				    	<hr><b><a href="#" style="color: #' +colors[j]+ '" title="' +selectedSeries[j][1]+ '" onclick="ShowSubmenu(); return false;"> ' +(selectedSeries[j][1].substring(selectedSeries[j][1].indexOf("(")+1, selectedSeries[j][1].indexOf(")"))).toUpperCase()+ ' </a></b>\
+   					';
+                }
+
+                compStr += '\
+                	</td>\
+                    <td>\
+                        <hr><img src="' +urls[7]+ '" width="450" height="450" />\
+                    </td>\
+                </tr>';
+            }
+            
+            if(chartType == "r"){
+            	compStr += '\
+					<tr align="left" >\
+                    <td>\
+                        <hr><img src="' +urls[1]+ '" width="450" height="450" />\
+                    </td>\
+                    <td>';
+                   
+                for(var j=0; j< colors.length ; j++){
+                	compStr += '\
+                        <hr><b><a href="#" style="color: #' +colors[j]+ '" title="' +selectedSeries[j][1]+ '" onclick="ShowSubmenu(); return false;"> ' +(selectedSeries[j][1].substring(selectedSeries[j][1].indexOf("(")+1, selectedSeries[j][1].indexOf(")"))).toUpperCase()+ ' </a></b>\
+    				';
+                }
+                compStr += '\
+                	</td>\
+                    <td>\
+                        <hr><img src="' +urls[2]+ '" width="450" height="450" />\
+                    </td>\
+                </tr>';
+            }
+            
+            
+            $("#comp_table").append(compStr);
+        }  
+            
+        </script>
+        <title>AERCS - Conferences</title>
+    </head>
+    <body class="profile">
+        
+        <div id="book">
+            <!-- Menu bar!-->
+            <div id="content_shadow">
+                <div id="content" class="clearfix">
+
+                    <div class="dashboard_header">
+                        <div class="dh_titlebar clearfix">
+                            <h2 id="page_heading"></h2>
+                        </div>
+                    </div>
+                    
+                    <div class="headingtext" id="heading_text"></div>
+                    
+                    <hr><table id="comp_table" width="100%" > 
+	                </table>
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

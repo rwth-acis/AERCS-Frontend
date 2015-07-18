@@ -96,3 +96,9 @@ function searchResults(callback, errorCallback, searchdata, searchfield, page){
 	var content = "";
 	sendRequest("GET", url, content, callback, errorCallback);
 }
+
+function getSeriesComparison(callback, errorCallback, selectedSeriesData, chartType){
+	var url = "drawSeriesComparison?selectedSeriesData=" + selectedSeriesData + "&chartType=" + chartType;
+	var content = "";
+	sendRequest("GET", url, content, callback, errorCallback);
+}

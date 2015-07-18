@@ -19,7 +19,6 @@ and open the template in the editor.
 		<script type="text/javascript" src="javascript/dojo/dojo.js" djConfig="parseOnLoad: true, bindEncoding: 'utf-8'"></script>
   		<script type="text/javascript" src="javascript/dojo/yfiles-ajax-complete.js"></script>
         
-        
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script type="text/javascript" src="javascript/functions.js"></script>
 		<script src="javascript/ServiceAPI/b64.js"></script>
@@ -43,6 +42,7 @@ and open the template in the editor.
 		    dojo.require("yfiles.client.tiles.widget.Rubberband");
 	
 		    dojo.registerModulePath("demos", "../demos");
+		    //dojo.require("demos.widget.GraphInfo");
 		    dojo.require("demos.GraphClient");
 		    dojo.require("demos.EventNetworkGraphListener");
 		</script>
@@ -62,15 +62,19 @@ and open the template in the editor.
 			}
 
 			function initClient() {
-				var canvas = dijit.byId('canvas');
-  				var rubberband = dijit.byId('canvasRubberband');
-				client = new demos.GraphClient(canvas, /*overview*/null, /*graphInfo*/null, rubberband);
-				listener = new demos.EventNetworkGraphListener(canvas, /*overview*/null, /*graphInfo*/null, id, graphTimestamp);
-// 				listener.activate();
+			      var canvas = dijit.byId('canvas');
+			      //var overview = dijit.byId('overview');
+			      //var graphInfo = dijit.byId('graphInfo');
+			      var rubberband = dijit.byId('canvasRubberband');
+			      client = new demos.GraphClient(canvas, /*overview*/null, /*graphInfo*/null, rubberband);
+			      listener = new demos.EventNetworkGraphListener(canvas, /*overview*/null, /*graphInfo*/null, id, graphTimestamp);
+			      listener.activate();
 
-// 				var zoomAreaButton = dijit.byId('zoomArea');
-// 				dojo.connect(zoomAreaButton, 'onChange', window, 'handleZoomArea');
-// 				dojo.connect(dijit.byId('canvasRubberband'), 'onDeactivated', window, 'deselectZoomAreaButton');
+			      //overview.setNoInteractionMode();
+
+			      var zoomAreaButton = dijit.byId('zoomArea');
+			      dojo.connect(zoomAreaButton, 'onChange', window, 'handleZoomArea');
+			      dojo.connect(dijit.byId('canvasRubberband'), 'onDeactivated', window, 'deselectZoomAreaButton');
 			}
 
 			function handleZoomArea(buttonPressed) {
@@ -131,6 +135,23 @@ and open the template in the editor.
 					releaseCanvas="true"></div>
 			</div>
 		</div>
+<!--
+  <div dojoType="dijit.layout.ContentPane" splitter="true" region="trailing" style="width:300px;">
+
+    <div dojoType="dijit.layout.BorderContainer" gutters="false"
+        liveSplitters="false" >
+       <div dojoType="dijit.layout.ContentPane" splitter="true" region="top" style="height:300px;">
+          <div id="graphInfo" dojoType="demos.widget.GraphInfo" baseUrl="."></div>
+       </div>
+      <div dojoType="dijit.layout.ContentPane" splitter="true" region="center" >
+        <div dojoType="yfiles.client.tiles.widget.GraphCanvas" id="overview" tileSize="400"  baseUrl=".">
+          <div dojoType="yfiles.client.tiles.widget.ViewPortMarker" canvasId="canvas" overviewId="overview"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+-->
 
 		<script type="text/javascript">
 			dojo.addOnLoad(initClient);
