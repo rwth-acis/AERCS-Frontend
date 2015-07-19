@@ -13,6 +13,7 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="css/search.css"/>
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script type="text/javascript" src="javascript/MenuBar.js"></script>
+        <script type="text/javascript" src="javascript/Footer.js"></script>
         <script type="text/javascript" src="javascript/functions.js"></script>
         <script src="javascript/ServiceAPI/b64.js"></script>
         <script src="javascript/ServiceAPI/moduleHelper.js"></script>
@@ -22,13 +23,15 @@ and open the template in the editor.
             
         $(document).ready(function() {
             appendMenu(book);
+            appendFooter(book);
+
             // Obtains url variables
             var searchdata = getUrlVar("searchdata");
             var searchfield = getUrlVar("searchfield");
             var page = getUrlVar("page");
 
-            if(typeof searchdata === 'undefined')	searchdata = "";
-            if(typeof searchfield === 'undefined')	searchfield = "1";
+//             if(typeof searchdata === 'undefined')	searchdata = "";
+//             if(typeof searchfield === 'undefined')	searchfield = "1";
             if(typeof page === 'undefined')			page = "1";
 
             // Retrieves events.
@@ -42,15 +45,15 @@ and open the template in the editor.
             var searchdata = getUrlVar("searchdata");
             var searchfield = getUrlVar("searchfield");
             var page = getUrlVar("page");
-            if(typeof searchdata === 'undefined')	searchdata = "";
-            if(typeof searchfield === 'undefined')	searchfield = "1";
+//             if(typeof searchdata === 'undefined')	searchdata = "";
+//             if(typeof searchfield === 'undefined')	searchfield = "1";
             if(typeof page === 'undefined')	page = "1";
 			var currentPage = parseInt(page);
 
-            if(searchdata == ""){
-            	$("#searchTitle").append("Please enter some keywords");
-            }
-            else if(searchfield == "1"){
+//             if(searchdata == ""){
+//             	$("#searchTitle").append("Please enter some keywords");
+//             }
+            if(searchfield == "1"){
 	            var searchTitleStr = '\
 	            	Search person for "' +searchdata+ '": ' +resultNum+(resultNum>1?" Results":" Result")+ '</h2>\
 	            ';

@@ -13,6 +13,7 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="css/search.css"/>
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script type="text/javascript" src="javascript/MenuBar.js"></script>
+		<script type="text/javascript" src="javascript/Footer.js"></script>
         <script type="text/javascript" src="javascript/functions.js"></script>
         <script src="javascript/contentHandler.js"></script>
         <script src="javascript/ServiceAPI/b64.js"></script>
@@ -23,6 +24,8 @@ and open the template in the editor.
             
             $(document).ready(function() {
                 appendMenu(book);
+                appendFooter(book);
+
                 // Obtains url variables.
                 var startChar = getUrlVar("start");
                 if(typeof startChar === 'undefined') {

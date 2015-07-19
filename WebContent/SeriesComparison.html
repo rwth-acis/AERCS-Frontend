@@ -14,6 +14,7 @@ and open the template in the editor.
         <link rel="stylesheet" TYPE="text/css" href="css/menutabs/menutabs.css">
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script type="text/javascript" src="javascript/MenuBar.js"></script>
+        <script type="text/javascript" src="javascript/Footer.js"></script>
         <script type="text/javascript" src="javascript/functions.js"></script>
         <script src="javascript/ServiceAPI/b64.js"></script>
         <script src="javascript/ServiceAPI/moduleHelper.js"></script>
@@ -25,6 +26,7 @@ and open the template in the editor.
             
         $(document).ready(function() {
             appendMenu(book);
+            appendFooter(book);
 
             var seriesType = getUrlVar("seriesType");
             var selectedSeries = getUrlVar("selectedSeries");
@@ -32,9 +34,8 @@ and open the template in the editor.
             var typeOfSeriesSearchIn = getUrlVar("typeOfSeriesSearchIn");
             var startChar = getUrlVar("startChar");
 
-//             if(typeof seriesType === 'undefined') seriesType = "";
-//             if(typeof selectedSeriesHistory === 'undefined') selectedSeriesHistory = "";
-//             if(typeof searchKeyword === 'undefined') searchKeyword = "";
+            if(typeof selectedSeries === 'undefined') selectedSeries = "";
+            if(typeof searchKeyword === 'undefined') searchKeyword = "^^";
 //             if(typeof typeOfSeriesSearchIn === 'undefined') typeOfSeriesSearchIn = "";
             if(typeof startChar === 'undefined') startChar = "A";
             
@@ -68,7 +69,7 @@ and open the template in the editor.
 	        $("#tabConference").addClass(conferenceTab);
 	        $("#tabJournal").addClass(journalTab);
 
-            selectSeriesComparison(compareSeries, function(errorData){alert("error");}, seriesType, selectedSeries, searchKeyword, typeOfSeriesSearchIn, startChar);
+            selectSeriesComparison(compareSeries, function(errorData){alert("error");}, selectedSeries, searchKeyword, typeOfSeriesSearchIn, startChar);
         });
         
         function compareSeries(data){
