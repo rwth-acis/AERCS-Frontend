@@ -92,6 +92,7 @@ and open the template in the editor.
 	                            <div>Page: 1/' +pageNum+ '</div>';
 	                            
 				for (var i = 0; i < events.length; i ++){
+					var event = events[i];
 				    if (i % 10 == 0 && i > 0){
 				    	eventsStr += '\
 		                    </div>\
@@ -102,16 +103,19 @@ and open the template in the editor.
 				    eventsStr += '\
                         <div>\
 	                        <div style="clear:both; float:left; width:70%" class="ffriends clearfix" id="ffriends">\
-	                            <div class="datawrap"><a href="EventList.html?series=' +events[i].key+ '&item=1">' +events[i].abbr+ ' (' +events[i].name+ ')</a></div>\
+	                            <div class="datawrap"><a href="EventList.html?id=' +event.id+ '&series=' +event.key+ '&item=1">' +event.abbr+ ' (' +event.name+ ')</a></div>\
 	                        </div>\
-	                        <div style="float:right; width:30%" class="datawrap">' +events[i].event_no+ ' event(s)</div>\
+	                        <div style="float:right; width:30%" class="datawrap">' +event.event_no+ ' event(s)</div>\
 	                    </div>';
 				}
+				eventsStr += '\
+						</div>\
+	                </div>';
             } // if(events.length > 0)
         	else{
         		eventsStr += '\
         			<div class="box clearfix ">\
-                    <div class="datawrap">No events ! </div>\
+                    <div class="datawrap">No events! </div>\
                 </div>';
         	}
         	$("#events").append(eventsStr);
