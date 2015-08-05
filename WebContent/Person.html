@@ -11,6 +11,9 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="css/InterfacePro.css"/>
         <link rel="stylesheet" type="text/css" href="css/common.css"/>
         <link rel="stylesheet" type="text/css" href="css/search.css"/>
+        <style type="text/css">
+	        @import "javascript/dijit/themes/tundra/tundra.css";
+	    </style>
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script type="text/javascript" src="javascript/MenuBar.js"></script>
         <script type="text/javascript" src="javascript/Footer.js"></script>
@@ -22,10 +25,6 @@ and open the template in the editor.
         <script type="text/javascript" src="javascript/dojo/dojo.js" djConfig="parseOnLoad: true"></script>
         <script type="text/javascript">
         
-        dojo.require("dojo.parser");
-        dojo.require("dijit.layout.ContentPane");
-        dojo.registerModulePath("dojoc","../dojoc");
-        dojo.require("dojoc.layout.FreelyMovingStackContainer");
             
         $(document).ready(function() {
             appendMenu(book);
@@ -119,7 +118,11 @@ and open the template in the editor.
                 </div>';
         	}
         	$("#events").append(eventsStr);
-
+        	
+            dojo.require("dojo.parser");
+            dojo.require("dijit.layout.ContentPane");
+            dojo.registerModulePath("dojoc","../dojoc");
+            dojo.require("dojoc.layout.FreelyMovingStackContainer");
 
 //         	var commStr = '\
 // 	            <div class="header">\
@@ -158,7 +161,6 @@ and open the template in the editor.
 	                
 	                <div id="events">
 	                </div>
-	                
 	                
 <!-- 	                <div id="community"> -->
 <!-- 	                </div>       -->
