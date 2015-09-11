@@ -5,156 +5,52 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
-		<title>Community Visualization</title>
-		
-		<style type="text/css">
-		    @import "javascript/dojo/resources/dojo.css";
-		    @import "javascript/dijit/themes/soria/soria.css";
-		    @import "resources/style/yfiles-ajax.css";
-		    @import "resources/style/yfiles-ajax-demos.css";
-		    @import "resources/style/graphclient.css";
-		  </style>
-		<script type="text/javascript" src="javascript/dojo/dojo.js" djConfig="parseOnLoad: true, bindEncoding: 'utf-8'"></script>
-  		<script type="text/javascript" src="javascript/dojo/yfiles-ajax-complete.js"></script>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
+	<title>Community Visualization</title>
         
-		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script type="text/javascript" src="javascript/functions.js"></script>
-		<script src="javascript/ServiceAPI/b64.js"></script>
-        <script src="javascript/ServiceAPI/moduleHelper.js"></script>
-        <script src="javascript/ServiceAPI/serviceAPI.js"></script>
-		<script src="javascript/requestHandler.js"></script>
-		<script type="text/javascript">
-		    dojo.registerModulePath("dijit", "../dijit");
-		    dojo.require("dijit.layout.BorderContainer");
-		    dojo.require("dijit.layout.ContentPane");
-		    dojo.require("dijit.Toolbar");
-		    dojo.require("dijit.form.Button");
-		    dojo.require("dijit.form.ComboBox");
-		    dojo.require("dijit.layout.ContentPane");
-		    dojo.require("dijit.Dialog");
-		    dojo.require("dijit.Menu");
-	
-		    dojo.registerModulePath("yfiles", "../yfiles");
-		    dojo.require("yfiles.client.tiles.widget.GraphCanvas");
-		    dojo.require("yfiles.client.tiles.widget.ViewPortMarker");
-		    dojo.require("yfiles.client.tiles.widget.Rubberband");
-	
-		    dojo.registerModulePath("demos", "../demos");
-		    //dojo.require("demos.widget.GraphInfo");
-		    dojo.require("demos.GraphClient");
-		    dojo.require("demos.EventNetworkGraphListener");
-		</script>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascript/functions.js"></script>
+	<script src="javascript/ServiceAPI/b64.js"></script>
+    <script src="javascript/ServiceAPI/moduleHelper.js"></script>
+    <script src="javascript/ServiceAPI/serviceAPI.js"></script>
+	<script src="javascript/requestHandler.js"></script>
+	<script type="text/javascript">
+		var id = getUrlVar("id");
+	    var layout = getUrlVar("layout");
+	    if(typeof layout === 'undefined') {
+	    	layout = "circular";
+	    }
+	    
+		getEventNetworkVisualization(setVisualization, function(errorData){alert("error: "+errorData);}, id, layout, 950, 750);
 		
-		<script type="text/javascript">
-		    var id = getUrlVar("id");
-		    var graphTimestamp = Date.now();
-	
-			var client = null;
-			var listener = null;
-
-			function deselectZoomAreaButton() {
-				var button = dijit.byId('zoomArea');
-				button.attr('checked', false);
-			}
-
-			function initClient() {
-			      var canvas = dijit.byId('canvas');
-			      //var overview = dijit.byId('overview');
-			      //var graphInfo = dijit.byId('graphInfo');
-			      var rubberband = dijit.byId('canvasRubberband');
-			      client = new demos.GraphClient(canvas, /*overview*/null, /*graphInfo*/null, rubberband);
-			      listener = new demos.EventNetworkGraphListener(canvas, /*overview*/null, /*graphInfo*/null, id, graphTimestamp);
-			      listener.activate();
-
-			      //overview.setNoInteractionMode();
-
-			      var zoomAreaButton = dijit.byId('zoomArea');
-			      dojo.connect(zoomAreaButton, 'onChange', window, 'handleZoomArea');
-			      dojo.connect(dijit.byId('canvasRubberband'), 'onDeactivated', window, 'deselectZoomAreaButton');
-			}
-
-			function handleZoomArea(buttonPressed) {
-				if(buttonPressed){
-					client.showZoomArea();
-				}
-				else{
-					client.hideZoomArea();
-				}
-			}
-		</script>
-
-    </head>
-    <body class="soria yfiles">
-       <div dojoType="dijit.layout.BorderContainer" gutters="true"
-			liveSplitters="false" style="width: 100%; height: 100%;" id="main" >
-
-			<div dojoType="dijit.layout.ContentPane" style="height:33px;" region="top">
-				<div id="toolbar" dojoType="dijit.Toolbar" style="height:32px;">
-					<button name="Zoom In" id="zoomIn" dojoType="dijit.form.Button" title="Zoom In" onClick="client.zoomIn();">
-						<img src="resources/images/zoom_in.png" alt="Zoom In"/>
-					</button>
-					<button name="Zoom Out" id="zoomOut" dojoType="dijit.form.Button" title="Zoom Out" onClick="client.zoomOut();">
-						<img src="resources/images/zoom_out.png" alt="Zoom Out"/>
-					</button>
-					<button name="Zoom Area" id="zoomArea" dojoType="dijit.form.ToggleButton" title="Zoom Area">
-						<img src="resources/images/selection_view.png" alt="Zoom Area"/>
-					</button>
-					<button name="Fit Content" id="fitContent" dojoType="dijit.form.Button" title="Fit Content"
-        				onClick="client.fitContent();">
-						<img src="resources/images/fit_to_size.png" alt="Fit Content"/>
-					</button>
-					
-					<div dojoType="dijit.ToolbarSeparator">&nbsp;</div>
-					
-					<select title="Layout Style" style="vertical-align: middle;"
-						onChange="listener.setLayouter(this.value); return true;">
-						<option value="circular" selected>Circular</option>
-						<option value="organic">Organic</option>
-						<option value="smartorganic">Smart Organic</option>
-					</select>
-
-					<div dojoType="dijit.ToolbarSeparator">&nbsp;</div>
-
-					<input id="graphSearchBox" style="vertical-align: middle;" value="Search node.." onFocus="if (this.value == 'Search node..') this.value=''" onBlur="if (this.value.length == 0) this.value='Search node..'"></input>
-					<button id="graphSearchButton" dojoType="dijit.form.Button" onClick="listener.search(dojo.byId('graphSearchBox').value, dojo.byId('graphSearchResult'));">
-						Search
-					</button>
-					
-					<label id="graphSearchResult"></label>
-				</div>
-			</div>  
-
-		<div dojoType="dijit.layout.ContentPane" splitter="false" region="center">
-			<div dojoType="yfiles.client.tiles.widget.GraphCanvas" id="canvas" tileSize="600" nodeLabelEvents="true"
-				style="width: 100%; height: 100%;" sizeMin="50" sizeShare="66"  baseUrl="." maxZoomForFitContent="1.0">
-				<div dojoType="yfiles.client.tiles.widget.Rubberband" id="canvasRubberband" fixCanvas="true"
-					releaseCanvas="true"></div>
-			</div>
-		</div>
-<!--
-  <div dojoType="dijit.layout.ContentPane" splitter="true" region="trailing" style="width:300px;">
-
-    <div dojoType="dijit.layout.BorderContainer" gutters="false"
-        liveSplitters="false" >
-       <div dojoType="dijit.layout.ContentPane" splitter="true" region="top" style="height:300px;">
-          <div id="graphInfo" dojoType="demos.widget.GraphInfo" baseUrl="."></div>
-       </div>
-      <div dojoType="dijit.layout.ContentPane" splitter="true" region="center" >
-        <div dojoType="yfiles.client.tiles.widget.GraphCanvas" id="overview" tileSize="400"  baseUrl=".">
-          <div dojoType="yfiles.client.tiles.widget.ViewPortMarker" canvasId="canvas" overviewId="overview"></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
--->
-
-		<script type="text/javascript">
-			dojo.addOnLoad(initClient);
-		</script>
-	
-       </div>  
-    </body>
+		function setVisualization(data) {
+			var formStr = '\
+		    	<input type="hidden" name="id" value="' +id+ '">\
+				<select name="layout" onchange="submit()">\
+			    	<option value="circular"' +(layout=="circular"?"selected":"")+ '>Circular</option>\
+			    	<option value="organic"' +(layout=="organic"?"selected":"")+ '>Organic</option>\
+			    	<option value="smartOrganic"' +(layout=="smartOrganic"?"selected":"")+ '>Smart Organic</option>\
+		    	</select>';
+			
+			$("#layoutForm").append(formStr);
+			$("#visualization").append(data);
+		}
+	</script>
+</head>
+<body>
+	<table>
+   		<tr align="left">
+			<td>
+				<form method="get" action="" name="layoutForm" id="layoutForm">
+				</form>
+			</td>
+		</tr>
+		<tr align="left">
+			<td>
+	   			<div id="visualization"> </div>
+	   		</td>
+	   	</tr>
+	</table>
+</body>
 </html>
