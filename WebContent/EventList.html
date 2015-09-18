@@ -145,9 +145,9 @@ and open the template in the editor.
             
 	            var eventStr = '\
 	            	<div class="header">\
-						<h2><a href="NetworkVisualization.html?id=' +newID+ '">Full Screen</a></h2>\
+						<h2><a href="EventNetworkVisualization.html?id=' +newID+ '">Full Screen</a></h2>\
 					</div>\
-					<iframe src="NetworkVisualization_lite.html?id=' +newID+ '" width="99%" height="800"></iframe>';
+					<iframe src="EventNetworkVisualization_lite.html?id=' +newID+ '" width="99%" height="800"></iframe>';
 	            
 				$("#info_table").append(eventStr);	
 			}
@@ -160,6 +160,8 @@ and open the template in the editor.
 	            
 				$("#info_table").append(eventStr);	
            	}
+           	
+//            	$("#loading").hide();
         }  
             
         </script>
@@ -172,6 +174,10 @@ and open the template in the editor.
             <div id="content_shadow">
                 <div id="content" class="clearfix">
 
+<!-- 					<div id="loading"> -->
+<!-- 						<img src="resources/style/loading.gif" /> -->
+<!--                     </div> -->
+                    
                     <div class="dashboard_header">
                         <div class="dh_titlebar clearfix">
                             <h2 id="series_name"></h2>

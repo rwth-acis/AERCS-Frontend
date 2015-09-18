@@ -8,9 +8,11 @@ and open the template in the editor.
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
 	<title>Community Visualization</title>
-        
+      
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="javascript/functions.js"></script>
+    <script src="javascript/jquery.panzoom.js"></script>
+    <script src="javascript/jquery.mousewheel.js"></script>
 	<script src="javascript/ServiceAPI/b64.js"></script>
     <script src="javascript/ServiceAPI/moduleHelper.js"></script>
     <script src="javascript/ServiceAPI/serviceAPI.js"></script>
@@ -31,11 +33,25 @@ and open the template in the editor.
 			    	<option value="circular"' +(layout=="circular"?"selected":"")+ '>Circular</option>\
 			    	<option value="organic"' +(layout=="organic"?"selected":"")+ '>Organic</option>\
 			    	<option value="smartOrganic"' +(layout=="smartOrganic"?"selected":"")+ '>Smart Organic</option>\
-		    	</select>';
+			    	<option value="hierarchic"' +(layout=="hierarchic"?"selected":"")+ '>Hierarchic</option>\
+			    </select>';
 			
 			$("#layoutForm").append(formStr);
 			$("#visualization").append(data);
+			$("#visualizationControl").append('<input id="visualizationZoomer" type="range">');
+			var $panzoom = $("#visualization").panzoom({$zoomRange: $("#visualizationZoomer"), increment: 0.9, contain: 'invert', maxScale: 10, minScale: 1});
+	        $panzoom.on('mousewheel', function( e ) {
+	            e.preventDefault();
+	            var delta = e.delta || e.originalEvent.wheelDelta;
+	            var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
+	            $panzoom.panzoom('zoom', zoomOut, {
+	                increment: 0.1,
+	                animate: false,
+	                focal: e
+	            });
+	        });
 		}
+		
 	</script>
 </head>
 <body>
@@ -45,10 +61,15 @@ and open the template in the editor.
 				<form method="get" action="" name="layoutForm" id="layoutForm">
 				</form>
 			</td>
-		</tr>
+		</tr>                                
+		<tr align="center">
+			<td>
+				<div id="visualizationControl">	</div>
+			</td>
+	   	</tr>
 		<tr align="left">
 			<td>
-	   			<div id="visualization"> </div>
+	   			<div id="visualization" class=""> </div>
 	   		</td>
 	   	</tr>
 	</table>

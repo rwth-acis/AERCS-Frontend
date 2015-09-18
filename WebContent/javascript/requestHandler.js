@@ -114,3 +114,9 @@ function getPersonNetworkVisualization(callback, errorCallback, id, layout, widt
 	var content = "";
 	sendRequest("GET", url, content, callback, errorCallback);
 }
+
+function getNetworkVisualization(callback, errorCallback, graphml, layout, width, height){
+	var url = "networkVisualization?graphml=" + graphml + "&layout=" + layout + "&width=" + width + "&height=" + height;
+	var content = "";
+	sendRequest("GET", url, content, callback, errorCallback);
+}

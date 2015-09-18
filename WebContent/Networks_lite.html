@@ -1,121 +1,94 @@
-<!-- saved from url=(0014)about:internet -->
-<html lang="en">
-
-<!-- 
-Smart developers always View Source. 
-
-This application was built using Adobe Flex, an open source framework
-for building rich Internet applications that get delivered via the
-Flash Player or to desktops via Adobe AIR. 
-
-Learn more about Flex at http://flex.org 
-// -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
+	
+	<title>AERCS - Networks of Conferences and Journals</title>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascript/functions.js"></script>
+    <script src="javascript/jquery.panzoom.js"></script>
+    <script src="javascript/jquery.mousewheel.js"></script>
+	<script src="javascript/ServiceAPI/b64.js"></script>
+    <script src="javascript/ServiceAPI/moduleHelper.js"></script>
+    <script src="javascript/ServiceAPI/serviceAPI.js"></script>
+	<script src="javascript/requestHandler.js"></script>
+	<script type="text/javascript">
+		var graphml = getUrlVar("graphml");
+		if(typeof graphml === 'undefined') {
+			graphml = "";
+	    }
+	    var layout = getUrlVar("layout");
+	    if(typeof layout === 'undefined') {
+	    	layout = "circular";
+	    }
+	    
+		getNetworkVisualization(setVisualization, function(errorData){alert("error: "+errorData);}, graphml, layout, 950, 750);
+	
+		function setVisualization(data){
+            var content = JSON.parse(data);
+			var graph = ((content.length-1) > -1)? content[content.length-1].graph: "";
+            
+            var formStr = '\
+		    	<input type="hidden" name="graphml" value="' +graphml+ '">\
+				<select name="layout" onchange="submit()">\
+			    	<option value="circular"' +(layout=="circular"?"selected":"")+ '>Circular</option>\
+			    	<option value="organic"' +(layout=="organic"?"selected":"")+ '>Organic</option>\
+			    	<option value="smartOrganic"' +(layout=="smartOrganic"?"selected":"")+ '>Smart Organic</option>\
+			    	<option value="hierarchic"' +(layout=="hierarchic"?"selected":"")+ '>Hierarchic</option>\
+			    </select>';
+			
+		    var graphmlFormStr = '\
+		    	<input type="hidden" name="graphml" value="' +graphml+ '">\
+				<select name="graphml" onchange="submit()">';
+			
+			for(var i=0; i<content.length-1; i++){
+				var graphName = content[i].graphml;
+				var graphmlProper = graphml.replace(/\+/g, " ");
+				graphmlFormStr+= '\
+					<option value="' +graphName+ '"' +(graphmlProper==graphName?"selected":"")+ '>' +graphName+ '</option>';
+			}
+			graphmlFormStr += '</select>';
+		    	
+			$("#layoutForm").append(formStr);
+			$("#graphmlForm").append(graphmlFormStr);
+			$("#visualization").append(graph);
+			$("#visualizationControl").append('<input id="visualizationZoomer" type="range">');
+			var $panzoom = $("#visualization").panzoom({$zoomRange: $("#visualizationZoomer"), increment: 0.9, contain: 'invert', maxScale: 10, minScale: 1});
+	        $panzoom.on('mousewheel', function( e ) {
+	            e.preventDefault();
+	            var delta = e.delta || e.originalEvent.wheelDelta;
+	            var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
+	            $panzoom.panzoom('zoom', zoomOut, {
+	                increment: 0.1,
+	                animate: false,
+	                focal: e
+	            });
+	        });
 
-<!--  BEGIN Browser History required section -->
-<link rel="stylesheet" type="text/css" href="history/history.css" />
-<!--  END Browser History required section -->
-
-<title>AERCS - Networks of Conferences and Journals</title>
-<script src="javascript/AC_OETags.js" language="javascript"></script>
-
-<!--  BEGIN Browser History required section -->
-<script src="history/history.js" language="javascript"></script>
-<!--  END Browser History required section -->
-
-<style>
-body { margin: 0px; overflow:hidden }
-</style>
-<script language="JavaScript" type="text/javascript">
-<!--
-// -----------------------------------------------------------------------------
-// Globals
-// Major version of Flash required
-var requiredMajorVersion = 9;
-// Minor version of Flash required
-var requiredMinorVersion = 0;
-// Minor version of Flash required
-var requiredRevision = 124;
-// -----------------------------------------------------------------------------
-// -->
-</script>
+		}
+	</script>
 </head>
-
-<body scroll="no">
-<script language="JavaScript" type="text/javascript">
-<!--
-// Version check for the Flash Player that has the ability to start Player Product Install (6.0r65)
-var hasProductInstall = DetectFlashVer(6, 0, 65);
-
-// Version check based upon the values defined in globals
-var hasRequestedVersion = DetectFlashVer(requiredMajorVersion, requiredMinorVersion, requiredRevision);
-
-if ( hasProductInstall && !hasRequestedVersion ) {
-	// DO NOT MODIFY THE FOLLOWING FOUR LINES
-	// Location visited after installation is complete if installation is required
-	var MMPlayerType = (isIE == true) ? "ActiveX" : "PlugIn";
-	var MMredirectURL = window.location;
-    document.title = document.title.slice(0, 47) + " - Flash Player Installation";
-    var MMdoctitle = document.title;
-
-	AC_FL_RunContent(
-		"src", "playerProductInstall",
-		"FlashVars", "MMredirectURL="+MMredirectURL+'&MMplayerType='+MMPlayerType+'&MMdoctitle='+MMdoctitle+"",
-		"width", "100%",
-		"height", "100%",
-		"align", "middle",
-		"id", "Series",
-		"quality", "high",
-		"bgcolor", "#869ca7",
-		"name", "Series",
-		"allowScriptAccess","sameDomain",
-		"type", "application/x-shockwave-flash",
-		"pluginspage", "http://www.adobe.com/go/getflashplayer"
-	);
-} else if (hasRequestedVersion) {
-	// if we've detected an acceptable version
-	// embed the Flash Content SWF when all tests are passed
-	AC_FL_RunContent(
-			"src", "Series",
-			"width", "100%",
-			"height", "100%",
-			"align", "middle",
-			"id", "Series",
-			"quality", "high",
-			"bgcolor", "#869ca7",
-			"name", "Series",
-			"allowScriptAccess","sameDomain",
-			"type", "application/x-shockwave-flash",
-			"pluginspage", "http://www.adobe.com/go/getflashplayer"
-	);
-  } else {  // flash is too old or we can't detect the plugin
-    var alternateContent = 'Alternate HTML content should be placed here. '
-  	+ 'This content requires the Adobe Flash Player. '
-   	+ '<a href=http://www.adobe.com/go/getflash/>Get Flash</a>';
-    document.write(alternateContent);  // insert non-flash content
-  }
-// -->
-</script>
-<noscript>
-  	<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-			id="Series" width="100%" height="100%"
-			codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab">
-			<param name="movie" value="swf/Series.swf" />
-			<param name="quality" value="high" />
-			<param name="bgcolor" value="#869ca7" />
-			<param name="allowScriptAccess" value="sameDomain" />
-			<embed src="Series.swf" quality="high" bgcolor="#869ca7"
-				width="100%" height="100%" name="Series" align="middle"
-				play="true"
-				loop="false"
-				quality="high"
-				allowScriptAccess="sameDomain"
-				type="application/x-shockwave-flash"
-				pluginspage="http://www.adobe.com/go/getflashplayer">
-			</embed>
-	</object>
-</noscript>
+<body>
+	<table>
+   		<tr align="left">
+			<td>
+				<form method="get" action="" name="layoutForm" id="layoutForm">
+				</form>
+				<form method="get" action="" name="graphmlForm" id="graphmlForm">
+				</form>
+			</td>
+		</tr>                                
+		<tr align="center">
+			<td>
+				<div id="visualizationControl">	</div>
+			</td>
+	   	</tr>
+		<tr align="left">
+			<td>
+	   			<div id="visualization" class=""> </div>
+	   		</td>
+	   	</tr>
+	</table>
 </body>
 </html>
