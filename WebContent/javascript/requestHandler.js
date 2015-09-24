@@ -103,15 +103,13 @@ function getSeriesComparison(callback, errorCallback, selectedSeriesData, chartT
 	sendRequest("GET", url, content, callback, errorCallback);
 }
 
-function getEventNetworkVisualization(callback, errorCallback, id, layout, width, height){
-	var url = "eventNetworkVisualization?id=" + id + "&layout=" + layout + "&width=" + width + "&height=" + height;
-	var content = "";
-	sendRequest("GET", url, content, callback, errorCallback);
+function getEventNetworkVisualization(callback, errorCallback, id, layout, search, width, height, content){
+	var url = "eventNetworkVisualization?id=" + id + "&layout=" + layout + "&search=" + search + "&width=" + width + "&height=" + height;
+	sendRequest("POST", url, content, callback, errorCallback);
 }
 
-function getPersonNetworkVisualization(callback, errorCallback, id, layout, width, height){
-	var url = "personNetworkVisualization?id=" + id + "&layout=" + layout + "&width=" + width + "&height=" + height;
-	var content = "";
+function getPersonNetworkVisualization(callback, errorCallback, id, layout, search, width, height, content){
+	var url = "personNetworkVisualization?id=" + id + "&layout=" + layout + "&search=" + search + "&width=" + width + "&height=" + height;
 	sendRequest("GET", url, content, callback, errorCallback);
 }
 

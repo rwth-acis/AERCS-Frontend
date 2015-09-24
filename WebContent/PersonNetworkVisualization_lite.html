@@ -9,22 +9,35 @@
   
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script type="text/javascript" src="javascript/functions.js"></script>
+  <script src="javascript/jquery.panzoom.js"></script>
+  <script src="javascript/jquery.mousewheel.js"></script>
   <script src="javascript/ServiceAPI/b64.js"></script>
   <script src="javascript/ServiceAPI/moduleHelper.js"></script>
   <script src="javascript/ServiceAPI/serviceAPI.js"></script>
   <script src="javascript/requestHandler.js"></script>
+  <script src="javascript/jquery.session.js"></script>
 
   <script type="text/javascript">
 	var id = getUrlVar("id");
-    var layout = getUrlVar("layout");
-    if(typeof layout === 'undefined') {
-    	layout = "circular";
-    }
-
-    getPersonNetworkVisualization(setVisualization, function(errorData){alert("error:"+errorData);}, id, layout, 950, 550);
-
+	var layout = getUrlVar("layout");
+	var search = getUrlVar("search");
+	if(typeof layout === 'undefined') {
+		layout = "circular";
+	}
+	if(typeof search === 'undefined') {
+		search = "";
+	}
+ 	var graphML = $.session.get("graphML");
+  
+	getPersonNetworkVisualization(setVisualization, function(errorData){alert("error: "+errorData);}, id, layout, search, 950, 700, graphML);
+	
 	function setVisualization(data) {
-		var formStr = '\
+	    var content = JSON.parse(data);
+		var graphML = content.graphML;
+		var graphSVG = content.graphSVG;
+		$.session.set("graphML",graphML);
+		
+		var layoutFormStr = '\
 	    	<input type="hidden" name="id" value="' +id+ '">\
 			<select name="layout" onchange="submit()">\
 		    	<option value="circular"' +(layout=="circular"?"selected":"")+ '>Circular</option>\
@@ -33,23 +46,54 @@
 		    	<option value="hierarchic"' +(layout=="hierarchic"?"selected":"")+ '>Hierarchic</option>\
 		    </select>';
 		
-		$("#layoutForm").append(formStr);
-		$("#visualization").append(data);
+		var searchFormStr = '\
+	    	<input type="hidden" name="id" value="' +id+ '">\
+			<input id="search" class="inputtext typeahead_placeholder" name="search" type="text" results="0" autosave="" value="" maxlength="100" size="25" autocomplete="off"/>\
+		    <input type="submit" name="submit" value="Search">';
+		    
+		$("#layoutForm").append(layoutFormStr);
+		$("#searchForm").append(searchFormStr);
+	
+		$("#visualization").append(graphSVG);
+		$("#visualizationControl").append('<input id="visualizationZoomer" type="range">');
+		
+		var $panzoom = $("#visualization").panzoom({$zoomRange: $("#visualizationZoomer"), increment: 0.9, contain: 'invert', maxScale: 10, minScale: 1});
+	     $panzoom.on('mousewheel', function( e ) {
+	         e.preventDefault();
+	         var delta = e.delta || e.originalEvent.wheelDelta;
+	         var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
+	         $panzoom.panzoom('zoom', zoomOut, {
+	             increment: 0.1,
+	             animate: false,
+	             focal: e
+	         });
+	     });
 	}
-
   </script>
 </head>
 <body>
    	<table>
    		<tr align="left">
-		   	<td>
-			   	<form method="get" action="" name="layoutForm" id="layoutForm">
+			<td>
+				<form method="get" action="" name="layoutForm" id="layoutForm">
 				</form>
 			</td>
-		</tr>
+			<td>
+				<form method="get" action="" name="searchForm" id="searchForm">
+				</form>
+			</td>
+			
+		</tr>   
+	</table>
+	<table>                             
+		<tr align="center">
+			<td>
+				<div id="visualizationControl">	</div>
+			</td>
+	   	</tr>
 		<tr align="left">
 			<td>
-	   			<div id="visualization"> </div>
+	   			<div id="visualization" class=""> </div>
 	   		</td>
 	   	</tr>
 	</table>

@@ -9,6 +9,8 @@
     <script type="text/javascript" src="javascript/functions.js"></script>
     <script src="javascript/jquery.panzoom.js"></script>
     <script src="javascript/jquery.mousewheel.js"></script>
+    <script src="javascript/rgbcolor.js"></script>
+    <script src="javascript/canvg.js"></script>
 	<script src="javascript/ServiceAPI/b64.js"></script>
     <script src="javascript/ServiceAPI/moduleHelper.js"></script>
     <script src="javascript/ServiceAPI/serviceAPI.js"></script>
@@ -23,7 +25,7 @@
 	    	layout = "circular";
 	    }
 	    
-		getNetworkVisualization(setVisualization, function(errorData){alert("error: "+errorData);}, graphml, layout, 950, 750);
+		getNetworkVisualization(setVisualization, function(errorData){alert("error: "+errorData);}, graphml, layout, 950, 680);
 	
 		function setVisualization(data){
             var content = JSON.parse(data);
@@ -65,7 +67,19 @@
 	                focal: e
 	            });
 	        });
-
+	        
+	        canvg(document.getElementById('canvas'), graph);
+	        var canvas = document.getElementById("canvas");
+	        canvas.style.height = "0px";
+	        canvas.style.width = "0px";
+		}
+		
+		function saveImage(){
+	        var img = canvas.toDataURL("image/png");
+	        var a = document.createElement('a');
+	        a.download = "image.png";
+	        a.href = canvas.toDataURL(img);
+	        a.click();
 		}
 	</script>
 </head>
@@ -75,10 +89,17 @@
 			<td>
 				<form method="get" action="" name="layoutForm" id="layoutForm">
 				</form>
+			</td>
+			<td>
 				<form method="get" action="" name="graphmlForm" id="graphmlForm">
 				</form>
 			</td>
+			<td>
+				<button id="save" onclick="saveImage()"> Save Image </button>
+			</td>
 		</tr>                                
+	</table>
+	<table>
 		<tr align="center">
 			<td>
 				<div id="visualizationControl">	</div>
@@ -90,5 +111,6 @@
 	   		</td>
 	   	</tr>
 	</table>
+	<canvas id="canvas"></canvas>
 </body>
 </html>
