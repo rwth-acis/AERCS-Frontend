@@ -7,7 +7,8 @@
 function getUrlVars()
 {
     var vars = [], hash;
-    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    var url = urldecode(window.location.href);
+    var hashes = url.slice(url.indexOf('?') + 1).split('&');
     for(var i = 0; i < hashes.length; i++)
     {
         hash = hashes[i].split('=');
@@ -27,4 +28,8 @@ function getUrlVar(name) {
 function handleError(errorData){
 	alert("Error: " + errorData);
    	$(".loader").fadeOut("slow");
+}
+
+function urldecode(str) {
+   return decodeURIComponent((str+'').replace(/\+/g, '%20'));
 }
