@@ -4,8 +4,7 @@
 <head>
   <title>Community Visualization</title>
 
-  <style type="text/css">
-  </style>
+  <link rel="stylesheet" type="text/css" href="css/AERCS.css"/>
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script type="text/javascript" src="javascript/functions.js"></script>
   <script src="javascript/jquery.panzoom.js"></script>
@@ -29,7 +28,7 @@
 		// somehow yfiles cannot create graph from svg, so we also send and receive the graph in graphml form
 	 	var graphML = $.session.get("graphML");
 	  
-		getEventNetworkVisualization(setVisualization, function(errorData){alert("error: "+errorData);}, id, layout, search, "", "", graphML);
+		getEventNetworkVisualization(setVisualization,handleError, id, layout, search, "", "", graphML);
 		
 		function setVisualization(data) {
 		     var content = JSON.parse(data);
@@ -58,16 +57,18 @@
 			$("#visualizationControl").append('<input id="visualizationZoomer" type="range">');
 			
 			var $panzoom = $("#visualization").panzoom({$zoomRange: $("#visualizationZoomer"), increment: 0.9, contain: 'invert', maxScale: 10, minScale: 1});
-		     $panzoom.on('mousewheel', function( e ) {
-		         e.preventDefault();
-		         var delta = e.delta || e.originalEvent.wheelDelta;
-		         var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
-		         $panzoom.panzoom('zoom', zoomOut, {
-		             increment: 0.1,
-		             animate: false,
-		             focal: e
-		         });
-		     });
+		    $panzoom.on('mousewheel', function( e ) {
+		    	e.preventDefault();
+				var delta = e.delta || e.originalEvent.wheelDelta;
+				var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
+				$panzoom.panzoom('zoom', zoomOut, {
+					increment: 0.1,
+					animate: false,
+					focal: e
+				});
+			});
+		     
+			$(".loader").fadeOut("slow");
 		}
   </script>
 
@@ -75,6 +76,7 @@
  
 </head>
 <body>
+	<div class="loader"></div>
    	<table>
    		<tr align="left">
 			<td>

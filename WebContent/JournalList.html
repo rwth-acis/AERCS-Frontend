@@ -32,7 +32,7 @@ and open the template in the editor.
                     startChar = "A";
                 }
                 // Retrieves journals.
-                selectJournals(addJournals, function(errorData){alert("error");}, startChar);
+                selectJournals(addJournals, handleError, startChar);
             });
             
             // Adds retrieved journals to the table.
@@ -54,6 +54,8 @@ and open the template in the editor.
                     $("#conferences").append(journalStr);
                 }
                 $("#conferences").append(journalStr);
+                
+                $(".loader").fadeOut("slow");
             }  
             
         </script>

@@ -3,10 +3,8 @@
 <html>
 <head>
   <title id="title">Community Visualization</title>
-
-  <style type="text/css">
-  </style>
   
+  <link rel="stylesheet" type="text/css" href="css/AERCS.css"/>
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script type="text/javascript" src="javascript/functions.js"></script>
   <script src="javascript/jquery.panzoom.js"></script>
@@ -29,7 +27,7 @@
 	}
  	var graphML = $.session.get("graphML");
   
-	getPersonNetworkVisualization(setVisualization, function(errorData){alert("error: "+errorData);}, id, layout, search, "", "", graphML);
+	getPersonNetworkVisualization(setVisualization, handleError, id, layout, search, "", "", graphML);
 	
 	function setVisualization(data) {
 	    var content = JSON.parse(data);
@@ -68,10 +66,13 @@
 	             focal: e
 	         });
 	     });
+	     
+	     $(".loader").fadeOut("slow");
 	}
   </script>
 </head>
 <body>
+	<div class="loader"></div>
    	<table>
    		<tr align="left">
 			<td>

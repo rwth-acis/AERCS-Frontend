@@ -33,10 +33,10 @@ and open the template in the editor.
             var series = getUrlVar("series");
             var id = getUrlVar("id");
             
-            // Retrieves events.
-            selectEvents(addEvents, function(errorData){alert("error");}, id, item);
-        
         	addTabs(series, item, id);
+
+            // Retrieves events.
+            selectEvents(addEvents, handleError, id, item);
         });
         
         function addTabs(series, item, id) {
@@ -161,7 +161,7 @@ and open the template in the editor.
 				$("#info_table").append(eventStr);	
            	}
            	
-//            	$("#loading").hide();
+           	$(".loader").fadeOut("slow");
         }  
             
         </script>
@@ -173,10 +173,6 @@ and open the template in the editor.
             <!-- Menu bar!-->
             <div id="content_shadow">
                 <div id="content" class="clearfix">
-
-<!-- 					<div id="loading"> -->
-<!-- 						<img src="resources/style/loading.gif" /> -->
-<!--                     </div> -->
                     
                     <div class="dashboard_header">
                         <div class="dh_titlebar clearfix">

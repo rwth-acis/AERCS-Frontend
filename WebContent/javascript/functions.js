@@ -23,3 +23,8 @@ function getUrlVars()
 function getUrlVar(name) {
     return getUrlVars()[name];
 }
+
+function handleError(errorData){
+	alert("Error: " + errorData);
+   	$(".loader").fadeOut("slow");
+}

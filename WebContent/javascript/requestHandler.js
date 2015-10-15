@@ -110,7 +110,7 @@ function getEventNetworkVisualization(callback, errorCallback, id, layout, searc
 
 function getPersonNetworkVisualization(callback, errorCallback, id, layout, search, width, height, content){
 	var url = "personNetworkVisualization?id=" + id + "&layout=" + layout + "&search=" + search + "&width=" + width + "&height=" + height;
-	sendRequest("GET", url, content, callback, errorCallback);
+	sendRequest("POST", url, content, callback, errorCallback);
 }
 
 function getNetworkVisualization(callback, errorCallback, graphml, layout, width, height){

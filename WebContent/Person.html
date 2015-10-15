@@ -37,7 +37,7 @@ and open the template in the editor.
             if(typeof key === 'undefined')	key = "";
 
             // Retrieves persons.
-            selectPerson(addPerson, function(errorData){alert("error");}, id, key);
+            selectPerson(addPerson, handleError, id, key);
         });
         
         
@@ -131,7 +131,9 @@ and open the template in the editor.
 		        </div>\
  		        <iframe src="PersonNetworkVisualization_lite.html?id=' +person[0].id+ '" width="99%" height="600"> </iframe>';
         	
-		        $("#personNetwork").append(networkStr);
+			$("#personNetwork").append(networkStr);
+		        
+		    $(".loader").fadeOut("slow");
         }  
             
         </script>

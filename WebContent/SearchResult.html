@@ -35,7 +35,7 @@ and open the template in the editor.
             if(typeof page === 'undefined')			page = "1";
 
             // Retrieves events.
-            searchResults(addSearchResults, function(errorData){alert("error");}, searchdata, searchfield, page);
+            searchResults(addSearchResults, handleError, searchdata, searchfield, page);
         });
                 
         // Adds retrieved journals to the table.
@@ -150,7 +150,7 @@ and open the template in the editor.
 					var series = results[i];
 					seriesSearchStr += '\
 						<tr>\
-				            <td><a href="EventList.html?series=' +series.series_key+ '&item=1">' +series.name+ '</a> </td>\
+				            <td><a href="EventList.html?id=' +series.id+ '&series=' +series.series_key+ '&item=1">' +series.name+ '</a> </td>\
 				            <td> </td>\
 			        	</tr>';
 				}
@@ -217,7 +217,7 @@ and open the template in the editor.
 
             }
 
-		    
+            $(".loader").fadeOut("slow");
         }  
             
         </script>

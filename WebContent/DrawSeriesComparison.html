@@ -28,7 +28,7 @@ and open the template in the editor.
             var chartType = getUrlVar("chartType");
             var selectedSeriesData = getUrlVar("selectedSeries");
             
-            getSeriesComparison(drawSeriesComparison, function(errorData){alert("error");}, selectedSeriesData, chartType);
+            getSeriesComparison(drawSeriesComparison, handleError, selectedSeriesData, chartType);
         });
         
         
@@ -168,9 +168,9 @@ and open the template in the editor.
                     </td>\
                 </tr>';
             }
-            
-            
             $("#comp_table").append(compStr);
+            
+           	$(".loader").fadeOut("slow");
         }  
             
         </script>

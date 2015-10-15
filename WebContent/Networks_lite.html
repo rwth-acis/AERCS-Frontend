@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
 	
 	<title>AERCS - Networks of Conferences and Journals</title>
+	<link rel="stylesheet" type="text/css" href="css/AERCS.css"/>
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="javascript/functions.js"></script>
     <script src="javascript/jquery.panzoom.js"></script>
@@ -25,13 +26,13 @@
 	    	layout = "circular";
 	    }
 	    
-		getNetworkVisualization(setVisualization, function(errorData){alert("error: "+errorData);}, graphml, layout, 950, 680);
+		getNetworkVisualization(setVisualization, handleError, graphml, layout, 950, 680);
 	
 		function setVisualization(data){
             var content = JSON.parse(data);
 			var graph = ((content.length-1) > -1)? content[content.length-1].graph: "";
             
-            var formStr = '\
+            var layoutFormStr = '\
 		    	<input type="hidden" name="graphml" value="' +graphml+ '">\
 				<select name="layout" onchange="submit()">\
 			    	<option value="circular"' +(layout=="circular"?"selected":"")+ '>Circular</option>\
@@ -52,8 +53,8 @@
 			}
 			graphmlFormStr += '</select>';
 		    	
-			$("#layoutForm").append(formStr);
-			$("#graphmlForm").append(graphmlFormStr);
+			$("#graphForm").append(layoutFormStr);
+			$("#graphForm").append(graphmlFormStr);
 			$("#visualization").append(graph);
 			$("#visualizationControl").append('<input id="visualizationZoomer" type="range">');
 			var $panzoom = $("#visualization").panzoom({$zoomRange: $("#visualizationZoomer"), increment: 0.9, contain: 'invert', maxScale: 10, minScale: 1});
@@ -72,6 +73,8 @@
 	        var canvas = document.getElementById("canvas");
 	        canvas.style.height = "0px";
 	        canvas.style.width = "0px";
+	        
+	        $(".loader").fadeOut("slow");
 		}
 		
 		function saveImage(){
@@ -84,14 +87,11 @@
 	</script>
 </head>
 <body>
+	<div class="loader"></div>
 	<table>
    		<tr align="left">
 			<td>
-				<form method="get" action="" name="layoutForm" id="layoutForm">
-				</form>
-			</td>
-			<td>
-				<form method="get" action="" name="graphmlForm" id="graphmlForm">
+				<form method="get" action="" name="graphForm" id="graphForm">
 				</form>
 			</td>
 			<td>

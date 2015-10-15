@@ -31,7 +31,7 @@ and open the template in the editor.
                     startChar = "A";
                 }
                 // Retrieves conferences.
-                selectConferences(addConferences, function(errorData){alert("error");}, startChar);
+                selectConferences(addConferences, handleError, startChar);
             });
             
             // Adds retrieved conferences to the table.
@@ -53,6 +53,8 @@ and open the template in the editor.
                     $("#conferences").append(conferenceStr);
                 }
                 $("#conferences").append(conferenceStr);
+                
+               	$(".loader").fadeOut("slow");
             }
             
         </script>

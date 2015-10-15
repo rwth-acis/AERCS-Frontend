@@ -29,7 +29,7 @@ and open the template in the editor.
             var id = getUrlVar("id");
             
             // Retrieves events.
-            selectEvent(addEvent, function(errorData){alert("error");}, id);
+            selectEvent(addEvent, handleError, id);
         });
         
         
@@ -151,8 +151,10 @@ and open the template in the editor.
 	            <div class="header">\
 		            <h2>Community visualization</h2>\
 		        </div>\
-		        <iframe src="EventNetworkVisualization_lite.html?id=' +event[0].id+ '" width="99%" height="600"> </iframe>';
+		        <iframe src="EventNetworkVisualization_lite.html?id=' +event[0].id+ '" width="99%" height="800"> </iframe>';
         	$("#community").append(commStr);
+        	
+           	$(".loader").fadeOut("slow");
         }  
             
         </script>

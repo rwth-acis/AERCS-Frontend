@@ -1,7 +1,7 @@
 var menuString = 
         '\
-            <div style="position:absolute;left:50%;margin-left:-635px;z-index:2;">\
-                <a href="http://www-i4.informatik.rwth-aachen.de/Kolleg/index.html" target="_blank"><img alt="Graduiertenkolleg" src="img/gk_banner.jpg"></a>\
+            <div style="position:absolute;left:50%;margin-left:-635px;z-index:2;padding-left:5px;">\
+                <a href="http://dbis.rwth-aachen.de/cms/research/ACIS" target="_blank"><img alt="ACIS" src="img/acis_logo.png"></a>\
             </div>\
             <div id="widebar" class="clearfix">\
                 <div id="navigator">\
@@ -37,6 +37,7 @@ var menuString =
                     </form>\
                 </div>\
             </div>\
+			<div class="loader"></div>\
         ';
 
 function appendMenu(element){

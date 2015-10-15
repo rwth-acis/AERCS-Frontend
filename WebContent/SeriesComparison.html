@@ -69,7 +69,7 @@ and open the template in the editor.
 	        $("#tabConference").addClass(conferenceTab);
 	        $("#tabJournal").addClass(journalTab);
 
-            selectSeriesComparison(compareSeries, function(errorData){alert("error");}, selectedSeries, searchKeyword, typeOfSeriesSearchIn, startChar);
+            selectSeriesComparison(compareSeries, handleError, selectedSeries, searchKeyword, typeOfSeriesSearchIn, startChar);
         });
         
         function compareSeries(data){
@@ -245,6 +245,7 @@ and open the template in the editor.
 
 	        $("#journalRightDiv").append(journalRightStr);
 
+	        $(".loader").fadeOut("slow");
         }
         
         

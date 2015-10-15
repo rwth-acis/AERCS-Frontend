@@ -21,7 +21,7 @@ and open the template in the editor.
         	var id = getUrlVar("id");
        	    
 			// Retrieves events.
-			getChartUrls(addCharts, function(errorData){alert("error");}, id);
+			getChartUrls(addCharts, handleError, id);
         });
         
         function addCharts(data){
@@ -46,6 +46,8 @@ and open the template in the editor.
 	            </tr>';
 	        
             $("#charts").append(chartStr);
+            
+            $(".loader").fadeOut("slow");
         }
             
         </script>

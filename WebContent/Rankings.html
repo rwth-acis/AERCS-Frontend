@@ -58,7 +58,7 @@ and open the template in the editor.
             }
             
             // Retrieves events.
-            getRanking(addRanking, function(errorData){alert("error");}, conf, journal, domain, currentPage, col, order);
+            getRanking(addRanking, handleError, conf, journal, domain, currentPage, col, order);
         
         });
         
@@ -262,6 +262,7 @@ and open the template in the editor.
 		    }
 			$("#navTable").append(navStr);
 
+			$(".loader").fadeOut("slow");
         }
            
         </script>
